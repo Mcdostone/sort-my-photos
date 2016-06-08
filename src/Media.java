@@ -4,7 +4,7 @@
  *
  * @author Mcdostone
  */
-public class Media {
+public abstract class Media {
 
     private String path;
 
@@ -12,13 +12,9 @@ public class Media {
      * Constructor
      * @param path Filepath to access to this media
      */
-    public Media(String path) {
-        this.path = path;
-    }
+    public Media(String path) {  this.path = path;  }
 
-    public String getPath() {
-        return this.path;
-    }
+    public String getPath() {  return this.path;  }
 
     /**
      * @param o Object to compare
@@ -28,6 +24,4 @@ public class Media {
         if(!(o instanceof Media)) return false;
         return this.getPath().equals(((Media) o).getPath());
     }
-
-    public String toString() {  return "[M] "  + this.getPath();  }
 }
