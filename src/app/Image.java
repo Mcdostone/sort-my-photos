@@ -7,7 +7,6 @@ package app;
  */
 public class Image extends Media {
 
-    public Image(String path) {  super(path);  }
+    public Image(String path) {  super('I', path);  }
 
-    public String toString() {  return "[I] " + this.getPath();  }
 }

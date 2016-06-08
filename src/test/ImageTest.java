@@ -15,6 +15,7 @@ public class ImageTest extends MediaTest {
 
     @Before
     public void setUp() throws Exception {
+        this.type = 'I';
         this.path = "my_image.png";
         this.media = new Image(this.path);
     }

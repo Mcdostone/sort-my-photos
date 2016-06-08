@@ -15,6 +15,7 @@ public class VideoTest extends MediaTest {
 
     @Before
     public void setUp() throws Exception {
+        this.type = 'V';
         this.path = "my_video.mp4";
         this.media = new Video(this.path);
     }
@@ -23,6 +24,5 @@ public class VideoTest extends MediaTest {
     public void testGetPath() {
         assertEquals("The path should be 'my_image.png'", this.path, this.media.getPath());
     }
-
 
 }

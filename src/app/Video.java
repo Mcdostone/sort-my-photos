@@ -7,7 +7,6 @@ package app;
  */
 public class Video extends Media {
 
-    public Video(String path) {  super(path); }
+    public Video(String path) {  super('V', path); }
 
-    public String toString() {  return "[V] " + this.getPath();  }
 }
