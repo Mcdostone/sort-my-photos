@@ -1,6 +1,8 @@
+package app;
+
 /**
  * A media is an abstract class, representing any kind of media (image, video, sound, animated image ...).
- * A Media is defined by its path on the hard drive (for the moment).
+ * A app.Media is defined by its path on the hard drive (for the moment).
  *
  * @author Mcdostone
  */

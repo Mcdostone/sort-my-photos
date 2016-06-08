@@ -1,3 +1,5 @@
+package app;
+
 /**
  * An image is media.
  *

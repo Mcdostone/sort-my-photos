@@ -1,3 +1,5 @@
+package app;
+
 /**
  * A video is a media.
  *
