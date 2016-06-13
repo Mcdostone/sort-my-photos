@@ -1,4 +1,4 @@
-package app;
+package app.model;
 
 /**
  * An image is media.

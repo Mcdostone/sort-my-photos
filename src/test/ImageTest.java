@@ -1,6 +1,6 @@
 package test;
 
-import app.Image;
+import app.model.Image;
 import org.junit.Before;
 import org.junit.Test;
 

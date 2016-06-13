@@ -1,4 +1,4 @@
-package app;
+package app.model;
 
 /**
  * A video is a media.

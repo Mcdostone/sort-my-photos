@@ -1,6 +1,6 @@
 package test;
 
-import app.Audio;
+import app.model.Audio;
 import org.junit.Before;
 import org.junit.Test;
 

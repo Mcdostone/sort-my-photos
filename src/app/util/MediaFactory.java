@@ -1,5 +1,10 @@
-package app;
+package app.util;
 
+
+import app.model.Audio;
+import app.model.Image;
+import app.model.Media;
+import app.model.Video;
 
 import javax.activation.MimetypesFileTypeMap;
 

@@ -1,6 +1,6 @@
 package test;
 
-import app.Video;
+import app.model.Video;
 import org.junit.Before;
 import org.junit.Test;
 
