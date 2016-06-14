@@ -25,14 +25,15 @@ public abstract class Media {
 
     public char getType() {  return this.type;  }
 
+
+    public String toString() {  return "[" + this.getType()  + "] " + this.getPath();  }
+
     /**
      * @param o Object to compare
      * @return {@code true} only if the two medias have the same filepath.
      */
     public boolean equals(Object o) {
         if(!(o instanceof Media)) return false;
-        return this.getPath().equals(((Media) o).getPath());
+        return this.getPath().equals(((Media) o).getPath()) && this.getType() == ((Media) o).getType();
     }
-
-    public String toString() {  return "[" + this.getType()  + "] " + this.getPath();  }
 }
