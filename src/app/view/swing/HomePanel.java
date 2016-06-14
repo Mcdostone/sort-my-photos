@@ -1,25 +1,37 @@
 package app.view.swing;
 
+import app.conf.Configuration;
 import app.controller.DragAndDropController;
 import app.controller.FileChooserController;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import app.util.UiKit;
+import com.sun.java.swing.plaf.windows.WindowsFileChooserUI;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
- * Created by Gang du stud' on 14/06/2016.
+ * Defines the first view of the app when you run it !
+ * The first view enables to know all medias you want to sort.
+ * That's why, you have the possibility to choose a directory thanks to the dedicated button
+ * But you can also 'drag and drop' a folder.
+ *
+ * @author Mcdostone
  */
 public class HomePanel extends JPanel {
 
-    private JButton choose;
-    private JFileChooser chooser;
-
     public HomePanel(Window w) {
         super();
-        this.choose = new JButton("Choose folder");
-        this.add(this.choose);
-        this.choose.addActionListener(new FileChooserController(this, w));
-        this.setDropTarget(new DragAndDropController(w));
-    }
+        this.setLayout(new GridBagLayout());
+        this.setPreferredSize(new Dimension(700, 700));
 
+        this.setBackground(Configuration.PRIMARY_COLOR);
+
+        JLabel choose = UiKit.Cliquablelabel("Choose folder ...");
+        choose.addMouseListener(new FileChooserController(this, w));
+        this.setDropTarget(new DragAndDropController(w));
+        JPanel drag = UiKit.dragAndDropArea(600, 600);
+        drag.add(UiKit.label("Drag & drop a folder or  "));
+        drag.add(choose);
+        this.add(drag);
+    }
 }

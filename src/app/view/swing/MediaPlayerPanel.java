@@ -34,6 +34,7 @@ public class MediaPlayerPanel extends JPanel implements Observer {
         this.addMouseListener(controller);
         this.addKeyListener(controller);
         this.m.addObserver(this);
+        this.p.setMedia(this.m.next());
     }
 
 
