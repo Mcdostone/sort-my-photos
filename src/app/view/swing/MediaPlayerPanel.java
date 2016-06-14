@@ -14,7 +14,7 @@ import java.util.Observer;
  *
  * @author Mcdostone
  */
-public class MediaPlayerPanel extends JPanel implements Observer {
+public class MediaPlayerPanel extends JLayeredPane implements Observer {
 
     private MediaPlayer m;
     private MediaPanel p;
@@ -23,18 +23,14 @@ public class MediaPlayerPanel extends JPanel implements Observer {
         super();
         this.m = m;
         this.p = new MediaPanel();
-
         MediaPlayerController controller = new MediaPlayerController(m, p);
-        this.setLayout(new GridLayout(1,1));
-        this.add(this.p);
-
         this.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT));
-        this.setBackground(Color.BLACK);
-
         this.addMouseListener(controller);
         this.addKeyListener(controller);
         this.m.addObserver(this);
-        this.p.setMedia(this.m.next());
+
+        this.add(this.p, 0);
+        this.add(new TabBarPanel(), 1);
     }
 
 
@@ -42,4 +38,13 @@ public class MediaPlayerPanel extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         this.p.repaint();
     }
+
+
+    @Override
+    public void doLayout() {
+        for (Component comp : getComponents()) {
+            comp.setBounds(0, 0, getWidth(), getHeight());
+        }
+    }
+
 }

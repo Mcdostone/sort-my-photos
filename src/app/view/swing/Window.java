@@ -18,7 +18,7 @@ public class Window extends JFrame {
 
     // List of all different panels
     private JPanel home;
-    private JPanel mediaPlayer;
+    private JLayeredPane mediaPlayer;
 
     private final static int SIZE = 650;
 
@@ -34,6 +34,7 @@ public class Window extends JFrame {
         // First view
         this.launchHome();
         this.pack();
+        this.requestFocus();
         this.setVisible(true);
     }
 
