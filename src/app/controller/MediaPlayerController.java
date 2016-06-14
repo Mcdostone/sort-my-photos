@@ -1,5 +1,8 @@
-package app.view.swing;
+package app.controller;
 
+
+import app.model.MediaPlayer;
+import app.view.swing.MediaPlayerPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -10,11 +13,20 @@ import java.awt.event.MouseListener;
  *
  * @author Mcdostone
  */
-public class MediaController implements MouseListener, KeyListener {
+public class MediaPlayerController implements MouseListener, KeyListener {
 
+    private MediaPlayer m;
+    private MediaPlayerPanel p;
+
+    public MediaPlayerController(MediaPlayer m, MediaPlayerPanel p) {
+        this.m = m;
+        this.p = p;
+    }
 
     @Override
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+        this.p.current(this.m.next());
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {}

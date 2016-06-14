@@ -14,19 +14,22 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
 
     @Override
     public E next() {
-        if (current == null) current = first;
-        else current = current.next();
-
-        return current.value();
+        if(!isEmpty()) {
+            if (current == null) current = first;
+            else current = current.next();
+            return current.value();
+        }
+        else return null;
     }
 
     @Override
     public E previous() {
-        if(current==null)   current=first;
-        else
-            current=current.previous();
-
-        return current.value();
+        if(!isEmpty()) {
+            if(current==null)   current=first;
+            else   current=current.previous();
+            return current.value();
+        }
+        else  return null;
     }
 
     @Override
@@ -87,5 +90,5 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
         }
         return list.iterator();
     }
-    
+
 }

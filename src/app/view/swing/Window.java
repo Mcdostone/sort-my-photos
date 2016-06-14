@@ -2,6 +2,7 @@ package app.view.swing;
 
 import javax.swing.*;
 import app.conf.Configuration;
+import app.model.MediaPlayer;
 
 /**
  * Window of the app
@@ -23,7 +24,8 @@ public class Window extends JFrame {
     }
 
     private void init(){
-        this.main = new MediaPanel();
+        MediaPlayer m = new MediaPlayer();
+        this.main = new MediaPlayerPanel(m);
         this.setContentPane(this.main);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
