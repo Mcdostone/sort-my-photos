@@ -2,7 +2,7 @@ package app.model;
 
 /**
  * A media is an abstract class, representing any kind of media (image, video, sound, animated image ...).
- * A app.model.Media is defined by its path on the hard drive (for the moment).
+ * A Media is defined by its path on the hard drive and its type.
  *
  * @author Mcdostone
  */

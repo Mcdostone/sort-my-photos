@@ -43,4 +43,8 @@ public class MediaPlayer extends Observable {
         return this.playlist.previous();
     }
 
+    public String toString() {
+        return this.playlist.toString();
+    }
+
 }
