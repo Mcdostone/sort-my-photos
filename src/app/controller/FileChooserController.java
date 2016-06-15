@@ -1,12 +1,10 @@
 package app.controller;
 
 import app.conf.Configuration;
-import app.view.swing.HomePanel;
+import app.view.swing.StarterPanel;
 import app.view.swing.Window;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -17,10 +15,10 @@ import java.io.File;
  */
 public class FileChooserController implements MouseListener {
 
-    private HomePanel p;
+    private StarterPanel p;
     private Window w;
 
-    public FileChooserController(HomePanel p, Window w) {
+    public FileChooserController(StarterPanel p, Window w) {
         this.p = p;
         this.w = w;
     }

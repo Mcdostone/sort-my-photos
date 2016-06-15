@@ -17,9 +17,9 @@ import java.awt.*;
  *
  * @author Mcdostone
  */
-public class HomePanel extends JPanel {
+public class StarterPanel extends JPanel {
 
-    public HomePanel(Window w) {
+    public StarterPanel(Window w) {
         super();
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT));

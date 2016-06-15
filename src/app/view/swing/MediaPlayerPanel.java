@@ -26,15 +26,11 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
     public MediaPlayerPanel(MediaPlayer m) {
         super();
         this.m = m;
-        this.p = new MediaPanel();
+        this.p = new MediaPanel(m);
         this.bar = new TabBarPanel();
-        MediaPlayerController controller = new MediaPlayerController(m, p);
 
         this.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT));
-        this.addMouseListener(controller);
-        this.addKeyListener(controller);
         this.m.addObserver(this);
-
         this.add(this.p, 0);
         this.add(this.bar, 1);
         this.p.setMedia(this.m.next());
@@ -62,6 +58,7 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
         this.p.setBounds(0, 0, this.getWidth(), this.getHeight());
         this.bar.setBounds(0, this.getHeight() - heightBar, this.getWidth(), heightBar);
         this.moveToFront(this.bar);
+        this.p.requestFocusInWindow();
     }
 
     @Override

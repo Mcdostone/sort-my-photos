@@ -1,7 +1,5 @@
 package app.conf;
 
-import java.awt.*;
-
 /**
  * Configuration of the app
  *
@@ -18,4 +16,5 @@ public class Configuration {
 
     public static String SETTINGS_ICON = "./assets/icons/settings.png";
     public static String SORT_ICON = "./assets/icons/sort-2.png";
+    public static String LOGS_ICON = "./assets/icons/logs.png";
 }

@@ -1,6 +1,8 @@
 package app.util;
 
 import app.conf.Configuration;
+import app.controller.ActionIconController;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -93,6 +95,25 @@ public class UiKit {
         l.setCursor(new Cursor(Cursor.HAND_CURSOR));
         l.setBackground(UiKit.TRANSPARANT);
 
+        return l;
+    }
+
+    public static JLabel settingsIcon(int height) {
+        JLabel l = UiKit.CliquableIcon(Configuration.SETTINGS_ICON, height);
+        l.addMouseListener(new ActionIconController("SETTINGS"));
+        return l;
+    }
+
+
+    public static JLabel sortIcon(int height) {
+        JLabel l = UiKit.CliquableIcon(Configuration.SORT_ICON, height);
+        l.addMouseListener(new ActionIconController("SORT"));
+        return l;
+    }
+
+    public static JLabel LogsIcon(int height) {
+        JLabel l = UiKit.CliquableIcon(Configuration.LOGS_ICON, height);
+        l.addMouseListener(new ActionIconController("LOGS"));
         return l;
     }
 

@@ -1,8 +1,6 @@
 package app.view.swing;
 
-import app.conf.Configuration;
 import app.util.UiKit;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,6 +14,7 @@ public class TabBarPanel extends JPanel {
     private int height = 100;
     private JLabel settings;
     private JLabel sort;
+    private JLabel logs;
 
     public TabBarPanel() {
         super();
@@ -27,11 +26,16 @@ public class TabBarPanel extends JPanel {
     }
 
     private void initIcons() {
-        this.settings = UiKit.CliquableIcon(Configuration.SETTINGS_ICON, (int) this.getPreferredSize().getHeight());
-        this.sort = UiKit.CliquableIcon(Configuration.SORT_ICON, (int) this.getPreferredSize().getHeight());
+        this.settings = UiKit.settingsIcon((int) this.getPreferredSize().getHeight());
+        this.sort = UiKit.sortIcon((int) this.getPreferredSize().getHeight());
+        this.logs = UiKit.LogsIcon((int) this.getPreferredSize().getHeight());
+
         this.settings.setBorder(UiKit.BORDER_ICON);
+        this.sort.setBorder(UiKit.BORDER_ICON);
+
         this.add(this.settings);
         this.add(this.sort);
+        this.add(this.logs);
     }
 
 

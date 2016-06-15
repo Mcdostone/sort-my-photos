@@ -17,7 +17,8 @@ import java.util.List;
 public class Window extends JFrame {
 
     // List of all different panels
-    private JPanel home;
+    private JPanel container;
+    private JPanel start;
     private JLayeredPane mediaPlayer;
 
     private final static int SIZE = 650;
@@ -25,6 +26,8 @@ public class Window extends JFrame {
 
     public Window() {
         super(Configuration.TITLE);
+        this.container = new JPanel();
+        this.container.setLayout(new BorderLayout());
         this.init();
     }
 
@@ -33,27 +36,29 @@ public class Window extends JFrame {
         this.setMinimumSize(new Dimension(SIZE, SIZE));
         this.setLayout(new BorderLayout());
         // First view
-        this.launchHome();
+        this.start();
         this.pack();
         this.requestFocus();
         this.setVisible(true);
+
     }
 
 
     /** Enables to display the 'home' view of the app */
-    public void launchHome() {
-        this.home = new HomePanel(this);
-        this.setContentPane(this.home);
+    public void start() {
+        this.start = new StarterPanel(this);
+        this.container.add(this.start);
+        this.setContentPane(this.container);
     }
 
     /** Enables to display the 'media player' view in the app */
     public void launchMediaPlayer(List<File> paths) {
         MediaPlayer m = MediaPlayerFactory.createMediaPlayer(paths);
         this.mediaPlayer = new MediaPlayerPanel(m);
-
-        this.getContentPane().setVisible(false);
-        this.getContentPane().removeAll();
-        this.setContentPane(this.mediaPlayer);
+        this.container.remove(this.start);
+        this.container.add(this.mediaPlayer);
+        this.setContentPane(this.container);
+        this.repaint();
     }
 
     public static void main(String[] args) {

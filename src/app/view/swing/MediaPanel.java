@@ -1,6 +1,8 @@
 package app.view.swing;
 
+import app.controller.MediaPlayerController;
 import app.model.Media;
+import app.model.MediaPlayer;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -18,9 +20,13 @@ public class MediaPanel extends JPanel {
 
     private Media current;
 
-    public MediaPanel() {
+    public MediaPanel(MediaPlayer m) {
         super();
         this.setBackground(Color.darkGray);
+        MediaPlayerController controller = new MediaPlayerController(m, this);
+        this.setFocusable(true);
+        this.addMouseListener(controller);
+        this.addKeyListener(controller);
     }
 
     public void setMedia(Media m) {
