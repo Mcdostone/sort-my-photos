@@ -3,6 +3,8 @@ package app.view.swing;
 import app.conf.Configuration;
 import app.model.MediaPlayer;
 import app.util.MediaPlayerFactory;
+import app.view.LogsWindow;
+import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,10 +66,15 @@ public class Window extends JFrame {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
         } catch (Exception e) {
             e.printStackTrace();
+
         }
         Window w = new Window();
+
+
+
     }
 }
 

@@ -27,7 +27,7 @@ public class StarterPanel extends JPanel {
         this.setBackground(UiKit.PRIMARY_COLOR);
 
         JLabel choose = UiKit.Cliquablelabel("Choose folder ...");
-        choose.addMouseListener(new FileChooserController(this, w));
+        choose.addMouseListener(new FileChooserController(w));
         this.setDropTarget(new DragAndDropController(w));
         JPanel drag = UiKit.dragAndDropArea(600, 600);
         drag.add(UiKit.label("Drag & drop a folder or  "));

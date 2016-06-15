@@ -1,29 +1,37 @@
 package app.controller;
 
 import app.conf.Configuration;
+import app.view.LogsWindow;
 import app.view.swing.StarterPanel;
 import app.view.swing.Window;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.io.File;
 
 /**
- * Created by Gang du stud' on 14/06/2016.
+ * Controller for the start page button.
+ * When the button is triggered, it displays a FileChooser.
+ *
+ * @author Mcdostone
  */
-public class FileChooserController implements MouseListener {
+public class FileChooserController extends MouseAdapter {
 
-    private StarterPanel p;
     private Window w;
 
-    public FileChooserController(StarterPanel p, Window w) {
-        this.p = p;
+    /**
+     * Unique constructor
+     * @param w Window that will be updated when chooser is validated
+     */
+    public FileChooserController(Window w) {
         this.w = w;
     }
 
-    private void showFileChooser() {
+    @Override
+    public void mouseReleased(MouseEvent e) {
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File(Configuration.DEFAULT_PATH));
         chooser.setDialogTitle("Choose ...");
@@ -31,8 +39,8 @@ public class FileChooserController implements MouseListener {
         ArrayList<File> list = new ArrayList<>();
 
         chooser.setAcceptAllFileFilterUsed(false);
-        if (chooser.showOpenDialog(p) == JFileChooser.APPROVE_OPTION) {
-            System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            LogsWindow.createInstance().update("LOCATION: " + chooser.getCurrentDirectory());
             list.add(chooser.getCurrentDirectory());
             this.w.launchMediaPlayer(list);
         } else
@@ -40,18 +48,4 @@ public class FileChooserController implements MouseListener {
     }
 
 
-    @Override
-    public void mouseClicked(MouseEvent e) {}
-
-    @Override
-    public void mousePressed(MouseEvent e) {}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {  this.showFileChooser();  }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
 }

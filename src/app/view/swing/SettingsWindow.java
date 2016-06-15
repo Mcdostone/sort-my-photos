@@ -1,30 +1,19 @@
 package app.view.swing;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Set;
 
 /**
  * Window which enables to modify settings of the app.
  *
  * @author Mcdostone
  */
-public class SettingsWindow extends JFrame {
+public class SettingsWindow extends DialogWindow {
 
-    /** Singleton */
     private static SettingsWindow window;
 
     private SettingsWindow() {
         super("Settings");
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setMinimumSize(new Dimension(400 ,400));
-        this.setLayout(new BorderLayout());
-        // First view
-        this.pack();
-        this.requestFocus();
-        this.setVisible(true);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
                 setVisible(false);
@@ -32,12 +21,19 @@ public class SettingsWindow extends JFrame {
                 SettingsWindow.window = null;
             }
         });
+
     }
 
-    public static void createInstance() {
+    public static DialogWindow createInstance() {
         if(SettingsWindow.window == null)
             SettingsWindow.window = new SettingsWindow();
         else
             SettingsWindow.window.requestFocus();
+
+        SettingsWindow.window.setVisible(true);
+        return SettingsWindow.window;
     }
+
+    @Override
+    public void update(String data) {}
 }

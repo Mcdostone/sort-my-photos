@@ -3,6 +3,8 @@ package app.view.swing;
 import app.controller.MediaPlayerController;
 import app.model.Media;
 import app.model.MediaPlayer;
+import app.view.LogsWindow;
+import sun.rmi.runtime.Log;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -31,7 +33,7 @@ public class MediaPanel extends JPanel {
 
     public void setMedia(Media m) {
         this.current = m;
-        System.out.println(this.current);
+        LogsWindow.createInstance().update(this.current.toString());
         this.repaint();
     }
 

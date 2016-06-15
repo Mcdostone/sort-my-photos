@@ -2,6 +2,8 @@ package app.util;
 
 
 import app.model.*;
+import app.view.LogsWindow;
+
 import javax.activation.MimetypesFileTypeMap;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -30,7 +32,7 @@ public class MediaPlayerFactory {
                 } else if (Files.isRegularFile(Paths.get(file.getAbsolutePath())))
                     m.addMedia(MediaPlayerFactory.createMedia(file.toString()));
             } catch (Exception e) {
-                e.printStackTrace();
+                LogsWindow.createInstance().update(e.getMessage());
             }
         }
 

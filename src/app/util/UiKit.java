@@ -28,7 +28,8 @@ public class UiKit {
 
     public final static int LENGTH_BORDER = 10;
     public final static int SIZE_BORDER = 2;
-    public final static Border BORDER_ICON =  BorderFactory.createMatteBorder(0, 0, 0, 1, UiKit.COLOR_ICON_HOVER);
+    public final static Border BORDER_ICON_DEFAULT =  BorderFactory.createMatteBorder(1, 0, 0, 0, UiKit.COLOR_ICON_HOVER);
+    public final static Border BORDER_ICON =  BorderFactory.createMatteBorder(1, 0, 0, 1, UiKit.COLOR_ICON_HOVER);
     public final static Font DEFAULT_FONT = new Font("Arial",Font.PLAIN, 18);
 
     public static JPanel panel() {
@@ -91,7 +92,7 @@ public class UiKit {
         l.setMaximumSize(l.getPreferredSize());
         l.setMinimumSize(l.getPreferredSize());
         l.setOpaque(false);
-        l.setBorder(null);
+        l.setBorder(UiKit.BORDER_ICON_DEFAULT);
         l.setCursor(new Cursor(Cursor.HAND_CURSOR));
         l.setBackground(UiKit.TRANSPARANT);
 
@@ -113,6 +114,7 @@ public class UiKit {
 
     public static JLabel LogsIcon(int height) {
         JLabel l = UiKit.CliquableIcon(Configuration.LOGS_ICON, height);
+
         l.addMouseListener(new ActionIconController("LOGS"));
         return l;
     }
