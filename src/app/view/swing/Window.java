@@ -1,13 +1,13 @@
 package app.view.swing;
 
-import javax.swing.*;
 import app.conf.Configuration;
 import app.model.MediaPlayer;
 import app.util.MediaPlayerFactory;
 
+import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import java.io.File;
+import java.util.List;
 
 /**
  * Window of the app
@@ -31,6 +31,7 @@ public class Window extends JFrame {
     private void init(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(SIZE, SIZE));
+        this.setLayout(new BorderLayout());
         // First view
         this.launchHome();
         this.pack();

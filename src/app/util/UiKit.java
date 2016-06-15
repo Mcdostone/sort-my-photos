@@ -2,6 +2,7 @@ package app.util;
 
 import app.conf.Configuration;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,20 +14,26 @@ import java.awt.event.MouseListener;
  */
 public class UiKit {
 
-    private final static Color SECONDARY_COLOR = Color.WHITE;
-    private final static Color SECONDARY_COLOR_PASSIVE = new Color(255, 255, 255, 100);
+    public static Color PRIMARY_COLOR = new Color(34, 34, 34);
+    public final static Color SECONDARY_COLOR = Color.WHITE;
+    public final static Color SECONDARY_COLOR_PASSIVE = new Color(255, 255, 255, 100);
+    public final static Color TRANSPARANT = new Color(0, 0, 0, 0);
 
-    private final static int LENGTH_BORDER = 10;
-    private final static int SIZE_BORDER = 2;
+    public final static Color COLOR_ICON_HOVER = new Color(10, 10, 10, 255);
+    public final static Color BACKGROUND_TABBAR = new Color(0,0,0, 120);
 
-    private final static Font DEFAULT_FONT = new Font("Arial",Font.PLAIN, 18);
+    public final static int PADDING_ICON = 70;
 
+    public final static int LENGTH_BORDER = 10;
+    public final static int SIZE_BORDER = 2;
+    public final static Border BORDER_ICON =  BorderFactory.createMatteBorder(0, 0, 0, 1, UiKit.COLOR_ICON_HOVER);
+    public final static Font DEFAULT_FONT = new Font("Arial",Font.PLAIN, 18);
 
     public static JPanel panel() {
         JPanel p = new JPanel();
         p.setLayout(new GridBagLayout());
         p.setAlignmentX(Component.CENTER_ALIGNMENT);
-        p.setBackground(Configuration.PRIMARY_COLOR);
+        p.setBackground(UiKit.PRIMARY_COLOR);
         return p;
     }
 
@@ -67,34 +74,53 @@ public class UiKit {
     public static JLabel Cliquablelabel(String text) {
         JLabel l = label(text);
         l.setPreferredSize(new Dimension(170, 50));
-        l.setMaximumSize(new Dimension(170, 50));
-        l.setMinimumSize(new Dimension(170, 50));
+        l.setMaximumSize(l.getPreferredSize());
+        l.setMinimumSize(l.getPreferredSize());
+        l.setCursor(new Cursor(Cursor.HAND_CURSOR));
         l.setBorder(BorderFactory.createLineBorder(SECONDARY_COLOR, SIZE_BORDER));
-        l.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
+        l.addMouseListener(new CliquableLabelListener(l));
+        return l;
+    }
 
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                l.setForeground(Configuration.PRIMARY_COLOR);
-                l.setOpaque(true);
-                l.setBackground(SECONDARY_COLOR);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                l.setOpaque(false);
-                l.setForeground(SECONDARY_COLOR);
-
-            }
-        });
+    public static JLabel CliquableIcon(String filename, int height) {
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(height - PADDING_ICON, height - PADDING_ICON, Image.SCALE_DEFAULT));
+        JLabel l = new JLabel(imageIcon, JLabel.CENTER);
+        l.setPreferredSize(new Dimension(0, height));
+        l.setMaximumSize(l.getPreferredSize());
+        l.setMinimumSize(l.getPreferredSize());
+        l.setOpaque(false);
+        l.setBorder(null);
+        l.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        l.setBackground(UiKit.TRANSPARANT);
 
         return l;
+    }
+
+    private static class CliquableLabelListener implements MouseListener {
+        private JLabel l;
+
+        public CliquableLabelListener(JLabel l) {  this.l = l;  };
+
+        @Override
+        public void mouseClicked(MouseEvent e) {}
+
+        @Override
+        public void mousePressed(MouseEvent e) {}
+
+        @Override
+        public void mouseReleased(MouseEvent e) {}
+
+        public void mouseEntered(MouseEvent e) {
+            l.setForeground(UiKit.PRIMARY_COLOR);
+            l.setOpaque(true);
+            l.setBackground(SECONDARY_COLOR);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            l.setOpaque(false);
+            l.setForeground(SECONDARY_COLOR);
+
+        }
     }
 }

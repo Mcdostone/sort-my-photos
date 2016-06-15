@@ -25,9 +25,7 @@ public class FileChooserController implements MouseListener {
         this.w = w;
     }
 
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
+    private void showFileChooser() {
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File(Configuration.DEFAULT_PATH));
         chooser.setDialogTitle("Choose ...");
@@ -43,11 +41,15 @@ public class FileChooserController implements MouseListener {
             System.out.println("No Selection ");
     }
 
+
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
     @Override
     public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {  this.showFileChooser();  }
 
     @Override
     public void mouseEntered(MouseEvent e) {}

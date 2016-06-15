@@ -22,9 +22,9 @@ public class HomePanel extends JPanel {
     public HomePanel(Window w) {
         super();
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(700, 700));
+        this.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT));
 
-        this.setBackground(Configuration.PRIMARY_COLOR);
+        this.setBackground(UiKit.PRIMARY_COLOR);
 
         JLabel choose = UiKit.Cliquablelabel("Choose folder ...");
         choose.addMouseListener(new FileChooserController(this, w));

@@ -1,18 +1,39 @@
 package app.view.swing;
 
+import app.conf.Configuration;
+import app.util.UiKit;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Gang du stud' on 14/06/2016.
+ * TabBar for accessing to all settings and actions.
+ *
+ * @author Mcdostone
  */
 public class TabBarPanel extends JPanel {
 
-    private Color background = new Color(0,0,0, 120);
+    private int height = 100;
+    private JLabel settings;
+    private JLabel sort;
 
     public TabBarPanel() {
         super();
-        this.setBackground(this.background);
-        //this.setOpaque(tr);
+        this.setPreferredSize(new Dimension(0, this.height));
+        this.setOpaque(true);
+        this.setBackground(UiKit.BACKGROUND_TABBAR);
+        this.setLayout(new GridLayout(1, 3));
+        this.initIcons();
     }
+
+    private void initIcons() {
+        this.settings = UiKit.CliquableIcon(Configuration.SETTINGS_ICON, (int) this.getPreferredSize().getHeight());
+        this.sort = UiKit.CliquableIcon(Configuration.SORT_ICON, (int) this.getPreferredSize().getHeight());
+        this.settings.setBorder(UiKit.BORDER_ICON);
+        this.add(this.settings);
+        this.add(this.sort);
+    }
+
+
+
 }
