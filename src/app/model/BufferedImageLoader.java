@@ -25,6 +25,6 @@ public class BufferedImageLoader extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        LogsWindow.createInstance().update("LOAD: " + m.getPath());
+        LogsWindow.createInstance().update("LOAD: " + m.getPath() + "\n");
     }
 }

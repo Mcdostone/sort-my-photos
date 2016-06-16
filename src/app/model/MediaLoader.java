@@ -52,7 +52,6 @@ public class MediaLoader {
 
     public void add(int index, BufferedImage im) {
         this.images.add(index, im);
-        System.out.println(this.images);
     }
 
     public void previousMedia(Media m) {

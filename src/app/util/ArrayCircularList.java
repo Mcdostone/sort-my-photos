@@ -55,7 +55,6 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
     public void add(E element) {
         this.index = this.nextIndex();
         this.list[this.index] = element;
-        System.out.println("added at " + this.index);
     }
 
     @Override
@@ -80,7 +79,7 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
     }
 
     public void shiftRight() {
-        for(int i = this.list.length - 1; i > 1; i--) {
+        for(int i = this.list.length - 1; i > 0; i--) {
             this.list[i] = this.list[i - 1];
         }
         this.list[0] = null;
