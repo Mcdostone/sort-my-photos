@@ -43,9 +43,7 @@ public class MediaPlayerFactory {
                 LogsWindow.createInstance().update(e.getMessage());
             }
         }
-
         LogsWindow.createInstance().update("FILES FOUND : \n" + m.toString());
-        System.out.println(m);
         MediaPlayerFactory.initMediaLoader(m);
 
         return m;

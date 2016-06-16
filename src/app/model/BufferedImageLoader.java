@@ -12,19 +12,16 @@ import java.io.IOException;
 public class BufferedImageLoader extends Thread {
 
     private Media m;
-    private int index;
 
-    public BufferedImageLoader(int index, Media m) {
+    public BufferedImageLoader(Media m) {
         this.m = m;
-        this.index = index;
     }
 
     public void run() {
         try {
-            MediaLoader.getInstance().add(index, ImageIO.read(new File(m.getPath())));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        LogsWindow.createInstance().update("LOAD: " + m.getPath() + "\n");
+            MediaLoader.getInstance().add(this.m , ImageIO.read(new File(this.m.getPath())));
+            LogsWindow.createInstance().update("LOAD: " + m.getPath() + "\n");
+        } catch (IOException e) {  e.printStackTrace();  }
+
     }
 }

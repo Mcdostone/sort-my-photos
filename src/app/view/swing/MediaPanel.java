@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * JPanel which displays a given media
@@ -38,13 +39,14 @@ public class MediaPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        BufferedImage image = MediaLoader.getInstance().getImage();
+        BufferedImage image = MediaLoader.getInstance().getImage(this.current);
+
         if(image != null) {
             Dimension scale = MediaPanel.getScaledDimension(new Dimension(image.getWidth(), image.getHeight()), this.getSize());
             Dimension pos = MediaPanel.getPosition(scale, this.getSize());
-            //g.drawString(image.toString(), 5, 5);
             g.drawImage(image, (int) pos.getWidth(), (int) pos.getHeight(), (int) scale.getWidth(), (int) scale.getHeight(), null);
         }
     }

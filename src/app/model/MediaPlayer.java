@@ -37,7 +37,8 @@ public class MediaPlayer extends Observable {
         this.setChanged();
         this.notifyObservers();
         Media toLoad = this.playlist.NthMediaAfterCurrent((MediaLoader.getInstance().size()/2) + 1);
-        MediaLoader.getInstance().nextMedia(toLoad);
+        Media toRemove = this.playlist.NthMediaBeforeCurrent(MediaLoader.getInstance().size()/2);
+        MediaLoader.getInstance().nextMedia(toRemove, toLoad);
         this.current = this.playlist.next();
         return this.current;
     }
@@ -47,7 +48,8 @@ public class MediaPlayer extends Observable {
         this.setChanged();
         this.notifyObservers();
         Media toLoad = this.playlist.NthMediaAfterCurrent((MediaLoader.getInstance().size()/2) + 1);
-        MediaLoader.getInstance().previousMedia(toLoad);
+        Media toRemove = this.playlist.NthMediaAfterCurrent(MediaLoader.getInstance().size()/2);
+        MediaLoader.getInstance().previousMedia(toRemove, toLoad);
         this.current = this.playlist.previous();
         return this.current;
     }
