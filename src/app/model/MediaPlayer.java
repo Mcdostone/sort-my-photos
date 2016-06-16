@@ -43,6 +43,10 @@ public class MediaPlayer extends Observable {
         return this.playlist.previous();
     }
 
+    public Media firstMedia() {  return this.playlist.firstValue();  }
+
+    public Media get(int index) {  return this.playlist.get(index);  }
+
     public String toString() {
         return this.playlist.toString();
     }

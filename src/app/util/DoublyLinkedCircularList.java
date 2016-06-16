@@ -26,4 +26,10 @@ public interface DoublyLinkedCircularList<E> extends Iterable<E> {
     void removeCurrent();
 
     boolean contains(E element);
+
+    E get(int index);
+
+    int size();
+
+    E firstValue();
 }

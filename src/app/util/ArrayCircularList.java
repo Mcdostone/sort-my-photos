@@ -23,18 +23,26 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
     @Override
     public E next() {
         if(this.index == -1)
-            this.index = this.list.length / 2;
+            this.index = 0;
         else
             this.nextIndex();
         return this.list[this.index];
     }
 
     private void nextIndex() {
+        if(this.index == -1)
+            this.index = 0;
+        else
         this.index = (this.index == this.list.length - 1) ? 0 : this.index + 1;
+
+
     }
 
     private void previousIndex() {
-        this.index = (this.index == 0) ? this.list.length - 1 : this.index  - 1;
+        if(this.index == -1)
+            this.index = this.list.length / 2;
+        else
+            this.index = (this.index == 0) ? this.list.length - 1 : this.index  - 1;
     }
 
     @Override
@@ -55,6 +63,7 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
     public void add(E element) {
         this.nextIndex();
         this.list[this.index] = element;
+        System.out.println("added at " + this.index);
     }
 
     @Override
@@ -65,6 +74,7 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
                     this.list[i] = null;
             }
     }
+
 
     @Override
     public void removeCurrent() {
@@ -81,6 +91,21 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
     }
 
     @Override
+    public E get(int index) {
+        return (index > 0 && index < this.list.length) ? this.list[index] : null;
+    }
+
+    @Override
+    public int size() {
+        return this.list.length;
+    }
+
+    @Override
+    public E firstValue() {
+        return this.list[0];
+    }
+
+    @Override
     public Iterator<E> iterator() {
         ArrayList<E> l = new ArrayList<E>();
         for(E elem: this.list) {
@@ -88,5 +113,15 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
         }
 
         return l.iterator();
+    }
+
+    public String toString() {
+        String s = "";
+        int count = 0;
+        for (E elem : this) {
+            s += "[" + count + "] " + elem + "\n";
+            count++;
+        }
+        return s;
     }
 }

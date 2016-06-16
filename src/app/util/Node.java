@@ -26,7 +26,10 @@ public class Node<E> {
         if (o == null || getClass() != o.getClass()) return false;
         Node<?> node = (Node<?>) o;
         return value != null ? value.equals(node.value) : node.value == null;
+    }
 
+    public String toString() {
+        return this.value.toString();
     }
 
 }

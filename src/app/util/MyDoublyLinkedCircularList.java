@@ -21,9 +21,8 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     @Override
     public E next() {
         if(!isEmpty()) {
-            if (current == null) current = first;
-            else current = current.next();
-            return current.value();
+            this.current = this.current.next();
+            return this.current.value();
         }
         else return null;
     }
@@ -31,9 +30,8 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     @Override
     public E previous() {
         if(!isEmpty()) {
-            if(current==null)   current=first;
-            else   current=current.previous();
-            return current.value();
+            this.current = this.current.previous();
+            return this.current.value();
         }
         else  return null;
     }
@@ -48,6 +46,7 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
             this.first.setPrevious(this.first);
             this.first.setNext(this.first);
             this.last = this.first;
+            this.current = this.first;
         }
         else {
             // Updates next and previous nodes ...
@@ -117,6 +116,32 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     }
 
     @Override
+    public E get(int index) {
+        Node<E> tmp = this.first;
+        for(int i = 0; i < Math.abs(index); i++) {
+            tmp = (index < 0) ? tmp.previous() : tmp.next();
+        }
+
+        return tmp.value();
+    }
+
+    @Override
+    public int size() {
+        int size = (this.first != null) ? 1 : 0;
+        Node tmp = this.first;
+        while(tmp != this.last) {
+            size++;
+            tmp = tmp.next();
+        }
+        return size;
+    }
+
+    @Override
+    public E firstValue() {
+        return this.first.value();
+    }
+
+    @Override
     public Iterator<E> iterator() {
         ArrayList<E> list = new ArrayList<>();
         Node<E> tmp = this.first;
@@ -131,9 +156,8 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
         return list.iterator();
     }
 
-
     public String toString() {
-        String s = null;
+        String s = "";
         int count = 0;
         for (E elem : this) {
             s += "[" + count + "] " + elem + "\n";
@@ -143,3 +167,4 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     }
 
 }
+

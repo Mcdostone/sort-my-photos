@@ -1,14 +1,17 @@
 package app.util;
 
 
+import app.conf.Configuration;
 import app.model.*;
 import app.view.LogsWindow;
 
 import javax.activation.MimetypesFileTypeMap;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.io.File;
 
 /**
  * MediaFactory enables to create medias, depending on their types.
@@ -17,17 +20,22 @@ import java.io.File;
  */
 public class MediaPlayerFactory {
 
-    private static final MimetypesFileTypeMap mimeAnalyzer = new MimetypesFileTypeMap();
+    private static MimetypesFileTypeMap mimeAnalyzer;
 
+    private static void initMmeAnalyzer() {
+        MediaPlayerFactory.mimeAnalyzer = new MimetypesFileTypeMap();
+        MediaPlayerFactory.mimeAnalyzer.addMimeTypes(Configuration.SUPPORTED_MIME_TYPES);
+    }
 
     public static MediaPlayer createMediaPlayer(List<File> paths) {
+        MediaPlayerFactory.initMmeAnalyzer();
         MediaPlayer m = new MediaPlayer();
+
         for (File file : paths) {
             try {
                 if (file.isDirectory()) {
                     Files.walk(Paths.get(file.getAbsolutePath())).forEach(filePath -> {
-                        if (Files.isRegularFile(filePath))
-                            m.addMedia(MediaPlayerFactory.createMedia(filePath.toString()));
+                        m.addMedia(MediaPlayerFactory.createMedia(filePath.toString()));
                     });
                 } else if (Files.isRegularFile(Paths.get(file.getAbsolutePath())))
                     m.addMedia(MediaPlayerFactory.createMedia(file.toString()));
@@ -36,12 +44,31 @@ public class MediaPlayerFactory {
             }
         }
 
+        MediaPlayerFactory.initMediaLoader(m);
+
         return m;
     }
 
+
+    private static void initMediaLoader(MediaPlayer m) {
+        //System.out.println(m);
+        MediaLoader loader = MediaLoader.getInstance();
+        int size = loader.size();
+        size = size/2;
+        for(int i = -size; i <= size; i++) {
+            try {
+                LogsWindow.createInstance().update("LOAD: " + m.get(i).getPath());
+                System.out.println(m.get(i).getPath());
+                loader.add(ImageIO.read(new File(m.get(i).getPath())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     private static Media createMedia(String filepath) {
         String mimetype = mimeAnalyzer.getContentType(filepath);
-
         switch(mimetype.split("/")[0]) {
             case "image":
                 return new Image(filepath);
