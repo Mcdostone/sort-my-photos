@@ -41,7 +41,7 @@ public class MediaLoader {
     public void add(Media m) {
         try {
             this.images.put(m, ImageIO.read(new File(m.getPath())));
-            LogsWindow.createInstance().update("LOAD: " + m.getPath());
+            LogsWindow.createInstance().update("#LOAD\t" + m.getPath());
         } catch (IOException e) {  e.printStackTrace();  }
     }
 

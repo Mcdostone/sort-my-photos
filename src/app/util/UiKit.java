@@ -2,6 +2,7 @@ package app.util;
 
 import app.conf.Configuration;
 import app.controller.ActionIconController;
+import com.sun.jmx.remote.security.JMXPluggableAuthenticator;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -31,6 +32,7 @@ public class UiKit {
     public final static Border BORDER_ICON_DEFAULT =  BorderFactory.createMatteBorder(1, 0, 0, 0, UiKit.COLOR_ICON_HOVER);
     public final static Border BORDER_ICON =  BorderFactory.createMatteBorder(1, 0, 0, 1, UiKit.COLOR_ICON_HOVER);
     public final static Font DEFAULT_FONT = new Font("Arial",Font.PLAIN, 18);
+    public final static Font LOG_FONT = new Font("consolas",Font.ITALIC, 14);
 
     public static JPanel panel() {
         JPanel p = new JPanel();
@@ -145,5 +147,12 @@ public class UiKit {
             l.setForeground(SECONDARY_COLOR);
 
         }
+    }
+
+    public static JLabel circleButton() {
+        JLabel l = new JLabel("kfkfkkjfkjfkjf");
+        l.setSize(new Dimension(200, 200));
+        l.setBackground(Color.blue);
+        return l;
     }
 }

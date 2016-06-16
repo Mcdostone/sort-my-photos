@@ -33,7 +33,7 @@ public class MediaPanel extends JPanel {
 
     public void setMedia(Media m) {
         this.current = m;
-        LogsWindow.createInstance().update("DISPLAY: " + this.current.toString());
+        LogsWindow.createInstance().update("#DISPLAY\t" + this.current.toString());
         this.repaint();
     }
 

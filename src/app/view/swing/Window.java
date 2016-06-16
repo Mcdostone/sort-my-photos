@@ -1,6 +1,8 @@
 package app.view.swing;
 
 import app.conf.Configuration;
+import app.controller.ShortcutController;
+import app.model.MediaLoader;
 import app.model.MediaPlayer;
 import app.util.MediaPlayerFactory;
 
@@ -40,7 +42,6 @@ public class Window extends JFrame {
         this.pack();
         this.requestFocus();
         this.setVisible(true);
-
     }
 
 
@@ -54,9 +55,20 @@ public class Window extends JFrame {
     /** Enables to display the 'media player' view in the app */
     public void launchMediaPlayer(List<File> paths) {
         MediaPlayer m = MediaPlayerFactory.createMediaPlayer(paths);
+        MediaLoader loader = MediaLoader.getInstance();
+        int size = loader.size();
+        size = size / 2;
+        for(int i = -size; i <= size; i++)
+            loader.add(m.get(i));
+
+
         this.mediaPlayerPanel = new MediaPlayerPanel(m);
         this.container.remove(this.start);
         this.container.add(this.mediaPlayerPanel);
+        this.container.add(new OverlaySorting());
+
+        //this.mediaPlayerPanel.addKeyListener(new ShortcutController());
+
         this.setContentPane(this.container);
         this.repaint();
     }

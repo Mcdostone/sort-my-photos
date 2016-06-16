@@ -7,6 +7,7 @@ import app.view.swing.LogsWindow;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -44,20 +45,9 @@ public class MediaPlayerFactory {
             }
         }
         LogsWindow.createInstance().update("FILES FOUND : \n" + m.toString());
-        MediaPlayerFactory.initMediaLoader(m);
 
         return m;
     }
-
-
-    private static void initMediaLoader(MediaPlayer m) {
-        MediaLoader loader = MediaLoader.getInstance();
-        int size = loader.size();
-        size = size/2;
-        for(int i = -size; i <= size; i++)
-            loader.add(m.get(i));
-    }
-
 
     private static Media createMedia(String filepath) {
         String mimetype = mimeAnalyzer.getContentType(filepath);

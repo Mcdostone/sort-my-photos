@@ -26,18 +26,18 @@ public class MediaPlayerController implements MouseListener, KeyListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        if(SwingUtilities.isLeftMouseButton(e))
-            this.p.setMedia(this.m.next());
-        if(SwingUtilities.isRightMouseButton(e))
-            this.p.setMedia(this.m.previous());
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     @Override
     public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+        if(SwingUtilities.isLeftMouseButton(e))
+            this.p.setMedia(this.m.next());
+        if(SwingUtilities.isRightMouseButton(e))
+            this.p.setMedia(this.m.previous());
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {}
@@ -49,7 +49,10 @@ public class MediaPlayerController implements MouseListener, KeyListener {
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {
         switch( e.getKeyCode() ) {
             case KeyEvent.VK_LEFT:
                 this.p.setMedia(this.m.previous());
@@ -59,7 +62,4 @@ public class MediaPlayerController implements MouseListener, KeyListener {
                 break;
         }
     }
-
-    @Override
-    public void keyReleased(KeyEvent e) {}
 }

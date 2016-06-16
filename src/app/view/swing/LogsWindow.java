@@ -1,5 +1,7 @@
 package app.view.swing;
 
+import app.util.UiKit;
+
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -17,9 +19,14 @@ public class LogsWindow extends DialogWindow {
 
     protected LogsWindow() {
         super("Logs");
+        this.textArea.setEditable(false);
+        this.textArea.setFocusable(false);
+        this.textArea.setFont(UiKit.LOG_FONT);
+        //this.textArea.setBackground(UiKit.BACKGROUND_TABBAR);
+        //this.textArea.setForeground(UiKit.PRIMARY_COLOR);
         this.add(new JScrollPane(textArea));
-        this.addWindowListener(new WindowAdapter() {
 
+        this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
                 setVisible(false);
                 dispose();

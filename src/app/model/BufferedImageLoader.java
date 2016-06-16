@@ -20,7 +20,7 @@ public class BufferedImageLoader extends Thread {
     public void run() {
         try {
             MediaLoader.getInstance().add(this.m , ImageIO.read(new File(this.m.getPath())));
-            LogsWindow.createInstance().update("LOAD: " + m.getPath() + "\n");
+            LogsWindow.createInstance().update("#LOAD\t" + m.getPath() + "\n");
         } catch (IOException e) {  e.printStackTrace();  }
 
     }
