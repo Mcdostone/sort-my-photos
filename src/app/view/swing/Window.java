@@ -3,8 +3,6 @@ package app.view.swing;
 import app.conf.Configuration;
 import app.model.MediaPlayer;
 import app.util.MediaPlayerFactory;
-import app.view.LogsWindow;
-import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +19,7 @@ public class Window extends JFrame {
     // List of all different panels
     private JPanel container;
     private JPanel start;
-    private JLayeredPane mediaPlayer;
+    private JLayeredPane mediaPlayerPanel;
 
     private final static int SIZE = 650;
 
@@ -56,9 +54,9 @@ public class Window extends JFrame {
     /** Enables to display the 'media player' view in the app */
     public void launchMediaPlayer(List<File> paths) {
         MediaPlayer m = MediaPlayerFactory.createMediaPlayer(paths);
-        this.mediaPlayer = new MediaPlayerPanel(m);
+        this.mediaPlayerPanel = new MediaPlayerPanel(m);
         this.container.remove(this.start);
-        this.container.add(this.mediaPlayer);
+        this.container.add(this.mediaPlayerPanel);
         this.setContentPane(this.container);
         this.repaint();
     }
@@ -66,15 +64,9 @@ public class Window extends JFrame {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {  e.printStackTrace();  }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
         Window w = new Window();
-
-
-
     }
 }
 

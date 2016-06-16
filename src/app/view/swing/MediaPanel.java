@@ -2,9 +2,8 @@ package app.view.swing;
 
 import app.controller.MediaPlayerController;
 import app.model.Media;
+import app.model.MediaLoader;
 import app.model.MediaPlayer;
-import app.view.LogsWindow;
-import sun.rmi.runtime.Log;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -33,27 +32,22 @@ public class MediaPanel extends JPanel {
 
     public void setMedia(Media m) {
         this.current = m;
-        LogsWindow.createInstance().update(this.current.toString());
+        LogsWindow.createInstance().update("DISPLAY: " + this.current.toString());
         this.repaint();
     }
 
-    public void paintComponent(Graphics g) {
+    @Override
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        BufferedImage image = null;
-        try {
-            if(this.current != null)
-                image = ImageIO.read(new File(this.current.getPath()));
-        } catch (IOException e)  {
-            e.printStackTrace();
-        }
-
+        Graphics2D g2d = (Graphics2D) g;
+        BufferedImage image = MediaLoader.getInstance().getImage();
         if(image != null) {
             Dimension scale = MediaPanel.getScaledDimension(new Dimension(image.getWidth(), image.getHeight()), this.getSize());
             Dimension pos = MediaPanel.getPosition(scale, this.getSize());
+            //g.drawString(image.toString(), 5, 5);
             g.drawImage(image, (int) pos.getWidth(), (int) pos.getHeight(), (int) scale.getWidth(), (int) scale.getHeight(), null);
         }
     }
-
 
     /** Thank you StackOverFlow */
     private static Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {

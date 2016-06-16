@@ -3,7 +3,7 @@ package app.util;
 
 import app.conf.Configuration;
 import app.model.*;
-import app.view.LogsWindow;
+import app.view.swing.LogsWindow;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
@@ -44,6 +44,8 @@ public class MediaPlayerFactory {
             }
         }
 
+        LogsWindow.createInstance().update("FILES FOUND : \n" + m.toString());
+        System.out.println(m);
         MediaPlayerFactory.initMediaLoader(m);
 
         return m;
@@ -51,19 +53,11 @@ public class MediaPlayerFactory {
 
 
     private static void initMediaLoader(MediaPlayer m) {
-        //System.out.println(m);
         MediaLoader loader = MediaLoader.getInstance();
         int size = loader.size();
         size = size/2;
-        for(int i = -size; i <= size; i++) {
-            try {
-                LogsWindow.createInstance().update("LOAD: " + m.get(i).getPath());
-                System.out.println(m.get(i).getPath());
-                loader.add(ImageIO.read(new File(m.get(i).getPath())));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        for(int i = -size; i <= size; i++)
+            loader.add(m.get(i));
     }
 
 

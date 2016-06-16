@@ -1,14 +1,12 @@
 package app.controller;
 
 import app.conf.Configuration;
-import app.view.LogsWindow;
-import app.view.swing.StarterPanel;
+import app.view.swing.LogsWindow;
 import app.view.swing.Window;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.io.File;
 
@@ -40,7 +38,7 @@ public class FileChooserController extends MouseAdapter {
 
         chooser.setAcceptAllFileFilterUsed(false);
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            LogsWindow.createInstance().update("LOCATION: " + chooser.getSelectedFile());
+            LogsWindow.createInstance().update("LOCATION: " + chooser.getSelectedFile() + "\n");
             list.add(chooser.getSelectedFile());
             this.w.launchMediaPlayer(list);
         } else

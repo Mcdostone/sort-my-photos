@@ -19,6 +19,8 @@ public interface DoublyLinkedCircularList<E> extends Iterable<E> {
     /** Add an element in the collection */
     void add(E element);
 
+    void add(int index, E element);
+
     /** Remove a given element in the collection */
     void remove(E element);
 
@@ -32,4 +34,8 @@ public interface DoublyLinkedCircularList<E> extends Iterable<E> {
     int size();
 
     E firstValue();
+
+    E NthMediaAfterCurrent(int n);
+
+    E NthMediaBeforeCurrent(int n);
 }

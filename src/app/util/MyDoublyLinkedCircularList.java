@@ -60,6 +60,30 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     }
 
     @Override
+    public void add(int index, E element) {
+        Node<E> tmp = new Node<>(element);
+        if(index == 0) {
+            this.first.setPrevious(tmp);
+            this.last.setNext(tmp);
+            tmp.setNext(this.first);
+            tmp.setPrevious(this.last);
+            this.first = tmp;
+        }
+        else {
+            Node<E> curr = this.first;
+            for(int i = 0; i < index - 1; i++)
+                curr = curr.next();
+
+            tmp.setNext(curr.next());
+            tmp.setPrevious(curr);
+            curr.next().setPrevious(tmp);
+            curr.setNext(tmp);
+        }
+
+
+    }
+
+    @Override
     public void remove(E element) {
         if(contains(element)) {
             Node<E> tmp = this.first;
@@ -139,6 +163,26 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     @Override
     public E firstValue() {
         return this.first.value();
+    }
+
+    @Override
+    public E NthMediaAfterCurrent(int n) {
+        Node<E> tmp = this.current;
+        for(int i = 0; i < n; i++) {
+            tmp = tmp.next();
+        }
+
+        return tmp.value();
+    }
+
+    @Override
+    public E NthMediaBeforeCurrent(int n) {
+        Node<E> tmp = this.current;
+        for(int i = 0; i < n; i++) {
+            tmp = tmp.previous();
+        }
+
+        return tmp.value();
     }
 
     @Override

@@ -2,6 +2,7 @@ package app.model;
 
 import app.util.DoublyLinkedCircularList;
 import app.util.MyDoublyLinkedCircularList;
+import app.util.Node;
 
 import java.util.Observable;
 
@@ -13,6 +14,7 @@ import java.util.Observable;
 public class MediaPlayer extends Observable {
 
     private DoublyLinkedCircularList<Media> playlist;
+    private Media current;
 
     public MediaPlayer() {
         this.playlist = new MyDoublyLinkedCircularList<>();
@@ -34,16 +36,26 @@ public class MediaPlayer extends Observable {
     public Media next() {
         this.setChanged();
         this.notifyObservers();
-        return this.playlist.next();
+        Media toLoad = this.playlist.NthMediaAfterCurrent((MediaLoader.getInstance().size()/2) + 1);
+        MediaLoader.getInstance().nextMedia(toLoad);
+        this.current = this.playlist.next();
+        return this.current;
     }
+
 
     public Media previous() {
         this.setChanged();
         this.notifyObservers();
-        return this.playlist.previous();
+        Media toLoad = this.playlist.NthMediaAfterCurrent((MediaLoader.getInstance().size()/2) + 1);
+        MediaLoader.getInstance().previousMedia(toLoad);
+        this.current = this.playlist.previous();
+        return this.current;
     }
 
-    public Media firstMedia() {  return this.playlist.firstValue();  }
+    public Media firstMedia() {
+        this.current = this.playlist.firstValue();
+        return this.current;
+    }
 
     public Media get(int index) {  return this.playlist.get(index);  }
 

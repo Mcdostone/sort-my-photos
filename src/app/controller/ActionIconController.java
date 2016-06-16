@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.view.LogsWindow;
+import app.view.swing.LogsWindow;
 import app.view.swing.SettingsWindow;
 
 import java.awt.event.MouseAdapter;

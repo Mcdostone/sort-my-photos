@@ -1,9 +1,7 @@
 package app.view.swing;
 
 import app.conf.Configuration;
-import app.controller.MediaPlayerController;
 import app.model.MediaPlayer;
-import javafx.scene.control.Tab;
 
 import javax.swing.*;
 import java.awt.*;

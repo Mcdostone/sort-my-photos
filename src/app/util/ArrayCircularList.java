@@ -22,35 +22,27 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
 
     @Override
     public E next() {
-        if(this.index == -1)
-            this.index = 0;
-        else
-            this.nextIndex();
+        this.index = this.nextIndex();
         return this.list[this.index];
     }
 
-    private void nextIndex() {
+    private int nextIndex() {
         if(this.index == -1)
-            this.index = 0;
+            return 0;
         else
-        this.index = (this.index == this.list.length - 1) ? 0 : this.index + 1;
-
-
+            return (this.index == this.list.length - 1) ? 0 : this.index + 1;
     }
 
-    private void previousIndex() {
+    private int previousIndex() {
         if(this.index == -1)
-            this.index = this.list.length / 2;
+            return this.list.length / 2;
         else
-            this.index = (this.index == 0) ? this.list.length - 1 : this.index  - 1;
+            return (this.index == 0) ? this.list.length - 1 : this.index  - 1;
     }
 
     @Override
     public E previous() {
-        if(this.index == -1)
-            this.index = this.list.length / 2;
-        else
-            this.previousIndex();
+        this.index = this.previousIndex();
         return this.list[this.index];
     }
 
@@ -61,9 +53,14 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
 
     @Override
     public void add(E element) {
-        this.nextIndex();
+        this.index = this.nextIndex();
         this.list[this.index] = element;
         System.out.println("added at " + this.index);
+    }
+
+    @Override
+    public void add(int index, E element) {
+        this.list[index] = element;
     }
 
     @Override
@@ -73,6 +70,20 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
                 if(this.list[i] != null && this.list[i].equals(element))
                     this.list[i] = null;
             }
+    }
+
+    public void shiftLeft() {
+        for(int i = 0; i < this.list.length -1; i++) {
+            this.list[i] = this.list[i + 1];
+        }
+        this.list[this.list.length - 1] = null;
+    }
+
+    public void shiftRight() {
+        for(int i = this.list.length - 1; i > 1; i--) {
+            this.list[i] = this.list[i - 1];
+        }
+        this.list[0] = null;
     }
 
 
@@ -103,6 +114,25 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
     @Override
     public E firstValue() {
         return this.list[0];
+    }
+
+    @Override
+    public E NthMediaAfterCurrent(int n) {
+        int tmp = this.index;
+        for(int i = 0; i < n; i++) {
+            tmp = this.nextIndex();
+        }
+        return this.list[tmp];
+
+    }
+
+    @Override
+    public E NthMediaBeforeCurrent(int n) {
+        int tmp = this.index;
+        for(int i = 0; i < n; i++) {
+            tmp = this.previousIndex();
+        }
+        return this.list[tmp];
     }
 
     @Override

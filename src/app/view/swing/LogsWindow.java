@@ -1,6 +1,4 @@
-package app.view;
-
-import app.view.swing.DialogWindow;
+package app.view.swing;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
