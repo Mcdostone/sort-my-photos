@@ -19,6 +19,7 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
 
     private MediaPlayer m;
     private MediaPanel p;
+    private OverlaySorting overlay;
     private TabBarPanel bar;
 
     public MediaPlayerPanel(MediaPlayer m) {
@@ -26,11 +27,14 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
         this.m = m;
         this.p = new MediaPanel(m);
         this.bar = new TabBarPanel();
+        this.overlay = new OverlaySorting();
 
         this.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT));
         this.m.addObserver(this);
         this.add(this.p, 0);
-        this.add(this.bar, 1);
+        this.add(this.overlay, 1);
+        this.add(this.bar, 2);
+
         this.p.setMedia(this.m.firstMedia());
 
         this.doLayout();
@@ -40,6 +44,7 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
     @Override
     public void update(Observable o, Object arg) {
         this.p.repaint();
+        this.overlay.repaint();
         this.bar.repaint();
         this.doLayout();
     }
@@ -51,10 +56,12 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
 
     @Override
     public void doLayout() {
-        //int heightBar = (int) this.bar.getPreferredSize().getHeight();
         int heightBar = this.calculateHeightTabBar();
         this.p.setBounds(0, 0, this.getWidth(), this.getHeight());
+        this.overlay.setBounds(0, this.getHeight()/2 - heightBar/2, this.getWidth(), heightBar);
         this.bar.setBounds(0, this.getHeight() - heightBar, this.getWidth(), heightBar);
+
+        this.moveToFront(this.overlay);
         this.moveToFront(this.bar);
         this.p.requestFocusInWindow();
     }

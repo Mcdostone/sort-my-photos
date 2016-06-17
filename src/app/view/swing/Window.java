@@ -65,7 +65,7 @@ public class Window extends JFrame {
         this.mediaPlayerPanel = new MediaPlayerPanel(m);
         this.container.remove(this.start);
         this.container.add(this.mediaPlayerPanel);
-        this.container.add(new OverlaySorting());
+        //this.container.add(new OverlaySorting());
 
         //this.mediaPlayerPanel.addKeyListener(new ShortcutController());
 

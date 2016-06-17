@@ -10,16 +10,23 @@ import java.awt.*;
  */
 public class OverlaySorting extends JPanel {
 
+    private JLabel accept;
+    private JLabel reject;
+
     public OverlaySorting() {
         super();
-        this.setLayout(new BorderLayout());
-        this.setBackground(Color.RED);
-        this.add(new JPanel(), BorderLayout.CENTER);
-        this.add(UiKit.circleButton(), BorderLayout.EAST);
-        this.add(UiKit.circleButton(), BorderLayout.WEST);
+        this.setBackground(new Color(0,0,0,0));
+        this.accept = UiKit.circleButton();
+        this.reject = UiKit.circleButton();
+
+        this.add(this.accept);
+        this.add(this.reject);
     }
 
-
-
+    @Override
+    public void doLayout() {
+        this.reject.setBounds(0, 0, this.getHeight(), this.getHeight());
+        this.accept.setBounds(this.getWidth() - this.getHeight(),0, this.getHeight(), this.getHeight());
+    }
 
 }

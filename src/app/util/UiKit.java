@@ -151,8 +151,8 @@ public class UiKit {
 
     public static JLabel circleButton() {
         JLabel l = new JLabel("kfkfkkjfkjfkjf");
-        l.setSize(new Dimension(200, 200));
-        l.setBackground(Color.blue);
+        l.setOpaque(true);
+        l.setBackground(UiKit.SECONDARY_COLOR);
         return l;
     }
 }
