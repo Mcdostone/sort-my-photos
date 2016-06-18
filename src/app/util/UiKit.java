@@ -2,6 +2,7 @@ package app.util;
 
 import app.conf.Configuration;
 import app.controller.ActionIconController;
+import app.controller.SortingController;
 import com.sun.jmx.remote.security.JMXPluggableAuthenticator;
 
 import javax.swing.*;
@@ -88,7 +89,7 @@ public class UiKit {
     }
 
     public static JLabel CliquableIcon(String filename, int height) {
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(height - PADDING_ICON, height - PADDING_ICON, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(height - PADDING_ICON, height - PADDING_ICON, Image.SCALE_AREA_AVERAGING));
         JLabel l = new JLabel(imageIcon, JLabel.CENTER);
         l.setPreferredSize(new Dimension(0, height));
         l.setMaximumSize(l.getPreferredSize());
@@ -150,9 +151,27 @@ public class UiKit {
     }
 
     public static JLabel circleButton() {
-        JLabel l = new JLabel("kfkfkkjfkjfkjf");
+        JLabel l = new JLabel("");
         l.setOpaque(true);
         l.setBackground(UiKit.SECONDARY_COLOR);
+        return l;
+    }
+
+    public static JLabel rejectIcon() {
+        JLabel l = UiKit.CliquableIcon(Configuration.REJECT_ICON, 120);
+        l.setBorder(null);
+        l.setOpaque(true);
+        l.setBackground(UiKit.SECONDARY_COLOR);
+        l.addMouseListener(new SortingController(l, SortingController.REJECT));
+        return l;
+    }
+
+    public static JLabel acceptIcon() {
+        JLabel l = UiKit.CliquableIcon(Configuration.ACCEPT_ICON, 120);
+        l.setBorder(null);
+        l.setOpaque(true);
+        l.setBackground(UiKit.SECONDARY_COLOR);
+        l.addMouseListener(new SortingController(l, SortingController.ACCEPT));
         return l;
     }
 }

@@ -16,8 +16,8 @@ public class OverlaySorting extends JPanel {
     public OverlaySorting() {
         super();
         this.setBackground(new Color(0,0,0,0));
-        this.accept = UiKit.circleButton();
-        this.reject = UiKit.circleButton();
+        this.accept = UiKit.acceptIcon();
+        this.reject = UiKit.rejectIcon();
 
         this.add(this.accept);
         this.add(this.reject);
@@ -25,8 +25,9 @@ public class OverlaySorting extends JPanel {
 
     @Override
     public void doLayout() {
-        this.reject.setBounds(0, 0, this.getHeight(), this.getHeight());
-        this.accept.setBounds(this.getWidth() - this.getHeight(),0, this.getHeight(), this.getHeight());
+        int dx = 10;
+        this.reject.setBounds(dx, 0, this.getHeight(), this.getHeight());
+        this.accept.setBounds(this.getWidth() - this.getHeight() - dx, 0, this.getHeight(), this.getHeight());
     }
 
 }

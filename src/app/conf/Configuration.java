@@ -20,4 +20,9 @@ public class Configuration {
     public static String SETTINGS_ICON = "./assets/icons/settings.png";
     public static String SORT_ICON = "./assets/icons/sort-2.png";
     public static String LOGS_ICON = "./assets/icons/logs.png";
+    public static String ACCEPT_ICON = "./assets/icons/accept.png";
+    public static String REJECT_ICON = "./assets/icons/reject.png";
+
+    public static String ACCEPT_SHORCUT= "V";
+    public static String REJECT_SHORTCUT = "A";
 }
