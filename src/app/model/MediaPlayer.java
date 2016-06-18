@@ -28,7 +28,9 @@ public class MediaPlayer extends Observable {
         }
     }
 
-    public void removeCurrent() {  this.playlist.removeCurrent();
+    public void removeCurrent() {
+        this.current = this.playlist.removeCurrent();
+        System.out.println(this.current);
         this.setChanged();
         this.notifyObservers();
     }
@@ -58,6 +60,8 @@ public class MediaPlayer extends Observable {
         this.current = this.playlist.firstValue();
         return this.current;
     }
+
+    public Media current() {  return this.current;  }
 
     public Media get(int index) {  return this.playlist.get(index);  }
 

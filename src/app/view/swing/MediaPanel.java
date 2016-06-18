@@ -12,6 +12,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * JPanel which displays a given media
@@ -88,5 +90,4 @@ public class MediaPanel extends JPanel {
 
         return new Dimension(dx, dy);
     }
-
 }

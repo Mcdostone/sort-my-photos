@@ -26,8 +26,9 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
         super();
         this.m = m;
         this.p = new MediaPanel(m);
-        this.bar = new TabBarPanel();
+        this.bar = new TabBarPanel(this);
         this.overlay = new OverlaySorting();
+        this.overlay.setVisible(false);
 
         this.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT));
         this.m.addObserver(this);
@@ -43,6 +44,7 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
 
     @Override
     public void update(Observable o, Object arg) {
+        this.p.setMedia(this.m.current());
         this.p.repaint();
         this.overlay.repaint();
         this.bar.repaint();
@@ -77,4 +79,6 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
 
     @Override
     public void componentHidden(ComponentEvent e) {}
+
+    public void switchSorting() {  this.overlay.setVisible(!this.overlay.isVisible());  }
 }

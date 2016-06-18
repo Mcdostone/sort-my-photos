@@ -3,6 +3,7 @@ package app.controller;
 import app.view.swing.LogsWindow;
 import app.view.swing.SettingsWindow;
 
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,10 +16,12 @@ public class ActionIconController extends MouseAdapter {
 
     /** Type of action: SETTINGS/LOGS/... */
     private String action;
+    private JPanel panel;
 
-    public ActionIconController(String action) {
+    public ActionIconController(String action, JPanel p) {
         super();
         this.action = action;
+        this.panel = p;
     }
 
     @Override
@@ -30,6 +33,9 @@ public class ActionIconController extends MouseAdapter {
                 break;
             case "LOGS":
                 LogsWindow.createInstance().setVisible(true);
+                break;
+            case "SORT":
+                this.panel.setVisible(!this.panel.isVisible());
                 break;
         }
 

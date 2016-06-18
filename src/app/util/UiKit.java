@@ -8,6 +8,7 @@ import com.sun.jmx.remote.security.JMXPluggableAuthenticator;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ContainerAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -34,6 +35,7 @@ public class UiKit {
     public final static Border BORDER_ICON =  BorderFactory.createMatteBorder(1, 0, 0, 1, UiKit.COLOR_ICON_HOVER);
     public final static Font DEFAULT_FONT = new Font("Arial",Font.PLAIN, 18);
     public final static Font LOG_FONT = new Font("consolas",Font.ITALIC, 14);
+    public final static Font FONT_ICON = new Font("Arial",Font.PLAIN, 24);
 
     public static JPanel panel() {
         JPanel p = new JPanel();
@@ -95,6 +97,8 @@ public class UiKit {
         l.setMaximumSize(l.getPreferredSize());
         l.setMinimumSize(l.getPreferredSize());
         l.setOpaque(false);
+        l.setForeground(UiKit.PRIMARY_COLOR);
+        l.setFont(UiKit.FONT_ICON);
         l.setBorder(UiKit.BORDER_ICON_DEFAULT);
         l.setCursor(new Cursor(Cursor.HAND_CURSOR));
         l.setBackground(UiKit.TRANSPARANT);
@@ -104,21 +108,20 @@ public class UiKit {
 
     public static JLabel settingsIcon(int height) {
         JLabel l = UiKit.CliquableIcon(Configuration.SETTINGS_ICON, height);
-        l.addMouseListener(new ActionIconController("SETTINGS"));
+        l.addMouseListener(new ActionIconController("SETTINGS", null));
         return l;
     }
 
 
     public static JLabel sortIcon(int height) {
         JLabel l = UiKit.CliquableIcon(Configuration.SORT_ICON, height);
-        l.addMouseListener(new ActionIconController("SORT"));
         return l;
     }
 
     public static JLabel LogsIcon(int height) {
         JLabel l = UiKit.CliquableIcon(Configuration.LOGS_ICON, height);
 
-        l.addMouseListener(new ActionIconController("LOGS"));
+        l.addMouseListener(new ActionIconController("LOGS", null));
         return l;
     }
 
@@ -162,7 +165,6 @@ public class UiKit {
         l.setBorder(null);
         l.setOpaque(true);
         l.setBackground(UiKit.SECONDARY_COLOR);
-        l.addMouseListener(new SortingController(l, SortingController.REJECT));
         return l;
     }
 
@@ -171,7 +173,6 @@ public class UiKit {
         l.setBorder(null);
         l.setOpaque(true);
         l.setBackground(UiKit.SECONDARY_COLOR);
-        l.addMouseListener(new SortingController(l, SortingController.ACCEPT));
         return l;
     }
 }

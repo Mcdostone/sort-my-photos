@@ -1,5 +1,6 @@
 package app.view.swing;
 
+import app.controller.SortingController;
 import app.util.UiKit;
 
 import javax.swing.*;
@@ -18,6 +19,8 @@ public class OverlaySorting extends JPanel {
         this.setBackground(new Color(0,0,0,0));
         this.accept = UiKit.acceptIcon();
         this.reject = UiKit.rejectIcon();
+        this.accept.addMouseListener(new SortingController(this.accept, SortingController.ACCEPT));
+        this.reject.addMouseListener(new SortingController(this.reject, SortingController.REJECT));
 
         this.add(this.accept);
         this.add(this.reject);
@@ -25,7 +28,7 @@ public class OverlaySorting extends JPanel {
 
     @Override
     public void doLayout() {
-        int dx = 10;
+        int dx = 0;
         this.reject.setBounds(dx, 0, this.getHeight(), this.getHeight());
         this.accept.setBounds(this.getWidth() - this.getHeight() - dx, 0, this.getHeight(), this.getHeight());
     }

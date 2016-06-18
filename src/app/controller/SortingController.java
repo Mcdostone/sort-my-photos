@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.conf.Configuration;
+import app.model.SortingManager;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -22,6 +23,17 @@ public class SortingController extends MouseAdapter {
         this.l = l;
         this.backup = this.l.getIcon();
         this.action = action;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        switch (this.action) {
+            case SortingController.ACCEPT:
+                SortingManager.getInstance(null, null).acceptMedia();
+                break;
+            case SortingController.REJECT:
+                SortingManager.getInstance(null, null).rejectMedia();
+        }
     }
 
     @Override

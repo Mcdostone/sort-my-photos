@@ -25,7 +25,7 @@ public interface DoublyLinkedCircularList<E> extends Iterable<E> {
     void remove(E element);
 
     /** Remove the current element in the collection */
-    void removeCurrent();
+    E removeCurrent();
 
     boolean contains(E element);
 

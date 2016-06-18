@@ -87,8 +87,10 @@ public class ArrayCircularList<E> implements DoublyLinkedCircularList<E> {
 
 
     @Override
-    public void removeCurrent() {
+    public E removeCurrent() {
         this.list[this.index] = null;
+        this.index = this.nextIndex();
+        return this.list[this.index];
     }
 
     @Override
