@@ -190,21 +190,12 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     }
     
     @Override
-    public E get(int index) throws IndexOutOfBoundsException{
-    	/* OLD VERSION
+    public E get(int index){
         Node<E> tmp = this.first;
         for(int i = 0; i < Math.abs(index); i++) {
             tmp = (index < 0) ? tmp.previous() : tmp.next();
         }
 
-        return tmp.value();
-    	 */
-    	
-    	if(index < 0 || index >= size)
-    		throw new IndexOutOfBoundsException();
-        Node<E> tmp = this.first;
-        for(int i = 0; i < index; i++) 
-            tmp = tmp.next();
         return tmp.value();
     }
 
