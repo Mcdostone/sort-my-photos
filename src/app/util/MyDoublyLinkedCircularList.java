@@ -2,6 +2,7 @@ package app.util;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Circular List for watching medias like a playlist (loop)
@@ -17,6 +18,8 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     private Node<E> last;
     /** Current Node of the circular list */
     private Node<E> current;
+    /** Size of the data structure */
+    private int size = 0;
 
     @Override
     public E next() {
@@ -37,77 +40,105 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     }
 
     @Override
-    public boolean isEmpty() {  return this.first == null;  }
+    public boolean isEmpty() {  return size == 0;  }
+    
+    private void addBetweenNodes(Node<E> before, Node<E> between, Node<E> after){
+    	between.setNext(after);
+        between.setPrevious(before);
+        before.setNext(between);
+        after.setPrevious(between);
+    }
 
     @Override
     public void add(E element) {
         if(this.first == null) {
-            this.first = new Node<>(element);
-            this.first.setPrevious(this.first);
-            this.first.setNext(this.first);
-            this.last = this.first;
-            this.current = this.first;
+            Node<E> tmp = new Node<>(element);
+            tmp.setPrevious(tmp);
+            tmp.setNext(tmp);
+            this.first = tmp;
+            this.last = tmp;
+            this.current = tmp;
         }
         else {
-            // Updates next and previous nodes ...
             Node<E> tmp = new Node<>(element);
-            tmp.setNext(this.first);
-            this.last.setNext(tmp);
-            tmp.setPrevious(this.last);
+            addBetweenNodes(this.last, tmp, this.first);
             this.last = tmp;
-            this.first.setPrevious(this.last);
         }
+        size++;
     }
 
     @Override
-    public void add(int index, E element) {
+    public void add(int index, E element) throws IndexOutOfBoundsException {
+    	if(index > size)
+    		throw new IndexOutOfBoundsException();
         Node<E> tmp = new Node<>(element);
-        if(index == 0) {
-            this.first.setPrevious(tmp);
-            this.last.setNext(tmp);
-            tmp.setNext(this.first);
-            tmp.setPrevious(this.last);
-            this.first = tmp;
-        }
+        if(index == 0)
+            add(element);
         else {
             Node<E> curr = this.first;
             for(int i = 0; i < index - 1; i++)
                 curr = curr.next();
-
-            tmp.setNext(curr.next());
-            tmp.setPrevious(curr);
-            curr.next().setPrevious(tmp);
-            curr.setNext(tmp);
+            addBetweenNodes(curr, tmp, curr.next());
         }
-
-
+        size++;
     }
 
     @Override
-    public void remove(E element) {
-        if(contains(element)) {
-            Node<E> tmp = this.first;
-            if(tmp.value().equals(element)) {
-                this.current = tmp;
-                this.removeCurrent();
-            }
-            else {
-                tmp = tmp.next();
-                while(!tmp.equals(this.first)) {
-                    if(tmp.value().equals(element)) {
-                        this.current = tmp;
-                        this.removeCurrent();
-                        break;
-                    }
-                    else
-                        tmp = tmp.next();
+    public void remove(E element) throws NoSuchElementException {
+        if(!contains(element))
+        	throw new NoSuchElementException();
+        
+        /* OLD VERSION
+        Node<E> tmp = this.first;
+        if(tmp.value().equals(element)) {
+            this.current = tmp;
+            this.removeCurrent();
+        }
+        else {
+            tmp = tmp.next();
+            while(!tmp.equals(this.first)) {
+                if(tmp.value().equals(element)) {
+                    this.current = tmp;
+                    this.removeCurrent();
+                    break;
                 }
+                else
+                    tmp = tmp.next();
             }
         }
+        */
+
+        Node<E> tmp = this.first;
+        while(!tmp.equals(this.last) && !tmp.value().equals(element))
+            tmp = tmp.next();
+        if(tmp.value().equals(element))
+            this.removeNode(tmp);
+    }
+    
+    private void removeNode(Node<E> node){
+        if(node.equals(this.first) && node.equals(this.last)) {
+            this.last = null;
+            this.first = null;
+            this.current = null;
+        }
+        else{        
+	        if(node.equals(this.last))
+	            this.last = node.previous();
+	        if(node.equals(this.first))
+	            this.first = node.next();
+	
+	        node.previous().setNext(node.next());
+	        node.next().setPrevious(node.previous());
+	        
+	        node  = node.next();
+        }
+        
+        size--;
     }
 
     @Override
     public E removeCurrent() {
+    	/* OLD VERSION
         if(this.last.equals(this.first)) {
             this.last = null;
             this.first = null;
@@ -116,17 +147,33 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
         else {
             if(this.current.equals(this.last))
                 this.last = this.current.previous();
+            if(this.current.equals(this.first))
+                this.first = this.current.next();
 
             this.current.previous().setNext(this.current.next());
             this.current.next().setPrevious(this.current.previous());
+            
             this.current  = this.current.next();
         }
-
-        return this.current.value();
+        
+        return this.current.value(); /////////// Mauvaise valeur de retour ////////////
+        */
+        
+        Node<E> removedNode = this.current;
+        E returnedValue = removedNode.value();
+        this.current = this.current.next();
+        this.removeNode(removedNode);
+        return returnedValue;
     }
 
     @Override
     public boolean contains(E element) {
+        Node<E> tmp = this.first;
+        while(!tmp.value().equals(element) && !tmp.equals(this.last))
+            tmp = tmp.next();
+        return tmp.value().equals(element);
+        
+        /* OLD VERSION
         Node tmp = this.first;
         if(tmp.value().equals(element))  return true;
         else {
@@ -139,27 +186,31 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
             }
         }
         return false;
+        */
     }
-
+    
     @Override
-    public E get(int index) {
+    public E get(int index) throws IndexOutOfBoundsException{
+    	/* OLD VERSION
         Node<E> tmp = this.first;
         for(int i = 0; i < Math.abs(index); i++) {
             tmp = (index < 0) ? tmp.previous() : tmp.next();
         }
 
         return tmp.value();
+    	 */
+    	
+    	if(index < 0 || index >= size)
+    		throw new IndexOutOfBoundsException();
+        Node<E> tmp = this.first;
+        for(int i = 0; i < index; i++) 
+            tmp = tmp.next();
+        return tmp.value();
     }
 
     @Override
     public int size() {
-        int size = (this.first != null) ? 1 : 0;
-        Node tmp = this.first;
-        while(tmp != this.last) {
-            size++;
-            tmp = tmp.next();
-        }
-        return size;
+        return this.size;
     }
 
     @Override

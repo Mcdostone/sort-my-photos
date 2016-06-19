@@ -3,7 +3,6 @@ package app.controller;
 
 import app.model.MediaPlayer;
 import app.view.swing.MediaPanel;
-import app.view.swing.MediaPlayerPanel;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -17,12 +16,12 @@ import java.awt.event.MouseListener;
  */
 public class MediaPlayerController implements MouseListener, KeyListener {
 
-    private MediaPlayer m;
-    private MediaPanel p;
+    private MediaPlayer mediaPlayer;
+    private MediaPanel mediaPanel;
 
-    public MediaPlayerController(MediaPlayer m, MediaPanel p) {
-        this.m = m;
-        this.p = p;
+    public MediaPlayerController(MediaPlayer mediaPlayer, MediaPanel mediaPanel) {
+        this.mediaPlayer = mediaPlayer;
+        this.mediaPanel = mediaPanel;
     }
 
     @Override
@@ -34,9 +33,9 @@ public class MediaPlayerController implements MouseListener, KeyListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if(SwingUtilities.isLeftMouseButton(e))
-            this.p.setMedia(this.m.next());
+            this.mediaPanel.setMedia(this.mediaPlayer.next());
         if(SwingUtilities.isRightMouseButton(e))
-            this.p.setMedia(this.m.previous());
+            this.mediaPanel.setMedia(this.mediaPlayer.previous());
     }
 
     @Override
@@ -55,10 +54,10 @@ public class MediaPlayerController implements MouseListener, KeyListener {
     public void keyReleased(KeyEvent e) {
         switch( e.getKeyCode() ) {
             case KeyEvent.VK_LEFT:
-                this.p.setMedia(this.m.previous());
+                this.mediaPanel.setMedia(this.mediaPlayer.previous());
                 break;
             case KeyEvent.VK_RIGHT :
-                this.p.setMedia(this.m.next());
+                this.mediaPanel.setMedia(this.mediaPlayer.next());
                 break;
         }
     }

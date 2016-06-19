@@ -7,14 +7,14 @@ package app.util;
  */
 public class Node<E> {
 
-    private Node previous;
-    private Node next;
+    private Node<E> previous;
+    private Node<E> next;
     private E value;
 
     public Node (E value) {  this.value = value;  }
 
-    public Node previous() {  return this.previous;  }
-    public Node next() {  return this.next;  }
+    public Node<E> previous() {  return this.previous;  }
+    public Node<E> next() {  return this.next;  }
     public E value() {  return this.value;  }
 
     public void setPrevious(Node<E> n) {  this.previous = n;  }
