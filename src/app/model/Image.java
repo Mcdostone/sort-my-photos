@@ -1,7 +1,7 @@
 package app.model;
 
 /**
- * An image is media.
+ * An image is a media, nothing else.
  *
  * @author Mcdostone
  */

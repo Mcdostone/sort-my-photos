@@ -1,7 +1,7 @@
 package app.model;
 
 /**
- * An Audio is media.
+ * An Audio is a media.
  *
  * @author Mcdostone
  */

@@ -38,7 +38,7 @@ public class FileChooserController extends MouseAdapter {
 
         chooser.setAcceptAllFileFilterUsed(false);
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            LogsWindow.createInstance().update("LOCATION: " + chooser.getSelectedFile() + "\n");
+            LogsWindow.getInstance().update("LOCATION: " + chooser.getSelectedFile() + "\n");
             list.add(chooser.getSelectedFile());
             this.w.launchMediaPlayer(list);
         } else

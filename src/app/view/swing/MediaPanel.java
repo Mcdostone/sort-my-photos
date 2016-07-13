@@ -35,7 +35,7 @@ public class MediaPanel extends JPanel {
 
     public void setMedia(Media m) {
         this.current = m;
-        LogsWindow.createInstance().update("#DISPLAY\t" + this.current.toString());
+        LogsWindow.getInstance().update("#DISPLAY\t" + this.current.toString());
         this.repaint();
     }
 
@@ -48,6 +48,7 @@ public class MediaPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         BufferedImage image = MediaLoader.getInstance().getImage(this.current);
+        System.out.println(this.current + "\n" + image + "\n");
 
         if(image != null) {
             Dimension scale = MediaPanel.getScaledDimension(new Dimension(image.getWidth(), image.getHeight()), this.getSize());

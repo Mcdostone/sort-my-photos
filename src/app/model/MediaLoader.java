@@ -1,31 +1,28 @@
 package app.model;
 
-import app.util.ArrayCircularList;
-import app.view.swing.LogsWindow;
+import app.util.BufferedImageLoader;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 
 /**
- * The MediaLoader object enables to load images in advance in order to reduce lag during loading of file.
+ * The MediaLoader object enables to load images in advance in order to reduce freezer lag during loading of file.
+ * By default, MediaLoader has a capacity of 5 medias (any kind).
+ *
  *
  * @author Mcdostone
  */
 public class MediaLoader {
 
-    //private ArrayCircularList<BufferedImage> images;
     private HashMap<Media, BufferedImage> images;
     private static MediaLoader loader;
-    private int size;
+    private int capacity;
+
 
     private MediaLoader() {
         this.images = new HashMap<>();
-        this.size = 5;
+        this.capacity = 5;
     }
-
 
     public static MediaLoader getInstance() {
         if(MediaLoader.loader == null)
@@ -35,23 +32,20 @@ public class MediaLoader {
     }
 
     public void add(Media m, BufferedImage image) {
-        this.images.put(m, image);
+        if(this.images.size() < this.capacity)
+            this.images.put(m, image);
     }
 
     public void add(Media m) {
-        try {
-            this.images.put(m, ImageIO.read(new File(m.getPath())));
-            LogsWindow.createInstance().update("#LOAD\t" + m.getPath());
-        } catch (IOException e) {  e.printStackTrace();  }
+        if(this.images.size() < this.capacity)
+            new BufferedImageLoader(m).run();
     }
 
     public BufferedImage getImage(Media m) {
         return this.images.get(m);
     }
 
-    public int size() {
-        return this.size;
-    }
+    public int capacity() {  return this.capacity;  }
 
     public void nextMedia(Media toRemove, Media toAdd) {
         this.images.remove(toRemove);
@@ -64,6 +58,11 @@ public class MediaLoader {
     }
 
     public String toString() {
-        return this.images.toString();
+        String desc = "{\n";
+        for(Media m : this.images.keySet()) {
+            desc += "\t" + m.toString() + " => " + this.images.get(m) + "\n";
+        }
+        desc += "}";
+        return desc;
     }
 }

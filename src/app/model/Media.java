@@ -11,6 +11,7 @@ public abstract class Media {
     private String path;
     private char type;
 
+
     /**
      * Constructor
      * @param type Type of media (Image, video, sound ...)
@@ -24,7 +25,6 @@ public abstract class Media {
     public String getPath() {  return this.path;  }
 
     public char getType() {  return this.type;  }
-
 
     public String toString() {  return "[" + this.getType()  + "] " + this.getPath();  }
 

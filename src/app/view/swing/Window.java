@@ -1,10 +1,9 @@
 package app.view.swing;
 
 import app.conf.Configuration;
-import app.controller.ShortcutController;
 import app.model.MediaLoader;
 import app.model.MediaPlayer;
-import app.util.MediaPlayerFactory;
+import app.model.MediaPlayerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,9 +55,9 @@ public class Window extends JFrame {
     public void launchMediaPlayer(List<File> paths) {
         MediaPlayer m = MediaPlayerFactory.createMediaPlayer(paths);
         MediaLoader loader = MediaLoader.getInstance();
-        int size = loader.size();
-        size = size / 2;
-        for(int i = -size; i <= size; i++)
+        int capa = loader.capacity();
+        capa = capa / 2;
+        for(int i = -capa; i <= capa; i++)
             loader.add(m.get(i));
 
 

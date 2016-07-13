@@ -1,15 +1,11 @@
-package app.util;
+package app.model;
 
 
 import app.conf.Configuration;
-import app.model.*;
 import app.view.swing.LogsWindow;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -44,12 +40,11 @@ public class MediaPlayerFactory {
                 } else if (Files.isRegularFile(Paths.get(file.getAbsolutePath())))
                     m.addMedia(MediaPlayerFactory.createMedia(file.toString()));
             } catch (Exception e) {
-                LogsWindow.createInstance().update(e.getMessage());
+                LogsWindow.getInstance().update(e.getMessage());
             }
 
             SortingManager.getInstance(rootDir, m);
         }
-        LogsWindow.createInstance().update("FILES FOUND : \n" + m.toString());
 
         return m;
     }

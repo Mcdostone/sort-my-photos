@@ -87,27 +87,6 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     public void remove(E element) throws NoSuchElementException {
         if(!contains(element))
         	throw new NoSuchElementException();
-        
-        /* OLD VERSION
-        Node<E> tmp = this.first;
-        if(tmp.value().equals(element)) {
-            this.current = tmp;
-            this.removeCurrent();
-        }
-        else {
-            tmp = tmp.next();
-            while(!tmp.equals(this.first)) {
-                if(tmp.value().equals(element)) {
-                    this.current = tmp;
-                    this.removeCurrent();
-                    break;
-                }
-                else
-                    tmp = tmp.next();
-            }
-        }
-        */
-
         Node<E> tmp = this.first;
         while(!tmp.equals(this.last) && !tmp.value().equals(element))
             tmp = tmp.next();
@@ -129,8 +108,7 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
 	
 	        node.previous().setNext(node.next());
 	        node.next().setPrevious(node.previous());
-	        
-	        node  = node.next();
+	        node = node.next();
         }
         
         size--;
@@ -138,27 +116,6 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
 
     @Override
     public E removeCurrent() {
-    	/* OLD VERSION
-        if(this.last.equals(this.first)) {
-            this.last = null;
-            this.first = null;
-            this.current = null;
-        }
-        else {
-            if(this.current.equals(this.last))
-                this.last = this.current.previous();
-            if(this.current.equals(this.first))
-                this.first = this.current.next();
-
-            this.current.previous().setNext(this.current.next());
-            this.current.next().setPrevious(this.current.previous());
-            
-            this.current  = this.current.next();
-        }
-        
-        return this.current.value(); /////////// Mauvaise valeur de retour ////////////
-        */
-        
         Node<E> removedNode = this.current;
         E returnedValue = removedNode.value();
         this.current = this.current.next();
@@ -172,21 +129,6 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
         while(!tmp.value().equals(element) && !tmp.equals(this.last))
             tmp = tmp.next();
         return tmp.value().equals(element);
-        
-        /* OLD VERSION
-        Node tmp = this.first;
-        if(tmp.value().equals(element))  return true;
-        else {
-            tmp = tmp.next();
-            while(!tmp.equals(this.first)) {
-                if(tmp.value().equals(element))
-                    return true;
-                else
-                    tmp = tmp.next();
-            }
-        }
-        return false;
-        */
     }
     
     @Override

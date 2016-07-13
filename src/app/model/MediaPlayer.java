@@ -16,6 +16,7 @@ public class MediaPlayer extends Observable {
     private DoublyLinkedCircularList<Media> playlist;
     private Media current;
 
+
     public MediaPlayer() {
         this.playlist = new MyDoublyLinkedCircularList<>();
     }
@@ -38,19 +39,18 @@ public class MediaPlayer extends Observable {
     public Media next() {
         this.setChanged();
         this.notifyObservers();
-        Media toLoad = this.playlist.NthMediaAfterCurrent((MediaLoader.getInstance().size()/2) + 1);
-        Media toRemove = this.playlist.NthMediaBeforeCurrent(MediaLoader.getInstance().size()/2);
+        Media toLoad = this.playlist.NthMediaAfterCurrent((MediaLoader.getInstance().capacity()/2) + 1);
+        Media toRemove = this.playlist.NthMediaBeforeCurrent(MediaLoader.getInstance().capacity()/2);
         MediaLoader.getInstance().nextMedia(toRemove, toLoad);
         this.current = this.playlist.next();
         return this.current;
     }
 
-
     public Media previous() {
         this.setChanged();
         this.notifyObservers();
-        Media toLoad = this.playlist.NthMediaAfterCurrent((MediaLoader.getInstance().size()/2) + 1);
-        Media toRemove = this.playlist.NthMediaAfterCurrent(MediaLoader.getInstance().size()/2);
+        Media toLoad = this.playlist.NthMediaBeforeCurrent((MediaLoader.getInstance().capacity()/2) + 1);
+        Media toRemove = this.playlist.NthMediaAfterCurrent(MediaLoader.getInstance().capacity()/2);
         MediaLoader.getInstance().previousMedia(toRemove, toLoad);
         this.current = this.playlist.previous();
         return this.current;

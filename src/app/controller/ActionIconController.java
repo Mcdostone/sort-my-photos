@@ -32,7 +32,7 @@ public class ActionIconController extends MouseAdapter {
                 SettingsWindow.createInstance();
                 break;
             case "LOGS":
-                LogsWindow.createInstance().setVisible(true);
+                LogsWindow.getInstance().setVisible(true);
                 break;
             case "SORT":
                 this.panel.setVisible(!this.panel.isVisible());

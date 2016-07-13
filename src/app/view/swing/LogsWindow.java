@@ -34,7 +34,7 @@ public class LogsWindow extends DialogWindow {
         });
     }
 
-    public static DialogWindow createInstance() {
+    public static DialogWindow getInstance() {
         if(LogsWindow.window == null)
             LogsWindow.window = new LogsWindow();
 
