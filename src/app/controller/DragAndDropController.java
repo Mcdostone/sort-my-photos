@@ -18,7 +18,7 @@ import java.util.List;
  * @author Mcdostone
  */
 public class DragAndDropController extends DropTarget {
-    // interact with the main window when somethin is dropped */
+    // interact with the main Window when somethin is dropped */
     private Window w;
 
     /** Unique constructor */

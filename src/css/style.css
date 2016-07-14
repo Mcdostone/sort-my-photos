@@ -1,0 +1,59 @@
+
+
+/* 
+ * WIDTH: 800px
+ * HEIGHT: 800px
+ * MIN_WIDTH: 200px
+ * MIN_HEIGHT: 200px
+ * PRIMARY_COLOR: rgb(34, 34, 34)
+ * SECONDARY_COLOR: white
+ * SECONDARY_COLOR_PASSIVE: rgba(255, 255, 255, 100)
+ * LENGTH_BORDER: 10
+ * SIZE_BORDER: 2
+ * DEFAULT_FONT: Arial 18;
+ */
+
+
+.pane {
+    -fx-background-color: rgb(34, 34, 34);
+}
+
+.label, .button {
+	-fx-background-color: transparent;
+	-fx-font-size: 18px;
+    -fx-pref-height: 50px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-padding: 5px 20px;
+    -fx-border-color: white;
+	-fx-border-width: 2;
+	-fx-cursor: hand;
+}
+
+.button:hover {
+	-fx-background-color: white;
+	-fx-text-fill: rgb(34, 34, 34);
+}
+
+.start-pane {
+	-fx-pref-width: 800px;
+    -fx-pref-height: 800px;
+    -fx-min-width: 200px;
+    -fx-min-height: 200px;
+}
+
+.drop-area {
+    -fx-pref-width: 80%;
+	-fx-pref-height: 80%;
+	-fx-opacity: 0.5;
+	-fx-border-color: white;
+    -fx-border-width: 2; 
+    -fx-border-style: segments(20) line-cap butt;
+}
+
+.drop-area:hover {
+	-fx-opacity: 1;
+}

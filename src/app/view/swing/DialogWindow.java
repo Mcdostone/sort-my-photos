@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * A DialogWindow is a tiny window that brings some informations.
- * This Window is the main window of the app!
+ * A DialogWindow is a tiny Window that brings some informations.
+ * This Window is the main Window of the app!
  *
  * @author Mcdostone
  */

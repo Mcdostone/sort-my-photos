@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Controller which displays the appropriated window, depending of the type of the icon.
+ * Controller which displays the appropriated Window, depending of the type of the icon.
  *
  * @author Mcdostone
  */
@@ -25,7 +25,7 @@ public class ActionIconController extends MouseAdapter {
     }
 
     @Override
-    /** Create the dedicated window */
+    /** Create the dedicated Window */
     public void mouseClicked(MouseEvent e) {
         switch(this.action.toUpperCase()) {
             case "SETTINGS":
