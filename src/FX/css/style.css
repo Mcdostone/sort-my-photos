@@ -39,7 +39,7 @@
 	-fx-text-fill: rgb(34, 34, 34);
 }
 
-.start-pane, .media-player{
+.start-pane, .media-player {
 	-fx-pref-width: 800px;
 	-fx-pref-height: 800px;
 	-fx-min-width: 200px;
@@ -60,6 +60,7 @@
 }
 
 .toolbar {
+	-fx-pref-width: 100%;
 	-fx-background-color: rgba(25, 25, 25, 100);
 }
 
@@ -84,9 +85,13 @@
 }
 
 #sorting {
-	-fx-background-image: url("../assets/icons/sort-2.png");
+	-fx-background-image: url("../assets/icons/sort.png");
 }
 
 #logs {
 	-fx-background-image: url("../assets/icons/logs.png");
+}
+
+#grid {
+	-fx-background-image: url("../assets/icons/grid.png");
 }

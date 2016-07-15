@@ -30,15 +30,18 @@ public class HomeController {
     @FXML
     public void initialize() {
         this.chooseFolder.setOnAction(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent event) {
                 DirectoryChooser chooser = new DirectoryChooser();
                 chooser.setTitle("Choose medias");
                 chooser.setInitialDirectory(new File(Configuration.DEFAULT_PATH));
                 File selectedFolder = chooser.showDialog(null);
-                ArrayList<File> tmp = new ArrayList<File>();
-                tmp.add(selectedFolder);
-                runMediaPlayer(tmp);
+                if(selectedFolder != null) {
+                    ArrayList<File> tmp = new ArrayList<File>();
+                    tmp.add(selectedFolder);
+                    runMediaPlayer(tmp);
+                }
             }
         });
 
@@ -57,18 +60,15 @@ public class HomeController {
             @Override
             public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
-                List<File> files = (ArrayList<File>) db.getContent(DataFormat.FILES);
+                List<File> paths = (ArrayList<File>) db.getContent(DataFormat.FILES);
                 boolean success = false;
-                if (files != null) {
-                    for(File f: files)
-                        System.out.println(f);
-
+                if (paths != null) {
+                    runMediaPlayer(paths);
                     success = true;
                 }
                 event.setDropCompleted(success);
                 event.consume();
             }
-
         });
     };
 
