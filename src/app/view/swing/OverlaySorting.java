@@ -17,8 +17,8 @@ public class OverlaySorting extends JPanel {
     public OverlaySorting() {
         super();
         this.setBackground(new Color(0,0,0,0));
-        this.accept = UiKit.acceptIcon();
-        this.reject = UiKit.rejectIcon();
+        //this.accept = UiKit.acceptIcon();
+        //this.reject = UiKit.rejectIcon();
         this.accept.addMouseListener(new SortingController(this.accept, SortingController.ACCEPT));
         this.reject.addMouseListener(new SortingController(this.reject, SortingController.REJECT));
 

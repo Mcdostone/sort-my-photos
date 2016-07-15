@@ -41,11 +41,11 @@ public class SortingController extends MouseAdapter {
         switch (this.action) {
             case SortingController.ACCEPT:
                 this.l.setIcon(null);
-                this.l.setText(app.conf.Configuration.ACCEPT_SHORCUT);
+                this.l.setText(app.conf.Configuration.getInstance().ACCEPT_SHORCUT);
                 break;
             case SortingController.REJECT:
                 this.l.setIcon(null);
-                this.l.setText(Configuration.REJECT_SHORTCUT);
+                this.l.setText(Configuration.getInstance().REJECT_SHORTCUT);
                 break;
         }
     }

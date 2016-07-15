@@ -31,7 +31,7 @@ public class FileChooserController extends MouseAdapter {
     @Override
     public void mouseReleased(MouseEvent e) {
         JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File(Configuration.DEFAULT_PATH));
+        chooser.setCurrentDirectory(new File(Configuration.getInstance().DEFAULT_PATH));
         chooser.setDialogTitle("Choose ...");
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         ArrayList<File> list = new ArrayList<>();

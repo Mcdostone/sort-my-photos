@@ -5,23 +5,26 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Grid Overlay which improve visual sorting.
  *
  * @author Mcdostone
  */
-public class GridOverlay extends StackPane {
+public class GridOverlay extends StackPane implements Observer {
 
     /** Grid will be drawn on this canvas */
     private Canvas canvas;
 
-
     /** Default constructor */
-    public GridOverlay() {
+    public GridOverlay(boolean visible) {
         super();
         this.canvas = new Canvas();
         this.getChildren().add(this.canvas);
-        this.canvas.toFront();
+        this.setMouseTransparent(true);
+        this.setVisible(visible);
     }
 
     @Override
@@ -34,7 +37,7 @@ public class GridOverlay extends StackPane {
         GraphicsContext g = canvas.getGraphicsContext2D();
         g.clearRect(0, 0, w, h);
         g.setLineWidth(1.0);
-        g.setStroke(Configuration.COLOR_GRID);
+        g.setStroke(Configuration.getInstance().getColorGrid());
 
         this.canvas.setLayoutX(0);
         this.canvas.setLayoutY(0);
@@ -47,4 +50,7 @@ public class GridOverlay extends StackPane {
         for (int y = (int) spacingY; y <= h - spacingY; y += spacingY)
             g.strokeLine(0,y + 0.5, w, y + 0.5);
     }
+
+    @Override
+    public void update(Observable o, Object arg) {  this.layoutChildren();  }
 }

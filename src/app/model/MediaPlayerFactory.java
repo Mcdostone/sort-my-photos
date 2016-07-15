@@ -21,7 +21,7 @@ public class MediaPlayerFactory {
 
     private static void initMmeAnalyzer() {
         MediaPlayerFactory.mimeAnalyzer = new MimetypesFileTypeMap();
-        MediaPlayerFactory.mimeAnalyzer.addMimeTypes(Configuration.SUPPORTED_MIME_TYPES);
+        MediaPlayerFactory.mimeAnalyzer.addMimeTypes(Configuration.getInstance().SUPPORTED_MIME_TYPES);
     }
 
     public static MediaPlayer createMediaPlayer(List<File> paths) {

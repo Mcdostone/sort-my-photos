@@ -2,6 +2,7 @@ package FX.controller;
 
 import FX.Window;
 import FX.view.GridOverlay;
+import app.conf.Configuration;
 import app.model.Media;
 import app.model.MediaPlayer;
 import app.model.MediaPlayerFactory;
@@ -10,7 +11,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -52,12 +52,10 @@ public class MediaPlayerController {
      */
     public MediaPlayerController(List<File> paths) {
         this.mediaPlayer = MediaPlayerFactory.createMediaPlayer(paths);
-
         // Create the GridOverlay and hide it
-        gridOverlay = new GridOverlay();
-        this.gridOverlay.setMouseTransparent(true);
-        this.gridOverlay.setVisible(false);
+        gridOverlay = new GridOverlay(Configuration.getInstance().enableGridAtStartup());
         this.gridOverlay.toFront();
+        Configuration.getInstance().addObserver(this.gridOverlay);
     }
 
     @FXML public void initialize() {

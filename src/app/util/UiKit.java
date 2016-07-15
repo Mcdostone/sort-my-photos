@@ -107,19 +107,19 @@ public class UiKit {
     }
 
     public static JLabel settingsIcon(int height) {
-        JLabel l = UiKit.CliquableIcon(Configuration.SETTINGS_ICON, height);
+        JLabel l = UiKit.CliquableIcon(Configuration.getInstance().SETTINGS_ICON, height);
         l.addMouseListener(new ActionIconController("SETTINGS", null));
         return l;
     }
 
 
     public static JLabel sortIcon(int height) {
-        JLabel l = UiKit.CliquableIcon(Configuration.SORT_ICON, height);
+        JLabel l = UiKit.CliquableIcon(Configuration.getInstance().SORT_ICON, height);
         return l;
     }
 
     public static JLabel LogsIcon(int height) {
-        JLabel l = UiKit.CliquableIcon(Configuration.LOGS_ICON, height);
+        JLabel l = UiKit.CliquableIcon(Configuration.getInstance().LOGS_ICON, height);
 
         l.addMouseListener(new ActionIconController("LOGS", null));
         return l;
@@ -161,7 +161,7 @@ public class UiKit {
     }
 
     public static JLabel rejectIcon() {
-        JLabel l = UiKit.CliquableIcon(Configuration.REJECT_ICON, 120);
+        JLabel l = UiKit.CliquableIcon(Configuration.getInstance().REJECT_ICON, 120);
         l.setBorder(null);
         l.setOpaque(true);
         l.setBackground(UiKit.SECONDARY_COLOR);
@@ -169,7 +169,7 @@ public class UiKit {
     }
 
     public static JLabel acceptIcon() {
-        JLabel l = UiKit.CliquableIcon(Configuration.ACCEPT_ICON, 120);
+        JLabel l = UiKit.CliquableIcon(Configuration.getInstance().ACCEPT_ICON, 120);
         l.setBorder(null);
         l.setOpaque(true);
         l.setBackground(UiKit.SECONDARY_COLOR);

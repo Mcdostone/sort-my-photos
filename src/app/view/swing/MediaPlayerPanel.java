@@ -30,7 +30,7 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
         this.overlay = new OverlaySorting();
         this.overlay.setVisible(false);
 
-        this.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT));
+        this.setPreferredSize(new Dimension(Configuration.getInstance().WIDTH, Configuration.getInstance().HEIGHT));
         this.m.addObserver(this);
         this.add(this.p, 0);
         this.add(this.overlay, 1);

@@ -26,7 +26,7 @@ public class Window extends JFrame {
 
 
     public Window() {
-        super(Configuration.TITLE);
+        super(Configuration.getInstance().TITLE);
         this.container = new JPanel();
         this.container.setLayout(new BorderLayout());
         this.init();

@@ -22,7 +22,7 @@ public class StarterPanel extends JPanel {
     public StarterPanel(Window w) {
         super();
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT));
+        this.setPreferredSize(new Dimension(Configuration.getInstance().WIDTH, Configuration.getInstance().HEIGHT));
 
         this.setBackground(UiKit.PRIMARY_COLOR);
 

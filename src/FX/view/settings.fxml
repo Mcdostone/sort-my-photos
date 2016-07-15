@@ -33,13 +33,13 @@
                 <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Display the grid by default " textAlignment="CENTER" textOverrun="CLIP">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Display the grid at startup" textAlignment="CENTER" textOverrun="CLIP">
                      <styleClass>
                         <String fx:value="label-settings" />
                         <String fx:value="label" />
                      </styleClass>
                   </Label>
-                  <CheckBox mnemonicParsing="false" text="Yeah !" GridPane.columnIndex="1">
+                  <CheckBox fx:id="enableGrid" mnemonicParsing="false" text="Yeah !" GridPane.columnIndex="1">
                      <styleClass>
                         <String fx:value="checkbox" />
                         <String fx:value="yeah" />
@@ -54,7 +54,7 @@
             </GridPane>
          </center>
          <bottom>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Save" BorderPane.alignment="CENTER">
+            <Button fx:id="save" alignment="CENTER" mnemonicParsing="false" text="Save" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="10.0" />
                </BorderPane.margin>

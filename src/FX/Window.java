@@ -13,7 +13,6 @@ public class Window extends Application {
     // Window Manager of this window !
     private static WindowManager wm;
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         WindowManager wm = new WindowManager(primaryStage);

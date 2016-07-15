@@ -1,12 +1,16 @@
 package FX;
 
 import FX.controller.MediaPlayerController;
+import app.conf.Configuration;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +28,9 @@ public class WindowManager {
     private Stage settingsStage;
 
 
-    public WindowManager(Stage stage) {  this.stage = stage;  }
+    public WindowManager(Stage stage) {
+        this.stage = stage;
+    }
 
     /**
      * @param filename FXML file to load.
@@ -32,9 +38,10 @@ public class WindowManager {
      */
     private Parent loadFXML(String filename) {
         try {
-            return FXMLLoader.load(getClass().getResource("/FX/view/" + filename));
-        } catch (IOException e) {  e.printStackTrace(); }
-
+            return this.getLoader(filename).load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -49,7 +56,15 @@ public class WindowManager {
         if(this.settingsStage == null)
             this.settingsStage = new Stage();
         this.settingsStage.setScene(new Scene(this.loadFXML("settings.fxml")));
+        this.settingsStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Configuration.getInstance().save();
+                settingsStage.close();
+            }
+        });
         this.settingsStage.show();
+
     }
 
     /**
