@@ -1,5 +1,7 @@
 package app.conf;
 
+import javafx.scene.paint.Color;
+
 /**
  * Configuration of the app
  *
@@ -22,6 +24,7 @@ public class Configuration {
     public static String LOGS_ICON = "./assets/icons/logs.png";
     public static String ACCEPT_ICON = "./assets/icons/accept.png";
     public static String REJECT_ICON = "./assets/icons/reject.png";
+    public static Color COLOR_GRID = Color.ALICEBLUE;
 
     public static String ACCEPT_SHORCUT= "V";
     public static String REJECT_SHORTCUT = "A";

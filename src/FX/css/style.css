@@ -46,6 +46,11 @@
 	-fx-min-height: 200px;
 }
 
+.container {
+	-fx-pref-width: 100%;
+	-fx-pref-height: 100%;
+}
+
 .drop-area {
 	-fx-pref-width: 80%;
 	-fx-pref-height: 80%;
@@ -61,7 +66,7 @@
 
 .toolbar {
 	-fx-pref-width: 100%;
-	-fx-background-color: rgba(25, 25, 25, 100);
+	-fx-pref-width: 75px;
 }
 
 .toolbar-button, .toolbar-last-button {
@@ -69,10 +74,15 @@
 	-fx-border-width: 1px 1px 0px 0px; 
 	-fx-border-top-style: solid;
 	-fx-cursor: hand;
-	
+
+	-fx-background-color: rgba(0, 0, 0, 0.47);
 	-fx-background-position: center center;
-	-fx-background-size: 50;
+	-fx-background-size: 45;
 	-fx-background-repeat: no-repeat;
+}
+
+.toolbar-button:hover {
+	-fx-background-color: rgba(0, 0 ,0 , 0.75);
 }
 
 .toolbar-last-button {
@@ -80,7 +90,7 @@
 }
 
 
-#settings {
+#settings {	
 	-fx-background-image: url("../assets/icons/settings.png");
 }
 
@@ -94,4 +104,8 @@
 
 #grid {
 	-fx-background-image: url("../assets/icons/grid.png");
+}
+
+.media-pane {
+	-fx-pref-width: 100%;
 }

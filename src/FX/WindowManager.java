@@ -1,11 +1,13 @@
 package FX;
 
+import FX.controller.MediaPlayerController;
 import app.model.MediaLoader;
 import app.model.MediaPlayer;
 import app.model.MediaPlayerFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.File;
 
@@ -37,18 +39,28 @@ public class WindowManager {
         this.stage.setTitle("Sort my fucking photos !");
         this.stage.setScene(new Scene(root));
         this.stage.sizeToScene();
+        this.stage.requestFocus();
         this.stage.show();
     }
 
     public void startMediaPlayer(List<File> paths) {
-        Parent root = this.loadFXML("mediaPlayer.fxml");
-        MediaPlayer m = MediaPlayerFactory.createMediaPlayer(paths);
-        MediaLoader loader = MediaLoader.getInstance();
-        int capa = loader.capacity();
-        capa = capa / 2;
-        for(int i = -capa; i <= capa; i++)
-            loader.add(m.get(i));
-        this.stage.setScene(new Scene(root));
+        FXMLLoader loader = this.getLoader("mediaPlayer.fxml");
+        MediaPlayerController controller = new MediaPlayerController(paths);
+        loader.setController(controller);
+        Parent pane = null;
+
+        try {
+            pane = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(pane);
+        this.stage.setScene(scene);
+        scene.getRoot().requestFocus();
         this.stage.show();
+    }
+
+    public FXMLLoader getLoader(String filename) {
+        return new FXMLLoader(getClass().getResource("/FX/view/" + filename));
     }
 }

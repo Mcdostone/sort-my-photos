@@ -76,7 +76,6 @@ public class HomeController {
     private void runMediaPlayer(List<File> selectedFolders) {
         if(selectedFolders != null && !selectedFolders.isEmpty())
             Window.getWM().startMediaPlayer(selectedFolders);
-
     }
 
 
