@@ -1,5 +1,6 @@
 package FX.controller;
 
+import FX.Window;
 import FX.view.GridOverlay;
 import app.model.Media;
 import app.model.MediaPlayer;
@@ -9,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -36,6 +38,8 @@ public class MediaPlayerController {
     @FXML private ImageView preview;
     @FXML private HBox container;
     @FXML private BorderPane gridButton;
+    @FXML private BorderPane settingsButton;
+
     @FXML private AnchorPane root;
     @FXML private StackPane toolbar;
     /** Grid Overlay for better sorting */
@@ -127,5 +131,9 @@ public class MediaPlayerController {
             }
         });
 
+        this.settingsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {  Window.getWM().openSettingsWindow();  }
+        });
     }
 }

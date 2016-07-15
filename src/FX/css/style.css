@@ -19,12 +19,20 @@
 	-fx-background-color: rgb(34, 34, 34);
 }
 
-.label, .button {
+.label, .button, .checkbox {
 	-fx-background-color: transparent;
 	-fx-font-size: 18px;
 	-fx-pref-height: 50px;
 	-fx-font-family: "Arial";
 	-fx-text-fill: white;
+}
+
+.checkbox {
+	-fx-font-size: 14px;
+}
+
+.yeah {
+	-fx-font-style: italic;
 }
 
 .button {
@@ -92,6 +100,17 @@
 
 #settings {	
 	-fx-background-image: url("../assets/icons/settings.png");
+}
+
+.label-settings {
+	-fx-font-size: 14px;
+	-fx-padding: 0 0 0 30px;	
+}
+
+.color-picker {
+	-fx-background-color: transparent;
+	-fx-border-color: white;
+	-fx-border-width: 2;
 }
 
 #sorting {

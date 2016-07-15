@@ -39,7 +39,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <BorderPane id="settings" fx:id="settings" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" />
+                  <BorderPane id="settings" fx:id="settingsButton" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" />
                   <BorderPane id="sorting" fx:id="sorting" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" GridPane.columnIndex="1" />
                   <BorderPane id="grid" fx:id="gridButton" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" GridPane.columnIndex="2" />
                   <BorderPane id="logs" fx:id="logs" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">

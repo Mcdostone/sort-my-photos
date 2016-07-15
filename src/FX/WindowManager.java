@@ -4,6 +4,8 @@ import FX.controller.MediaPlayerController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -19,6 +21,7 @@ public class WindowManager {
 
     /** Main stage */
     private Stage stage;
+    private Stage settingsStage;
 
 
     public WindowManager(Stage stage) {  this.stage = stage;  }
@@ -40,6 +43,13 @@ public class WindowManager {
         Parent root = this.loadFXML("homepage.fxml");
         this.stage.setTitle("Sort my fucking photos !");
         this.setScene(new Scene(root));
+    }
+
+    public void openSettingsWindow() {
+        if(this.settingsStage == null)
+            this.settingsStage = new Stage();
+        this.settingsStage.setScene(new Scene(this.loadFXML("settings.fxml")));
+        this.settingsStage.show();
     }
 
     /**

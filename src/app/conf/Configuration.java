@@ -28,4 +28,5 @@ public class Configuration {
 
     public static String ACCEPT_SHORCUT= "V";
     public static String REJECT_SHORTCUT = "A";
+
 }
