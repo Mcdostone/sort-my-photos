@@ -28,7 +28,6 @@ public class MediaPlayerFactory {
         MediaPlayerFactory.initMmeAnalyzer();
         MediaPlayer m = new MediaPlayer();
         String rootDir = null;
-
         for (File file : paths) {
             try {
                 if (file.isDirectory())

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * the 'Drag and drop' controller when you start the app.
+ * the 'Drag and drop' FX.view.controller when you start the app.
  *
  * @author Mcdostone
  */
