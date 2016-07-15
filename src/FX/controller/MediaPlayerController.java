@@ -107,7 +107,7 @@ public class MediaPlayerController {
         });
 
         // Listener for the keyboard
-        this.container.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        this.root.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if(event.getCode() == KeyCode.LEFT)  showMedia(mediaPlayer.previous());
@@ -116,6 +116,9 @@ public class MediaPlayerController {
         });
     }
 
+    /**
+     * Init all listeners for differents actions of the toolbar.
+     */
     private void initControlsToolbar() {
         this.gridButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -125,5 +128,4 @@ public class MediaPlayerController {
         });
 
     }
-
 }

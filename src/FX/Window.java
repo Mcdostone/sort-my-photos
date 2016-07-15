@@ -1,13 +1,10 @@
-package FX; /**
- * Created by Yann on 13/07/2016.
- */
+package FX;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
 /**
- * Main class of the software
+ * Main class of the software, the window
  *
  * @author Mcdostone
  */
@@ -16,6 +13,7 @@ public class Window extends Application {
     // Window Manager of this window !
     private static WindowManager wm;
 
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         WindowManager wm = new WindowManager(primaryStage);
@@ -23,6 +21,7 @@ public class Window extends Application {
         Window.wm = wm;
     }
 
+    /** @return the WindowManager */
     public static WindowManager getWM() {
         return Window.wm;
     }

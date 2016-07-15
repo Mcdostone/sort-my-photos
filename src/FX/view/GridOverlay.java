@@ -4,18 +4,19 @@ import app.conf.Configuration;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 /**
- * Grid Overlay
+ * Grid Overlay which improve visual sorting.
  *
  * @author Mcdostone
  */
 public class GridOverlay extends StackPane {
 
+    /** Grid will be drawn on this canvas */
     private Canvas canvas;
 
 
+    /** Default constructor */
     public GridOverlay() {
         super();
         this.canvas = new Canvas();

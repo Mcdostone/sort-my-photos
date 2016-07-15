@@ -15,22 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Controller for the button to choose a folder to handle.
+ * Controller for the homepage of the app
  *
  * @author Mcdostone
  */
 public class HomeController {
 
-    @FXML
-    private Button chooseFolder;
+    @FXML private Button chooseFolder;
+    @FXML private HBox dropZone;
 
-    @FXML
-    private HBox dropZone;
-
-    @FXML
-    public void initialize() {
+    @FXML public void initialize() {
         this.chooseFolder.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
                 DirectoryChooser chooser = new DirectoryChooser();
@@ -46,7 +41,6 @@ public class HomeController {
         });
 
         this.dropZone.setOnDragOver(new EventHandler<DragEvent>() {
-
             @Override
             public void handle(DragEvent event) {
                 if (event.getGestureSource() != dropZone && event.getDragboard().hasFiles())
@@ -56,7 +50,6 @@ public class HomeController {
         });
 
         this.dropZone.setOnDragDropped(new EventHandler<DragEvent>() {
-
             @Override
             public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
@@ -70,14 +63,10 @@ public class HomeController {
                 event.consume();
             }
         });
-    };
-
+    }
 
     private void runMediaPlayer(List<File> selectedFolders) {
         if(selectedFolders != null && !selectedFolders.isEmpty())
             Window.getWM().startMediaPlayer(selectedFolders);
     }
-
-
-
 }
