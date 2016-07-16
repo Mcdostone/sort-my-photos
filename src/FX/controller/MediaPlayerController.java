@@ -84,7 +84,8 @@ public class MediaPlayerController {
         this.initControlsMediaPlayer();
         this.initControlsToolbar();
 
-        this.showMedia(this.mediaPlayer.firstMedia());
+        if(!this.mediaPlayer.isEmpty())
+            this.showMedia(this.mediaPlayer.firstMedia());
     }
 
     /**
@@ -92,7 +93,8 @@ public class MediaPlayerController {
      * @param m Media to display
      */
     private void showMedia(Media m) {
-        this.preview.setImage(new Image(new File(m.getPath()).toURI().toString()));
+        if(m != null)
+            this.preview.setImage(new Image(new File(m.getPath()).toURI().toString()));
     }
 
     /**

@@ -40,7 +40,11 @@ public class SettingsController implements Observer {
             Stage stage = (Stage) save.getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         });
-        this.reset.setOnAction(t -> {  Configuration.reset();  this.update(null, null);});
+        this.reset.setOnAction(t -> {
+            Configuration.getInstance().reset();
+            Configuration.getInstance().addObserver(this);
+            Configuration.getInstance().notifyObservers();
+        });
         this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
         this.enableGrid.setSelected(Configuration.getInstance().enableGridAtStartup());
         this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
@@ -55,9 +59,9 @@ public class SettingsController implements Observer {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Choose the default path");
         chooser.setInitialDirectory(new File(Configuration.getInstance().getDefaultPath()));
-        File selectedFolder = chooser.showDialog(null);
+        File selectedFolder = chooser.showDialog(this.colorPicker.getScene().getWindow());
         if(selectedFolder != null)
-            Configuration.getInstance().setDefaultPath(selectedFolder.getPath());
+            Configuration.getInstance().setDefaultPath(selectedFolder.getAbsolutePath());
     }
 
     @Override
