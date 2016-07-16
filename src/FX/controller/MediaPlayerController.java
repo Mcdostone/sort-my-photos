@@ -122,10 +122,16 @@ public class MediaPlayerController {
      * Init all listeners for differents actions of the toolbar.
      */
     private void initControlsToolbar() {
+        if(this.gridOverlay.isVisible())
+            this.gridButton.getStyleClass().add("active");
         this.gridButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 gridOverlay.setVisible(!gridOverlay.isVisible());
+                if(gridOverlay.isVisible())
+                    gridButton.getStyleClass().add("active");
+                else
+                    gridButton.getStyleClass().remove("active");
             }
         });
 
