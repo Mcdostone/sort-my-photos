@@ -12,11 +12,11 @@
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200.0" minWidth="200.0" prefHeight="800.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FX.controller.HomeController">
   <columnConstraints>
     <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints minWidth="10.0" percentWidth="76.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="CENTER" minWidth="10.0" percentWidth="76.0" prefWidth="100.0" />
       <ColumnConstraints minWidth="10.0" percentWidth="12.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
     <RowConstraints minHeight="10.0" percentHeight="76.0" prefHeight="30.0" />
     <RowConstraints minHeight="10.0" percentHeight="12.0" prefHeight="30.0" />
   </rowConstraints>

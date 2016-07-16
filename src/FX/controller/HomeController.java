@@ -30,7 +30,7 @@ public class HomeController {
             public void handle(ActionEvent event) {
                 DirectoryChooser chooser = new DirectoryChooser();
                 chooser.setTitle("Choose medias");
-                chooser.setInitialDirectory(new File(Configuration.getInstance().DEFAULT_PATH));
+                chooser.setInitialDirectory(new File(Configuration.getInstance().getDefaultPath()));
                 File selectedFolder = chooser.showDialog(null);
                 if(selectedFolder != null) {
                     ArrayList<File> tmp = new ArrayList<File>();

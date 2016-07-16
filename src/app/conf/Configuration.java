@@ -19,34 +19,37 @@ public class Configuration extends Observable {
     public String TITLE = "Sort my medias";
     public int WIDTH = 800;
     public int HEIGHT = 800;
-    //public String DEFAULT_PATH = "X:\\Drive\\Stud v11.6\\Projets";
-    public String DEFAULT_PATH = ".";
+    private String DEFAULT_PATH = ".";
     public String SUPPORTED_MIME_TYPES = "image png tif jpg jpeg bmp";
-
     public String SETTINGS_ICON = "./assets/icons/settings.png";
     public String SORT_ICON = "./assets/icons/sort-2.png";
     public String LOGS_ICON = "./assets/icons/logs.png";
     public String ACCEPT_ICON = "./assets/icons/accept.png";
     public String REJECT_ICON = "./assets/icons/reject.png";
-
     private Color COLOR_GRID = Color.ALICEBLUE;
     private boolean enableGridAtStartup = true;
     public String ACCEPT_SHORCUT= "V";
     public String REJECT_SHORTCUT = "A";
-    private Configuration defaultConfig;
 
     private static Configuration config;
 
-    private Configuration(boolean def) {
-        if(def)
-            this.defaultConfig = new Configuration(false);
-    }
+    private Configuration() {}
 
     public static Configuration getInstance() {
         if(Configuration.config == null)
             Configuration.config = Configuration.load();
 
         return Configuration.config;
+    }
+
+    public void setDefaultPath(String path) {
+        this.DEFAULT_PATH = path;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public String getDefaultPath() {
+        return this.DEFAULT_PATH;
     }
 
     public void setColorGrid(Color c) {
@@ -57,21 +60,26 @@ public class Configuration extends Observable {
 
     public void save() {
         Properties prop = new Properties();
-        OutputStream output = null;
+        OutputStream output;
         try {
             output = new FileOutputStream(CONFIG_FILE);
             prop.setProperty("enableGrid", String.valueOf(this.enableGridAtStartup()));
             prop.setProperty("colorGrid", this.getColorGrid().toString());
+            prop.setProperty("defaultPath", this.getDefaultPath());
             prop.store(output, null);
         } catch (IOException io) {
             io.printStackTrace();
         }
     }
 
+    public static void reset() {
+        Configuration.config = new Configuration();
+    }
+
     public static Configuration load() {
         Properties prop = new Properties();
         InputStream input;
-        Configuration conf = new Configuration(true);
+        Configuration conf = new Configuration();
 
         try {
             input = new FileInputStream(Configuration.CONFIG_FILE);
@@ -79,6 +87,8 @@ public class Configuration extends Observable {
                 prop.load(input);
                 conf.setEnableGrid(Boolean.parseBoolean(prop.getProperty("enableGrid")));
                 conf.setColorGrid(Color.web(prop.getProperty("colorGrid")));
+                if(prop.getProperty("defaultPath") != null)
+                    conf.setDefaultPath(prop.getProperty("defaultPath"));
             }
         } catch (FileNotFoundException e) {
             System.out.println("No config file!\n" + e.getMessage());
