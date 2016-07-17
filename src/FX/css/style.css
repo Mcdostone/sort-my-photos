@@ -150,8 +150,8 @@
     -fx-font-family: consolas;
     -fx-highlight-fill: white;
     -fx-text-fill: white;
-    -fx-font-size: 16;
-    -fx-font-style: italic;
+    -fx-highlight-text-fill: rgb(28, 28, 28);
+    -fx-font-size: 14px;
     -fx-background-color: rgb(34, 34, 34);
     -fx-padding: 30px;
 }

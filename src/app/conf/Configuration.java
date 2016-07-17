@@ -81,10 +81,14 @@ public class Configuration extends Observable {
     }
 
     public void reset() {
-        this.deleteObservers();
-        Configuration.config = new Configuration();
-        Configuration.config.setChanged();
+        Configuration tmp = new Configuration();
 
+        this.setDefaultPath(tmp.getDefaultPath());
+        this.setColorGrid(tmp.getColorGrid());
+        this.setEnableGrid(tmp.enableGridAtStartup());
+
+        this.setChanged();
+        this.notifyObservers();
     }
 
 
@@ -109,6 +113,7 @@ public class Configuration extends Observable {
 
     public void setColorGrid(Color c) {
         this.colorGrid = c;
+        this.clearChanged();
         this.setChanged();
         this.notifyObservers();
     }

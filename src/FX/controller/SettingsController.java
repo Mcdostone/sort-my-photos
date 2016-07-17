@@ -1,6 +1,7 @@
 package FX.controller;
 
 import app.conf.Configuration;
+import app.model.MyLogger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
 
 /**
  * Controller for the settings scene.
@@ -38,18 +40,24 @@ public class SettingsController implements Observer {
             Stage stage = (Stage) save.getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         });
-        this.reset.setOnAction(t -> {
-            Configuration.getInstance().reset();
-            Configuration.getInstance().addObserver(this);
-            Configuration.getInstance().notifyObservers();
-        });
+
         this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
         this.enableGrid.setSelected(Configuration.getInstance().enableGridAtStartup());
         this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
 
         this.changePath.setOnAction(t -> { changeDefaultPath();  });
-        this.enableGrid.setOnAction(t -> {  Configuration.getInstance().setEnableGrid(enableGrid.isSelected());  });
-        this.colorPicker.setOnAction(t -> {  Configuration.getInstance().setColorGrid(colorPicker.getValue());  });
+        this.reset.setOnAction(t -> {
+            Configuration.getInstance().reset();
+            MyLogger.getInstance().log(Level.CONFIG, "Reset config");
+        });
+        this.enableGrid.setOnAction(t -> {
+            Configuration.getInstance().setEnableGrid(enableGrid.isSelected());
+            MyLogger.getInstance().log(Level.CONFIG, "Enable grid: " + enableGrid.isSelected());
+        });
+        this.colorPicker.setOnAction(t -> {
+            Configuration.getInstance().setColorGrid(colorPicker.getValue());
+            MyLogger.getInstance().log(Level.CONFIG, "Color of grid: " + colorPicker.getValue());
+        });
     }
 
     /** Launch a DirecyoryChooser in order to choose the default path */
@@ -58,8 +66,10 @@ public class SettingsController implements Observer {
         chooser.setTitle("Choose the default path");
         chooser.setInitialDirectory(new File(Configuration.getInstance().getDefaultPath()));
         File selectedFolder = chooser.showDialog(this.colorPicker.getScene().getWindow());
-        if(selectedFolder != null)
+        if(selectedFolder != null && !selectedFolder.getAbsolutePath().equals(Configuration.getInstance().getDefaultPath())) {
             Configuration.getInstance().setDefaultPath(selectedFolder.getAbsolutePath());
+            MyLogger.getInstance().log(Level.CONFIG, "New default path: " + selectedFolder.getAbsolutePath());
+        }
     }
 
     @Override

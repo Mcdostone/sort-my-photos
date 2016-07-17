@@ -32,6 +32,8 @@ public class WindowManager {
 
     public WindowManager(Stage stage) {
         this.stage = stage;
+        this.logsStage = new Stage();
+        this.logsStage.setScene((new Scene(this.loadFXML("logs.fxml"))));
     }
 
     /**
@@ -65,12 +67,7 @@ public class WindowManager {
         this.settingsStage.show();
     }
 
-    public void openLogsWindows() {
-        if(this.logsStage == null)
-            this.logsStage = new Stage();
-        this.logsStage.setScene((new Scene(this.loadFXML("logs.fxml"))));
-        this.logsStage.show();
-    }
+    public void openLogsWindows() {  this.logsStage.show();  }
 
     /**
      * Display the mediaPlayer.
