@@ -60,8 +60,6 @@
 .start-pane, .media-player {
 	-fx-pref-width: 800px;
 	-fx-pref-height: 800px;
-	-fx-min-width: 200px;
-	-fx-min-height: 200px;
 }
 
 .container {
@@ -89,7 +87,8 @@
 
 .toolbar {
 	-fx-pref-width: 100%;
-	-fx-pref-width: 75px;
+	-fx-pref-height: 75px;
+
 }
 
 .toolbar-button, .toolbar-last-button {
@@ -98,14 +97,15 @@
 	-fx-border-top-style: solid;
 	-fx-cursor: hand;
 
-	-fx-background-color: rgba(0, 0, 0, 0.47);
+	-fx-background-color: rgba(0, 0, 0, 0.7);
 	-fx-background-position: center center;
-	-fx-background-size: 45;
+	-fx-padding: 0px 10px;
+	-fx-background-size: auto 40%;
 	-fx-background-repeat: no-repeat;
 }
 
 .toolbar-button:hover, .active {
-	-fx-background-color: rgba(0, 0 ,0 , 0.75);
+	-fx-background-color: rgba(0, 0 ,0, 0.9);
 }
 
 .toolbar-last-button {
@@ -143,4 +143,27 @@
 
 .media-pane {
 	-fx-pref-width: 100%;
+}
+
+
+.logs-pane {
+    -fx-font-family: consolas;
+    -fx-highlight-fill: white;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-style: italic;
+    -fx-background-color: rgb(34, 34, 34);
+    -fx-padding: 30px;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
 }

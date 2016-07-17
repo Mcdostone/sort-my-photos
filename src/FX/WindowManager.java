@@ -2,6 +2,7 @@ package FX;
 
 import FX.controller.MediaPlayerController;
 import app.conf.Configuration;
+import app.model.MyLogger;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ public class WindowManager {
     /** Main stage */
     private Stage stage;
     private Stage settingsStage;
+    private Stage logsStage;
 
 
     public WindowManager(Stage stage) {
@@ -56,15 +58,18 @@ public class WindowManager {
         if(this.settingsStage == null)
             this.settingsStage = new Stage();
         this.settingsStage.setScene(new Scene(this.loadFXML("settings.fxml")));
-        this.settingsStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Configuration.getInstance().save();
-                settingsStage.close();
-            }
+        this.settingsStage.setOnCloseRequest(event -> {
+            Configuration.getInstance().save();
+            settingsStage.close();
         });
         this.settingsStage.show();
+    }
 
+    public void openLogsWindows() {
+        if(this.logsStage == null)
+            this.logsStage = new Stage();
+        this.logsStage.setScene((new Scene(this.loadFXML("logs.fxml"))));
+        this.logsStage.show();
     }
 
     /**
@@ -78,6 +83,7 @@ public class WindowManager {
         Parent root = null;
         try {
             root = loader.load();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,6 +98,8 @@ public class WindowManager {
         this.stage.setScene(scene);
         this.stage.sizeToScene();
         this.stage.requestFocus();
+        this.stage.setMinHeight(300);
+        this.stage.setMinWidth(300);
         this.stage.show();
     }
 

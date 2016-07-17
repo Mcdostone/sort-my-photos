@@ -31,9 +31,7 @@ public class SettingsController implements Observer {
     @FXML private Button save;
     @FXML private Button reset;
 
-    public SettingsController() {
-        Configuration.getInstance().addObserver(this);
-    }
+    public SettingsController() {  Configuration.getInstance().addObserver(this);  }
 
     @FXML public void initialize() {
         this.save.setOnAction(t -> {

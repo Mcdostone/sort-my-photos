@@ -5,6 +5,7 @@ import app.util.MyDoublyLinkedCircularList;
 import app.util.Node;
 
 import java.util.Observable;
+import java.util.logging.Logger;
 
 /**
  * MediaPlayer enables to play all media, one by one, thanks to a circular List
@@ -15,7 +16,6 @@ public class MediaPlayer extends Observable {
 
     private DoublyLinkedCircularList<Media> playlist;
     private Media current;
-
 
     public MediaPlayer() {
         this.playlist = new MyDoublyLinkedCircularList<>();

@@ -1,10 +1,12 @@
 package app.conf;
 
+import app.model.MyLogger;
 import javafx.scene.paint.Color;
 
 import java.io.*;
 import java.util.Observable;
 import java.util.Properties;
+import java.util.logging.Level;
 
 /**
  * Configuration of the app
@@ -55,6 +57,7 @@ public class Configuration extends Observable {
     }
 
     public static Configuration load() {
+        MyLogger.getInstance().log(Level.CONFIG, "Load '" + Configuration.CONFIG_FILE +"' config file");
         Properties prop = new Properties();
         InputStream input;
         Configuration conf = new Configuration();

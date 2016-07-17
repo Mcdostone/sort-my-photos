@@ -4,6 +4,7 @@ import app.util.BufferedImageLoader;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  * The MediaLoader object enables to load images in advance in order to reduce freezer lag during loading of file.
@@ -17,7 +18,6 @@ public class MediaLoader {
     private HashMap<Media, BufferedImage> images;
     private static MediaLoader loader;
     private int capacity;
-
 
     private MediaLoader() {
         this.images = new HashMap<>();

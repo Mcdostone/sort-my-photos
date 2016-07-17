@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <styleClass>
       <String fx:value="media-player" />
       <String fx:value="pane" />
@@ -42,7 +42,7 @@
                   <BorderPane id="settings" fx:id="settingsButton" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" />
                   <BorderPane id="sorting" fx:id="sorting" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" GridPane.columnIndex="1" />
                   <BorderPane id="grid" fx:id="gridButton" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" GridPane.columnIndex="2" />
-                  <BorderPane id="logs" fx:id="logs" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                  <BorderPane id="logs" fx:id="logsButton" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                      <styleClass>
                         <String fx:value="toolbar-last-button" />
                         <String fx:value="toolbar-button" />

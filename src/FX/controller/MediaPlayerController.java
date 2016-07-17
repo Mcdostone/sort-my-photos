@@ -39,6 +39,7 @@ public class MediaPlayerController {
     @FXML private HBox container;
     @FXML private BorderPane gridButton;
     @FXML private BorderPane settingsButton;
+    @FXML private BorderPane logsButton;
 
     @FXML private AnchorPane root;
     @FXML private StackPane toolbar;
@@ -68,6 +69,7 @@ public class MediaPlayerController {
             public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
                 preview.setFitWidth(newValue.getWidth());
                 preview.setFitHeight(newValue.getHeight());
+                toolbar.setPrefHeight((newValue.getHeight()/10) > 60 ? newValue.getHeight()/10 : 60);
             }
         });
 
@@ -137,9 +139,10 @@ public class MediaPlayerController {
             }
         });
 
-        this.settingsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {  Window.getWM().openSettingsWindow();  }
+        this.settingsButton.setOnMouseClicked(event -> Window.getWM().openSettingsWindow());
+
+        this.logsButton.setOnMouseClicked(event -> {
+            Window.getWM().openLogsWindows();
         });
     }
 }
