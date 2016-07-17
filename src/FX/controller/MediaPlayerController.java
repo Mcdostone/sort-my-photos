@@ -7,6 +7,7 @@ import app.model.Media;
 import app.model.MediaPlayer;
 import app.model.MediaPlayerFactory;
 import app.model.MyLogger;
+import javafx.animation.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -18,12 +19,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
+import javafx.util.Duration;
 
 import java.io.File;
+import java.sql.Time;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -44,10 +44,13 @@ public class MediaPlayerController {
     @FXML private BorderPane gridButton;
     @FXML private BorderPane fullscreenButton;
     @FXML private BorderPane logsButton;
+    private boolean toolbarLocked = true;
+
+    private Timeline currentAnimation;
 
 
     @FXML private AnchorPane root;
-    @FXML private StackPane toolbar;
+    @FXML private GridPane toolbar;
     /** Grid Overlay for better sorting */
     private GridOverlay gridOverlay;
 
@@ -67,6 +70,8 @@ public class MediaPlayerController {
     @FXML public void initialize() {
         this.root.getChildren().add(gridOverlay);
         this.toolbar.toFront();
+        this.toolbar.getParent().setOnMouseEntered(event -> {  showToolbar();  });
+        this.toolbar.getParent().setOnMouseExited(event -> {  hideToolbar();  });
 
         // Listener which make responsive the ImageView component
         this.preview.getParent().layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
@@ -137,7 +142,6 @@ public class MediaPlayerController {
         if(this.gridOverlay.isVisible())
             this.gridButton.getStyleClass().add("active");
         this.lockButton.getStyleClass().add("active");
-
         this.gridButton.setOnMouseClicked(event -> {
             gridOverlay.setVisible(!gridOverlay.isVisible());
             MediaPlayerController.applyActiveStyle(gridButton, gridOverlay.isVisible());
@@ -147,15 +151,15 @@ public class MediaPlayerController {
             MediaPlayerController.applyActiveStyle(fullscreenButton, Window.getWM().isFullscreen());
         });
         this.lockButton.setOnMouseClicked(event -> {
-            lockButton.setId((lockButton.getId().equals("locked") ? "unlocked" : "locked"));
+            lockButton.setId((toolbarLocked ? "unlocked" : "locked"));
+            toolbarLocked = !toolbarLocked;
             MediaPlayerController.applyActiveStyle(lockButton, lockButton.getId().equals("locked"));
+            if(!toolbarLocked)
+                hideToolbar();
         });
         this.settingsButton.setOnMouseClicked(event -> Window.getWM().openSettingsWindow());
         this.logsButton.setOnMouseClicked(event -> Window.getWM().openLogsWindows());
-
-
     }
-
 
     private static void applyActiveStyle(BorderPane p, boolean add) {
         if(add)
@@ -163,4 +167,37 @@ public class MediaPlayerController {
         else
             p.getStyleClass().remove("active");
     }
+
+    private void hideToolbar() {
+        System.out.println(toolbar.getTranslateY() + " - " + toolbar.getBoundsInParent().getMinY() + " - " + toolbar.getBoundsInParent().getMaxY());
+        if(!toolbarLocked) {
+            if(this.currentAnimation != null)
+                this.currentAnimation.stop();
+            toolbar.setMinHeight(container.getMaxHeight() - toolbar.getHeight());
+            Timeline timeline = new Timeline();
+            KeyValue hidden = new KeyValue(toolbar.translateYProperty(), toolbar.getHeight(), Interpolator.EASE_BOTH);
+            KeyFrame keyFrame  = new KeyFrame(Duration.millis(400), hidden);
+            timeline.getKeyFrames().add(keyFrame);
+            timeline.setOnFinished(event -> toolbar.setVisible(false));
+            this.currentAnimation = timeline;
+            timeline.play();
+        }
+    }
+
+    private void showToolbar() {
+        if(!toolbarLocked) {
+            if(this.currentAnimation != null)
+                this.currentAnimation.stop();
+            toolbar.setMinHeight(container.getMaxHeight());
+            toolbar.setVisible(true);
+            Timeline timeline = new Timeline();
+            KeyValue show = new KeyValue(toolbar.translateYProperty(), 0, Interpolator.EASE_BOTH);
+            KeyFrame keyFrame  = new KeyFrame(Duration.millis(400), show);
+            timeline.getKeyFrames().add(keyFrame);
+            this.currentAnimation = timeline;
+            timeline.play();
+        }
+    }
+
+
 }

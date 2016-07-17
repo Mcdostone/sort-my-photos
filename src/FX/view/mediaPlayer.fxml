@@ -26,9 +26,9 @@
             </ImageView>
          </children>
       </HBox>
-      <StackPane fx:id="toolbar" layoutX="116.0" layoutY="220.0" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="800.0" styleClass="toolbar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <StackPane layoutX="116.0" layoutY="220.0" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="800.0" styleClass="toolbar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <GridPane focusTraversable="true">
+            <GridPane fx:id="toolbar" focusTraversable="true">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
