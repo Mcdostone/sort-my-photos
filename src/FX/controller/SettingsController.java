@@ -30,17 +30,11 @@ public class SettingsController implements Observer {
     @FXML private CheckBox enableGrid;
     @FXML private Label defaultPath;
     @FXML private Button changePath;
-    @FXML private Button save;
     @FXML private Button reset;
 
     public SettingsController() {  Configuration.getInstance().addObserver(this);  }
 
     @FXML public void initialize() {
-        this.save.setOnAction(t -> {
-            Stage stage = (Stage) save.getScene().getWindow();
-            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-        });
-
         this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
         this.enableGrid.setSelected(Configuration.getInstance().enableGridAtStartup());
         this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
@@ -68,7 +62,7 @@ public class SettingsController implements Observer {
         File selectedFolder = chooser.showDialog(this.colorPicker.getScene().getWindow());
         if(selectedFolder != null && !selectedFolder.getAbsolutePath().equals(Configuration.getInstance().getDefaultPath())) {
             Configuration.getInstance().setDefaultPath(selectedFolder.getAbsolutePath());
-            MyLogger.getInstance().log(Level.CONFIG, "New default path: " + selectedFolder.getAbsolutePath());
+            MyLogger.getInstance().log(Level.CONFIG, "Default path: " + selectedFolder.getAbsolutePath());
         }
     }
 

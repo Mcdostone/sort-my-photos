@@ -57,7 +57,7 @@ public class Configuration extends Observable {
     }
 
     public static Configuration load() {
-        MyLogger.getInstance().log(Level.CONFIG, "Load '" + Configuration.CONFIG_FILE +"' config file");
+        MyLogger.getInstance().log(Level.CONFIG, "Load: '" + Configuration.CONFIG_FILE + "'");
         Properties prop = new Properties();
         InputStream input;
         Configuration conf = new Configuration();

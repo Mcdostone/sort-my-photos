@@ -2,6 +2,7 @@ package FX.controller;
 
 import FX.Window;
 import app.conf.Configuration;
+import app.model.MyLogger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.stage.DirectoryChooser;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * Controller for the homepage of the app
@@ -66,7 +68,9 @@ public class HomeController {
     }
 
     private void runMediaPlayer(List<File> selectedFolders) {
-        if(selectedFolders != null && !selectedFolders.isEmpty())
+        if(selectedFolders != null && !selectedFolders.isEmpty()) {
+            MyLogger.getInstance().log(Level.INFO, "Directory: " + selectedFolders.toString());
             Window.getWM().startMediaPlayer(selectedFolders);
+        }
     }
 }

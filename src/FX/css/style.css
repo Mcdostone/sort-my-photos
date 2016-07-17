@@ -141,10 +141,23 @@
 	-fx-background-image: url("../assets/icons/grid.png");
 }
 
+#fullscreen {
+    -fx-background-image: url("../assets/icons/fullscreen.png");
+}
+
+#locked {
+    -fx-background-image: url("../assets/icons/locked.png");
+}
+
+#unlocked {
+    -fx-background-image: url("../assets/icons/unlocked.png");
+}
+
+
+
 .media-pane {
 	-fx-pref-width: 100%;
 }
-
 
 .logs-pane {
     -fx-font-family: consolas;
@@ -153,7 +166,7 @@
     -fx-highlight-text-fill: rgb(28, 28, 28);
     -fx-font-size: 14px;
     -fx-background-color: rgb(34, 34, 34);
-    -fx-padding: 30px;
+    -fx-padding: 10px;
 }
 
 .text-area .scroll-pane {

@@ -26,6 +26,6 @@ public class LogsController implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         LogRecord log = (LogRecord)arg;
-        this.logsArea.appendText(log.getLevel() + "\t\t" + log.getMessage() + "\n");
+        this.logsArea.appendText(log.getLevel() + "\t" + log.getMessage() + "\n");
     }
 }

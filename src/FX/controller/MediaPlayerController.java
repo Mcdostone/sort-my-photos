@@ -6,6 +6,7 @@ import app.conf.Configuration;
 import app.model.Media;
 import app.model.MediaPlayer;
 import app.model.MediaPlayerFactory;
+import app.model.MyLogger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -24,6 +25,7 @@ import javafx.scene.layout.StackPane;
 
 import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * Controller of the MediaPlayer scene.
@@ -37,9 +39,12 @@ public class MediaPlayerController {
 
     @FXML private ImageView preview;
     @FXML private HBox container;
-    @FXML private BorderPane gridButton;
     @FXML private BorderPane settingsButton;
+    @FXML private BorderPane lockButton;
+    @FXML private BorderPane gridButton;
+    @FXML private BorderPane fullscreenButton;
     @FXML private BorderPane logsButton;
+
 
     @FXML private AnchorPane root;
     @FXML private StackPane toolbar;
@@ -95,8 +100,11 @@ public class MediaPlayerController {
      * @param m Media to display
      */
     private void showMedia(Media m) {
-        if(m != null)
+        if(m != null) {
             this.preview.setImage(new Image(new File(m.getPath()).toURI().toString()));
+            MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
+        }
+
     }
 
     /**
@@ -128,21 +136,31 @@ public class MediaPlayerController {
     private void initControlsToolbar() {
         if(this.gridOverlay.isVisible())
             this.gridButton.getStyleClass().add("active");
-        this.gridButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                gridOverlay.setVisible(!gridOverlay.isVisible());
-                if(gridOverlay.isVisible())
-                    gridButton.getStyleClass().add("active");
-                else
-                    gridButton.getStyleClass().remove("active");
-            }
-        });
+        this.lockButton.getStyleClass().add("active");
 
+        this.gridButton.setOnMouseClicked(event -> {
+            gridOverlay.setVisible(!gridOverlay.isVisible());
+            MediaPlayerController.applyActiveStyle(gridButton, gridOverlay.isVisible());
+        });
+        this.fullscreenButton.setOnMouseClicked(event -> {
+            Window.getWM().toggleFullscreen();
+            MediaPlayerController.applyActiveStyle(fullscreenButton, Window.getWM().isFullscreen());
+        });
+        this.lockButton.setOnMouseClicked(event -> {
+            lockButton.setId((lockButton.getId().equals("locked") ? "unlocked" : "locked"));
+            MediaPlayerController.applyActiveStyle(lockButton, lockButton.getId().equals("locked"));
+        });
         this.settingsButton.setOnMouseClicked(event -> Window.getWM().openSettingsWindow());
+        this.logsButton.setOnMouseClicked(event -> Window.getWM().openLogsWindows());
 
-        this.logsButton.setOnMouseClicked(event -> {
-            Window.getWM().openLogsWindows();
-        });
+
+    }
+
+
+    private static void applyActiveStyle(BorderPane p, boolean add) {
+        if(add)
+            p.getStyleClass().add("active");
+        else
+            p.getStyleClass().remove("active");
     }
 }

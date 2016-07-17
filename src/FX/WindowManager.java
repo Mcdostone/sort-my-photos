@@ -100,6 +100,14 @@ public class WindowManager {
         this.stage.show();
     }
 
+    public void toggleFullscreen() {
+        this.stage.setFullScreen(!this.isFullscreen());
+    }
+
+    public boolean isFullscreen() {
+        return this.stage.isFullScreen();
+    }
+
     /**
      *
      * @param filename FXML file to load.
