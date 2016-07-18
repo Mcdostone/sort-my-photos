@@ -24,35 +24,35 @@
          <center>
             <GridPane BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="209.0" minWidth="209.0" prefWidth="209.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.0" minWidth="10.0" prefWidth="491.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="218.0" minWidth="209.0" prefWidth="218.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.0" minWidth="10.0" prefWidth="482.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="CENTER" />
+                  <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="CENTER" />
                 <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="CENTER" />
-                <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Display the grid at startup" textAlignment="CENTER" textOverrun="CLIP" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Display the grid at startup" textAlignment="CENTER" textOverrun="CLIP" GridPane.rowIndex="2">
                      <styleClass>
                         <String fx:value="label-settings" />
                         <String fx:value="label" />
                      </styleClass>
                   </Label>
-                  <CheckBox fx:id="enableGrid" mnemonicParsing="false" text="Yeah !" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <CheckBox fx:id="enableGrid" mnemonicParsing="false" text="Yeah !" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <styleClass>
                         <String fx:value="checkbox" />
                         <String fx:value="yeah" />
                      </styleClass>
                   </CheckBox>
-                  <Label styleClass="label-settings" text="Color of the grid" GridPane.rowIndex="2" />
-                  <ColorPicker fx:id="colorPicker" styleClass="color-picker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label styleClass="label-settings" text="Color of the grid" GridPane.rowIndex="3" />
+                  <ColorPicker fx:id="colorPicker" styleClass="color-picker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label styleClass="label-settings" text="Default path" />
                   <BorderPane prefHeight="52.0" prefWidth="373.0" GridPane.columnIndex="1">
                      <center>
-                        <Label fx:id="defaultPath" graphicTextGap="0.0" maxWidth="1.7976931348623157E308" prefWidth="0.0" styleClass="path" text="ff" />
+                        <Label fx:id="defaultPath" graphicTextGap="0.0" maxWidth="1.7976931348623157E308" prefWidth="0.0" styleClass="path" text="." />
                      </center>
                      <left>
                         <Button fx:id="changePath" alignment="CENTER" mnemonicParsing="false" text="Change" textAlignment="CENTER" BorderPane.alignment="CENTER">
@@ -62,6 +62,13 @@
                         </Button>
                      </left>
                   </BorderPane>
+                  <Label styleClass="label-settings" text="Lock the toolbar at startup" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="lockToolbar" mnemonicParsing="false" text="Yeah !" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="checkbox" />
+                        <String fx:value="yeah" />
+                     </styleClass>
+                  </CheckBox>
                </children>
                <BorderPane.margin>
                   <Insets bottom="10.0" top="10.0" />

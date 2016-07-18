@@ -2,11 +2,10 @@ package FX.controller;
 
 import FX.Window;
 import FX.view.GridOverlay;
+import app.conf.Configuration;
 import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
@@ -24,13 +23,18 @@ public class ToolbarController {
     @FXML private Button fullscreenButton;
     @FXML private Button logsButton;
     private GridOverlay gridOverlay;
-    private boolean toolbarLocked = true;
+    private boolean toolbarLocked;
     private Animation currentAnimation;
-    @FXML private AnchorPane root;
+
+    public ToolbarController() {  this.toolbarLocked = Configuration.getInstance().lockToolbar();  }
 
     @FXML
     public void initialize() {
-        this.lockButton.getStyleClass().add("active");
+        if(this.toolbarLocked)
+            this.lockButton.getStyleClass().add("active");
+        else
+            lockButton.setId("unlocked");
+
         this.gridButton.setOnMouseClicked(event -> {
             gridOverlay.setVisible(!gridOverlay.isVisible());
             ToolbarController.applyActiveStyle(gridButton, gridOverlay.isVisible());
@@ -42,7 +46,7 @@ public class ToolbarController {
         this.lockButton.setOnMouseClicked(event -> {
             lockButton.setId((toolbarLocked ? "unlocked" : "locked"));
             toolbarLocked = !toolbarLocked;
-            ToolbarController.applyActiveStyle(lockButton, lockButton.getId().equals("locked"));
+            ToolbarController.applyActiveStyle(lockButton, toolbarLocked);
             if (!toolbarLocked)
                 hideToolbar();
         });
@@ -60,7 +64,6 @@ public class ToolbarController {
         if (!toolbarLocked) {
             if (this.currentAnimation != null)
                 this.currentAnimation.stop();
-            //this.toolbar.setMinHeight(container.getMaxHeight() - toolbar.getHeight());
             Timeline timeline = new Timeline();
             KeyValue hidden = new KeyValue(toolbar.translateYProperty(), toolbar.getHeight(), Interpolator.EASE_BOTH);
             KeyFrame keyFrame = new KeyFrame(Duration.millis(400), hidden);
@@ -69,9 +72,12 @@ public class ToolbarController {
             this.currentAnimation = timeline;
 
             Timeline empty = new Timeline();
-            empty.getKeyFrames().add(new KeyFrame(Duration.millis(700)));
+
+            empty.getKeyFrames().add(new KeyFrame(Duration.millis((toolbar.getTranslateY() == 0.0) ? 200 : 0)));
             SequentialTransition sequence = new SequentialTransition(empty, timeline);
             this.currentAnimation = sequence;
+            this.toolbar.getParent().requestLayout();
+
             sequence.play();
         }
     }
@@ -82,8 +88,8 @@ public class ToolbarController {
                 this.currentAnimation.stop();
             toolbar.setVisible(true);
             Timeline timeline = new Timeline();
-            KeyValue show = new KeyValue(toolbar.translateYProperty(), 0, Interpolator.EASE_BOTH);
-            KeyFrame keyFrame  = new KeyFrame(Duration.millis(400), show);
+            KeyValue show = new KeyValue(toolbar.translateYProperty(), 0, Interpolator.EASE_IN);
+            KeyFrame keyFrame  = new KeyFrame(Duration.millis(200), show);
             timeline.getKeyFrames().add(keyFrame);
             this.currentAnimation = timeline;
             timeline.play();

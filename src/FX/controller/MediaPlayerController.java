@@ -6,17 +6,12 @@ import app.model.Media;
 import app.model.MediaPlayer;
 import app.model.MediaPlayerFactory;
 import app.model.MyLogger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -57,7 +52,6 @@ public class MediaPlayerController {
         this.root.getChildren().add(gridOverlay);
         this.toolbarContainer.toFront();
         this.toolbarController.registerGridOverlay(this.gridOverlay);
-        //this.toolbarController.registerRootPane(this.root);
         this.toolbarContainer.setOnMouseEntered(event -> {  toolbarController.showToolbar();  });
         this.toolbarContainer.setOnMouseExited(event -> {  toolbarController.hideToolbar();  });
 
@@ -92,18 +86,15 @@ public class MediaPlayerController {
         }
     }
 
-    /**
-     * Init listeners for the MediaPlayer
-     */
+    /** Init listeners for the MediaPlayer */
     private void initControlsMediaPlayer() {
         // Listener for the mouse
         this.container.setOnMouseReleased(event -> {
             if(event.getButton() == MouseButton.PRIMARY) {  showMedia(mediaPlayer.next());  }
             if(event.getButton() == MouseButton.SECONDARY) {  showMedia(mediaPlayer.previous()); }
         });
-
         // Listener for the keyboard
-        this.root.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+        this.root.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.LEFT)  showMedia(mediaPlayer.previous());
             if(event.getCode() == KeyCode.RIGHT)  showMedia(mediaPlayer.next());
         });

@@ -26,10 +26,12 @@ import java.util.logging.Level;
  */
 public class SettingsController implements Observer {
 
-    @FXML private ColorPicker colorPicker;
-    @FXML private CheckBox enableGrid;
-    @FXML private Label defaultPath;
+
     @FXML private Button changePath;
+    @FXML private Label defaultPath;
+    @FXML private CheckBox lockToolbar;
+    @FXML private CheckBox enableGrid;
+    @FXML private ColorPicker colorPicker;
     @FXML private Button reset;
 
     public SettingsController() {  Configuration.getInstance().addObserver(this);  }
@@ -38,11 +40,11 @@ public class SettingsController implements Observer {
         this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
         this.enableGrid.setSelected(Configuration.getInstance().enableGridAtStartup());
         this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
-
         this.changePath.setOnAction(t -> { changeDefaultPath();  });
-        this.reset.setOnAction(t -> {
-            Configuration.getInstance().reset();
-            MyLogger.getInstance().log(Level.CONFIG, "Reset config");
+
+        this.lockToolbar.setOnAction(t -> {
+            Configuration.getInstance().setLockToolbar(lockToolbar.isSelected());
+            MyLogger.getInstance().log(Level.CONFIG, "Lock toolbar: " + lockToolbar.isSelected());
         });
         this.enableGrid.setOnAction(t -> {
             Configuration.getInstance().setEnableGrid(enableGrid.isSelected());
@@ -51,6 +53,10 @@ public class SettingsController implements Observer {
         this.colorPicker.setOnAction(t -> {
             Configuration.getInstance().setColorGrid(colorPicker.getValue());
             MyLogger.getInstance().log(Level.CONFIG, "Color of grid: " + colorPicker.getValue());
+        });
+        this.reset.setOnAction(t -> {
+            Configuration.getInstance().reset();
+            MyLogger.getInstance().log(Level.CONFIG, "Reset config");
         });
     }
 
@@ -69,6 +75,7 @@ public class SettingsController implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
+        this.lockToolbar.setSelected(Configuration.getInstance().lockToolbar());
         this.enableGrid.setSelected(Configuration.getInstance().enableGridAtStartup());
         this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
     }

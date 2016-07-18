@@ -29,6 +29,7 @@ public class Configuration extends Observable {
     public String REJECT_ICON = "./assets/icons/reject.png";
     private Color colorGrid = Color.ALICEBLUE;
     private boolean enableGridAtStartup = false;
+    private boolean lockToolbar = true;
     public String ACCEPT_SHORCUT= "V";
     public String REJECT_SHORTCUT = "A";
 
@@ -50,11 +51,14 @@ public class Configuration extends Observable {
             prop.setProperty("enableGrid", String.valueOf(this.enableGridAtStartup()));
             prop.setProperty("colorGrid", this.getColorGrid().toString());
             prop.setProperty("defaultPath", this.getDefaultPath());
+            prop.setProperty("lockToolbar", String.valueOf(this.lockToolbar()));
             prop.store(output, null);
         } catch (IOException io) {
             io.printStackTrace();
         }
     }
+
+
 
     public static Configuration load() {
         MyLogger.getInstance().log(Level.CONFIG, "Load: '" + Configuration.CONFIG_FILE + "'");
@@ -68,6 +72,7 @@ public class Configuration extends Observable {
                 prop.load(input);
                 conf.setEnableGrid(Boolean.parseBoolean(prop.getProperty("enableGrid")));
                 conf.setColorGrid(Color.web(prop.getProperty("colorGrid")));
+                conf.setLockToolbar(Boolean.parseBoolean(prop.getProperty("lockToolbar")));
                 if(prop.getProperty("defaultPath") != null)
                     conf.setDefaultPath(prop.getProperty("defaultPath"));
             }
@@ -86,11 +91,11 @@ public class Configuration extends Observable {
         this.setDefaultPath(tmp.getDefaultPath());
         this.setColorGrid(tmp.getColorGrid());
         this.setEnableGrid(tmp.enableGridAtStartup());
+        this.setLockToolbar(tmp.lockToolbar());
 
         this.setChanged();
         this.notifyObservers();
     }
-
 
     public void setEnableGrid(boolean enable) {
         this.enableGridAtStartup = enable;
@@ -103,6 +108,10 @@ public class Configuration extends Observable {
     }
 
     public String getDefaultPath() {  return this.defaultPath;  }
+
+    public void setLockToolbar(boolean lockToolbar) {  this.lockToolbar = lockToolbar;  }
+
+    public boolean lockToolbar() {  return this.lockToolbar;  }
 
     public void setDefaultPath(String path) {
         this.defaultPath = path;
@@ -117,4 +126,6 @@ public class Configuration extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+
+
 }
