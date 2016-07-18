@@ -81,8 +81,7 @@ public class ToolbarController {
             empty.getKeyFrames().add(new KeyFrame(Duration.millis((toolbar.getTranslateY() == 0.0) ? 200 : 0)));
             SequentialTransition sequence = new SequentialTransition(empty, timeline);
             this.currentAnimation = sequence;
-            this.toolbar.getParent().requestLayout();
-
+            this.toolbar.getParent().requestFocus();
             sequence.play();
         }
     }

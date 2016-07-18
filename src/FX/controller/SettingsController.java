@@ -40,8 +40,9 @@ public class SettingsController implements Observer {
         this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
         this.enableGrid.setSelected(Configuration.getInstance().enableGridAtStartup());
         this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
-        this.changePath.setOnAction(t -> { changeDefaultPath();  });
+        this.lockToolbar.setSelected(Configuration.getInstance().lockToolbar());
 
+        this.changePath.setOnAction(t -> { changeDefaultPath();  });
         this.lockToolbar.setOnAction(t -> {
             Configuration.getInstance().setLockToolbar(lockToolbar.isSelected());
             MyLogger.getInstance().log(Level.CONFIG, "Lock toolbar: " + lockToolbar.isSelected());
@@ -58,6 +59,8 @@ public class SettingsController implements Observer {
             Configuration.getInstance().reset();
             MyLogger.getInstance().log(Level.CONFIG, "Reset config");
         });
+
+        this.reset.requestLayout();
     }
 
     /** Launch a DirecyoryChooser in order to choose the default path */
