@@ -30,10 +30,11 @@ public class ToolbarController {
 
     @FXML
     public void initialize() {
-        if(this.toolbarLocked)
-            this.lockButton.getStyleClass().add("active");
-        else
+        ToolbarController.applyActiveStyle(this.lockButton, this.toolbarLocked);
+        if(!this.toolbarLocked) {
             lockButton.setId("unlocked");
+            this.hideToolbarAtStartup();
+        }
 
         this.gridButton.setOnMouseClicked(event -> {
             gridOverlay.setVisible(!gridOverlay.isVisible());
@@ -50,6 +51,7 @@ public class ToolbarController {
             if (!toolbarLocked)
                 hideToolbar();
         });
+
         this.settingsButton.setOnMouseClicked(event -> Window.getWM().openSettingsWindow());
         this.logsButton.setOnMouseClicked(event -> Window.getWM().openLogsWindows());
     }
@@ -58,6 +60,9 @@ public class ToolbarController {
         this.gridOverlay = grid;
         if(this.gridOverlay.isVisible())
             this.gridButton.getStyleClass().add("active");
+    }
+
+    public void hideToolbarAtStartup(){
     }
 
     public void hideToolbar() {
