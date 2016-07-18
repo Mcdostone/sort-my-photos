@@ -5,10 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
@@ -17,7 +14,7 @@
       <String fx:value="pane" />
    </styleClass>
    <children>
-      <HBox fx:id="container" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="container" alignment="CENTER" layoutX="207.0" layoutY="255.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="preview" fitHeight="150.0" fitWidth="533.0" pickOnBounds="true" preserveRatio="true" styleClass="preview-pane">
                <viewport>
@@ -26,33 +23,13 @@
             </ImageView>
          </children>
       </HBox>
-      <StackPane layoutX="116.0" layoutY="220.0" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="800.0" styleClass="toolbar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <StackPane fx:id="toolbarContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="75.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <GridPane fx:id="toolbar" focusTraversable="true">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <BorderPane id="settings" fx:id="settingsButton" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" />
-                  <BorderPane id="locked" fx:id="lockButton" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" GridPane.columnIndex="1" />
-                  <BorderPane id="sorting" fx:id="sorting" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" GridPane.columnIndex="2" />
-                  <BorderPane id="grid" fx:id="gridButton" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" GridPane.columnIndex="3" />
-                  <BorderPane id="fullscreen" fx:id="fullscreenButton" prefHeight="200.0" prefWidth="200.0" styleClass="toolbar-button" GridPane.columnIndex="4" />
-                  <BorderPane id="logs" fx:id="logsButton" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
-                     <styleClass>
-                        <String fx:value="toolbar-last-button" />
-                        <String fx:value="toolbar-button" />
-                     </styleClass></BorderPane>
-               </children>
-            </GridPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <fx:include fx:id="toolbar" source="toolbar.fxml" />
+               </center>
+            </BorderPane>
          </children>
       </StackPane>
    </children>
