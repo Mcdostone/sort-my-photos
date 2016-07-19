@@ -211,6 +211,7 @@
 .button-sort {
     -fx-background-radius: 50%;
     -fx-border-radius: 50%;
+    -fx-border-color: rgba(255, 255, 255, 0.5);
     -fx-pref-width: 80px;
     -fx-pref-height: 80px;
     -fx-background-position: center center;
@@ -220,13 +221,12 @@
     -fx-padding: 20px;
     -fx-text-fill: rgb(34, 34, 34);
     -fx-font-size: 32px;
-    -fx-opacity: 0.2;
     -fx-font-weight: 100;
     -fx-background-color: transparent;
 }
 
 .button-sort:hover {
-    -fx-opacity: 1;
+    -fx-border-color: white;
     -fx-text-fill: rgba(0, 0 ,0, 0.9);
 }
 

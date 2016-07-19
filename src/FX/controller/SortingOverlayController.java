@@ -18,26 +18,30 @@ public class SortingOverlayController {
 
     @FXML
     public void initialize() {
-        this.acceptButton.setOnMousePressed(event -> {
+        this.acceptButton.setOnMouseEntered(event -> {
             acceptButton.setText(Configuration.getInstance().getShortcutAccept());
             acceptButton.setId(null);
         });
-        this.acceptButton.setOnMouseReleased(event -> {
+        this.acceptButton.setOnMouseExited(event -> {
             acceptButton.setText(null);
             acceptButton.setId("accept");
-            this.sortingManager.acceptMedia();
         });
+        this.acceptButton.setOnMouseReleased(event -> {  this.sortingManager.acceptMedia(); });
 
-        this.rejectButton.setOnMousePressed(event -> {
+        this.rejectButton.setOnMouseExited(event -> {
+            rejectButton.setText(null);
+            rejectButton.setId("reject");
+        });
+        this.rejectButton.setOnMouseEntered(event -> {
             rejectButton.setText(Configuration.getInstance().getShortcutReject());
             rejectButton.setId(null);
         });
-        this.rejectButton.setOnMouseReleased(event -> {
-            rejectButton.setText(null);
-            rejectButton.setId("reject");
-            this.sortingManager.rejectMedia();
-        });
+        this.rejectButton.setOnMouseReleased(event -> {  this.sortingManager.rejectMedia();  });
     }
+
+    public void accept() {  this.sortingManager.acceptMedia();  }
+
+    public void reject() {  this.sortingManager.rejectMedia();  }
 
     public void registerSortingManager(SortingManager sortingManager) {
         this.sortingManager = sortingManager;

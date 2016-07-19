@@ -67,8 +67,6 @@ public class MediaPlayerController implements Observer {
         this.toolbarContainer.setOnMouseEntered(event -> {  toolbarController.showToolbar();  });
         this.toolbarContainer.setOnMouseExited(event -> {  toolbarController.hideToolbar();  });
 
-
-
         // Listener which make responsive the ImageView component
         this.preview.getParent().layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
             preview.setFitWidth(newValue.getWidth());
@@ -113,6 +111,10 @@ public class MediaPlayerController implements Observer {
         this.root.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.LEFT)  showMedia(mediaPlayer.previous());
             if(event.getCode() == KeyCode.RIGHT)  showMedia(mediaPlayer.next());
+            if(event.getCode().getName().equals(Configuration.getInstance().getShortcutAccept()) && sortingOverlayContainer.isVisible())
+                this.sortingOverlayController.accept();
+            if(event.getCode().getName().equals(Configuration.getInstance().getShortcutReject()) && sortingOverlayContainer.isVisible())
+                this.sortingOverlayController.reject();
         });
     }
 
