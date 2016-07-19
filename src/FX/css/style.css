@@ -112,6 +112,28 @@
 
 }
 
+.transparent-pane, .toolbar-button {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+.toolbar-button:hover, .active, .transparent-pane:hover {
+	-fx-background-color: rgba(0, 0 ,0, 0.9);
+}
+
+.label-infos {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+.link {
+    -fx-font-style: italic;
+}
+
+.link:hover {
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+
 .toolbar-button, .toolbar-last-button {
 	-fx-border-color: black;
 	-fx-border-radius: 0;
@@ -122,7 +144,6 @@
 	-fx-border-top-style: solid;
 	-fx-cursor: hand;
 
-	-fx-background-color: rgba(0, 0, 0, 0.7);
 	-fx-background-position: center center;
 	-fx-padding: 0px 10px;
 	-fx-background-size: auto 40%;
@@ -158,6 +179,10 @@
 	-fx-background-image: url("../assets/icons/sort.png");
 }
 
+#infos {
+	-fx-background-image: url("../assets/icons/infos.png");
+}
+
 #logs {
 	-fx-background-image: url("../assets/icons/logs.png");
 }
@@ -165,6 +190,8 @@
 #grid {
 	-fx-background-image: url("../assets/icons/grid.png");
 }
+
+
 
 #fullscreen {
     -fx-background-image: url("../assets/icons/fullscreen.png");

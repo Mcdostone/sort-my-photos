@@ -14,9 +14,9 @@
       <String fx:value="pane" />
    </styleClass>
    <children>
-      <StackPane fx:id="toolbarContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="75.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <StackPane fx:id="toolbarContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="75.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                <center>
                   <fx:include fx:id="toolbar" source="toolbar.fxml" />
                </center>
@@ -37,5 +37,14 @@
             </ImageView>
          </children>
       </HBox>
+      <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <right>
+                  <fx:include source="infosOverlay.fxml" />
+               </right>
+            </BorderPane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
