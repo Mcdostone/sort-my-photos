@@ -7,6 +7,7 @@ import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 /**
@@ -18,6 +19,7 @@ public class ToolbarController {
 
     @FXML private GridPane toolbar;
     @FXML private Button settingsButton;
+    @FXML private Button sortingButton;
     @FXML private Button lockButton;
     @FXML private Button gridButton;
     @FXML private Button fullscreenButton;
@@ -25,6 +27,7 @@ public class ToolbarController {
     private GridOverlay gridOverlay;
     private boolean toolbarLocked;
     private Animation currentAnimation;
+    private StackPane sortingOverlay;
 
     public ToolbarController() {  this.toolbarLocked = Configuration.getInstance().lockToolbar();  }
 
@@ -36,24 +39,27 @@ public class ToolbarController {
             this.hideToolbarAtStartup();
         }
 
-        this.gridButton.setOnMouseClicked(event -> {
+        this.gridButton.setOnAction(event -> {
             gridOverlay.setVisible(!gridOverlay.isVisible());
             ToolbarController.applyActiveStyle(gridButton, gridOverlay.isVisible());
         });
-        this.fullscreenButton.setOnMouseClicked(event -> {
+        this.fullscreenButton.setOnAction(event -> {
             Window.getWM().toggleFullscreen();
             ToolbarController.applyActiveStyle(fullscreenButton, Window.getWM().isFullscreen());
         });
-        this.lockButton.setOnMouseClicked(event -> {
+        this.lockButton.setOnAction(event -> {
             lockButton.setId((toolbarLocked ? "unlocked" : "locked"));
             toolbarLocked = !toolbarLocked;
             ToolbarController.applyActiveStyle(lockButton, toolbarLocked);
             if (!toolbarLocked)
                 hideToolbar();
         });
-
-        this.settingsButton.setOnMouseClicked(event -> Window.getWM().openSettingsWindow());
-        this.logsButton.setOnMouseClicked(event -> Window.getWM().openLogsWindows());
+        this.sortingButton.setOnAction(event -> {
+            this.sortingOverlay.setVisible(!this.sortingOverlay.isVisible());
+            ToolbarController.applyActiveStyle(this.sortingButton, this.sortingOverlay.isVisible());
+        });
+        this.settingsButton.setOnAction(event -> Window.getWM().openSettingsWindow());
+        this.logsButton.setOnAction(event -> Window.getWM().openLogsWindows());
     }
 
     public void registerGridOverlay(GridOverlay grid) {
@@ -105,5 +111,9 @@ public class ToolbarController {
             p.getStyleClass().add("active");
         else
             p.getStyleClass().remove("active");
+    }
+
+    public void registerSortingOverlay(StackPane sortingOverlayContainer) {
+        this.sortingOverlay = sortingOverlayContainer;
     }
 }

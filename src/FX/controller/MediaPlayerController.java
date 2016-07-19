@@ -6,13 +6,15 @@ import app.model.Media;
 import app.model.MediaPlayer;
 import app.model.MediaPlayerFactory;
 import app.model.MyLogger;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
@@ -34,6 +36,8 @@ public class MediaPlayerController {
     @FXML private AnchorPane root;
     @FXML private StackPane toolbarContainer;
     @FXML private ToolbarController toolbarController;
+    @FXML private StackPane sortingOverlayContainer;
+    @FXML private SortingOverlayController sortingOverlayController;
     /** Grid Overlay for better sorting */
     private GridOverlay gridOverlay;
 
@@ -49,11 +53,20 @@ public class MediaPlayerController {
     }
 
     @FXML public void initialize() {
+        this.sortingOverlayContainer.setVisible(false);
+        this.root.setOnMouseClicked(event -> {
+            if(event.getTarget().equals(sortingOverlayContainer))
+                Event.fireEvent(this.container, new MouseEvent(MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0, event.getButton(), event.getClickCount(), true, true, true, true, true, true, true, true, true, true, null));
+        });
         this.root.getChildren().add(gridOverlay);
+        this.sortingOverlayContainer.toFront();
         this.toolbarContainer.toFront();
         this.toolbarController.registerGridOverlay(this.gridOverlay);
+        this.toolbarController.registerSortingOverlay(this.sortingOverlayContainer);
         this.toolbarContainer.setOnMouseEntered(event -> {  toolbarController.showToolbar();  });
         this.toolbarContainer.setOnMouseExited(event -> {  toolbarController.hideToolbar();  });
+
+
 
         // Listener which make responsive the ImageView component
         this.preview.getParent().layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
@@ -101,3 +114,4 @@ public class MediaPlayerController {
     }
 
 }
+

@@ -14,15 +14,6 @@
       <String fx:value="pane" />
    </styleClass>
    <children>
-      <HBox fx:id="container" alignment="CENTER" layoutX="207.0" layoutY="255.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ImageView fx:id="preview" fitHeight="150.0" fitWidth="533.0" pickOnBounds="true" preserveRatio="true" styleClass="preview-pane">
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-            </ImageView>
-         </children>
-      </HBox>
       <StackPane fx:id="toolbarContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="75.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
@@ -32,5 +23,19 @@
             </BorderPane>
          </children>
       </StackPane>
+      <StackPane fx:id="sortingOverlayContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" styleClass="sortingOverlay" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <fx:include fx:id="sortingOverlay" source="sortingOverlay.fxml" />
+         </children>
+      </StackPane>
+      <HBox fx:id="container" alignment="CENTER" layoutX="207.0" layoutY="255.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="preview" fitHeight="150.0" fitWidth="533.0" pickOnBounds="true" preserveRatio="true" styleClass="preview-pane">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

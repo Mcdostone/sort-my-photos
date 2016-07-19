@@ -185,23 +185,27 @@
 }
 
 .sortingOverlay {
-    -fx-background-color: grey;
+    -fx-background-color: transparent;
 }
 
 .button-sort {
+    -fx-background-radius: 50%;
     -fx-border-radius: 50%;
     -fx-pref-width: 80px;
     -fx-pref-height: 80px;
     -fx-background-position: center center;
     -fx-background-size: auto 60%;
     -fx-background-repeat: no-repeat;
+    -fx-cursor: hand;
     -fx-padding: 20px;
     -fx-opacity: 0.2;
+    -fx-background-color: transparent;
 }
 
 .button-sort:hover {
--fx-opacity: 1;
+    -fx-opacity: 1;
 }
+
 
 #accept {
     -fx-background-image: url("../assets/icons/accept.png");
@@ -209,5 +213,4 @@
 
 #reject {
     -fx-background-image: url("../assets/icons/reject.png");
-    -fx-background-size: auto 55%;
 }
