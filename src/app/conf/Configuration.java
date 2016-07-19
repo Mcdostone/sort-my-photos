@@ -30,10 +30,11 @@ public class Configuration extends Observable {
     private Color colorGrid = Color.ALICEBLUE;
     private boolean enableGridAtStartup = false;
     private boolean lockToolbar = true;
-    public String ACCEPT_SHORCUT= "V";
-    public String REJECT_SHORTCUT = "A";
+    private String shortcutAccept = "V";
+    private String shortcutReject = "A";
 
     private static Configuration config;
+
 
     private Configuration() {}
 
@@ -52,6 +53,8 @@ public class Configuration extends Observable {
             prop.setProperty("colorGrid", this.getColorGrid().toString());
             prop.setProperty("defaultPath", this.getDefaultPath());
             prop.setProperty("lockToolbar", String.valueOf(this.lockToolbar()));
+            prop.setProperty("shortcutAccept", this.getShortcutAccept());
+            prop.setProperty("shortcutReject", this.getShortcutReject());
             prop.store(output, null);
         } catch (IOException io) {
             io.printStackTrace();
@@ -70,10 +73,17 @@ public class Configuration extends Observable {
             input = new FileInputStream(Configuration.CONFIG_FILE);
             if(input != null) {
                 prop.load(input);
-                conf.setEnableGrid(Boolean.parseBoolean(prop.getProperty("enableGrid")));
-                conf.setColorGrid(Color.web(prop.getProperty("colorGrid")));
-                conf.setLockToolbar(Boolean.parseBoolean(prop.getProperty("lockToolbar")));
-                if(prop.getProperty("defaultPath") != null)
+                if(prop.containsKey("enableGrid"))
+                    conf.setEnableGrid(Boolean.parseBoolean(prop.getProperty("enableGrid")));
+                if(prop.containsKey("colorGrid"))
+                    conf.setColorGrid(Color.web(prop.getProperty("colorGrid")));
+                if(prop.containsKey("lockToolbar"))
+                    conf.setLockToolbar(Boolean.parseBoolean(prop.getProperty("lockToolbar")));
+                if(prop.containsKey("shortcutAccept"))
+                    conf.setShortcutAccept(prop.getProperty("shortcutAccept"));
+                if(prop.containsKey("shortcutReject"))
+                conf.setShortcutReject(prop.getProperty("shortcutReject"));
+                if(prop.containsKey("defaultPath"))
                     conf.setDefaultPath(prop.getProperty("defaultPath"));
             }
         } catch (FileNotFoundException e) {
@@ -92,6 +102,8 @@ public class Configuration extends Observable {
         this.setColorGrid(tmp.getColorGrid());
         this.setEnableGrid(tmp.enableGridAtStartup());
         this.setLockToolbar(tmp.lockToolbar());
+        this.setShortcutAccept(tmp.getShortcutAccept());
+        this.setShortcutReject(tmp.getShortcutReject());
 
         this.setChanged();
         this.notifyObservers();
@@ -128,4 +140,23 @@ public class Configuration extends Observable {
     }
 
 
+    public String getShortcutAccept() {
+        return this.shortcutAccept;
+    }
+
+    public String getShortcutReject() {
+        return this.shortcutReject;
+    }
+
+    public void setShortcutAccept(String s) {
+        s = s.toUpperCase();
+        if(s.length() != 0 && !s.equals(this.getShortcutReject()))
+            this.shortcutAccept = s;
+    }
+
+    public void setShortcutReject(String s) {
+        s = s.toUpperCase();
+        if(s.length() != 0 && !s.equals(this.getShortcutAccept()))
+            this.shortcutReject = s;
+    }
 }

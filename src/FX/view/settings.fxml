@@ -6,6 +6,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -33,6 +34,7 @@
                 <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="CENTER" />
                 <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Display the grid at startup" textAlignment="CENTER" textOverrun="CLIP" GridPane.rowIndex="2">
@@ -48,7 +50,7 @@
                      </styleClass>
                   </CheckBox>
                   <Label styleClass="label-settings" text="Color of the grid" GridPane.rowIndex="3" />
-                  <ColorPicker fx:id="colorPicker" styleClass="color-picker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ColorPicker fx:id="colorPicker" prefWidth="200.0" styleClass="color-picker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label styleClass="label-settings" text="Default path" />
                   <BorderPane prefHeight="52.0" prefWidth="373.0" GridPane.columnIndex="1">
                      <center>
@@ -69,6 +71,10 @@
                         <String fx:value="yeah" />
                      </styleClass>
                   </CheckBox>
+                  <Label styleClass="label-settings" text="Shortcut to accept medias" GridPane.rowIndex="4" />
+                  <Label styleClass="label-settings" text="Shortcut to reject medias" GridPane.rowIndex="5" />
+                  <TextField fx:id="shortcutAccept" alignment="CENTER" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="shortcutReject" alignment="CENTER" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="10.0" top="10.0" />
