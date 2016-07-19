@@ -16,8 +16,10 @@ public class MediaPlayer extends Observable {
 
     private DoublyLinkedCircularList<Media> playlist;
     private Media current;
+    private String workingDir;
 
-    public MediaPlayer() {
+    public MediaPlayer(String workDir) {
+        this.workingDir = workDir;
         this.playlist = new MyDoublyLinkedCircularList<>();
     }
 
@@ -31,29 +33,21 @@ public class MediaPlayer extends Observable {
 
     public void removeCurrent() {
         this.current = this.playlist.removeCurrent();
-        System.out.println(this.current);
         this.setChanged();
         this.notifyObservers();
     }
 
     public Media next() {
+        this.current = (this.isEmpty()) ? null: this.playlist.next();
         this.setChanged();
         this.notifyObservers();
-        Media toLoad = this.playlist.NthMediaAfterCurrent((MediaLoader.getInstance().capacity()/2) + 1);
-        Media toRemove = this.playlist.NthMediaBeforeCurrent(MediaLoader.getInstance().capacity()/2);
-        //MediaLoader.getInstance().nextMedia(toRemove, toLoad);
-        this.current = this.playlist.next();
-
         return this.current;
     }
 
     public Media previous() {
+        this.current = (this.isEmpty()) ? null: this.playlist.previous();
         this.setChanged();
         this.notifyObservers();
-        Media toLoad = this.playlist.NthMediaBeforeCurrent((MediaLoader.getInstance().capacity()/2) + 1);
-        Media toRemove = this.playlist.NthMediaAfterCurrent(MediaLoader.getInstance().capacity()/2);
-        //MediaLoader.getInstance().previousMedia(toRemove, toLoad);
-        this.current = this.playlist.previous();
         return this.current;
     }
 
@@ -71,5 +65,7 @@ public class MediaPlayer extends Observable {
     }
 
     public boolean isEmpty() {  return this.playlist.isEmpty();  }
+
+    public String getWorkingDirectory() {  return this.workingDir;  }
 
 }

@@ -2,10 +2,7 @@ package FX.controller;
 
 import FX.view.GridOverlay;
 import app.conf.Configuration;
-import app.model.Media;
-import app.model.MediaPlayer;
-import app.model.MediaPlayerFactory;
-import app.model.MyLogger;
+import app.model.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -20,6 +17,8 @@ import javafx.scene.layout.StackPane;
 
 import java.io.File;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 
 /**
@@ -27,7 +26,7 @@ import java.util.logging.Level;
  *
  * @author Mcdostone
  */
-public class MediaPlayerController {
+public class MediaPlayerController implements Observer {
 
     /** The unique MediaPlayer */
     private MediaPlayer mediaPlayer;
@@ -49,14 +48,16 @@ public class MediaPlayerController {
         this.mediaPlayer = MediaPlayerFactory.createMediaPlayer(paths);
         this.gridOverlay = new GridOverlay(Configuration.getInstance().enableGridAtStartup());
         this.gridOverlay.toFront();
+        this.mediaPlayer.addObserver(this);
         Configuration.getInstance().addObserver(this.gridOverlay);
     }
 
     @FXML public void initialize() {
         this.sortingOverlayContainer.setVisible(false);
-        this.root.setOnMouseClicked(event -> {
+        this.sortingOverlayController.registerSortingManager(this.createSortingManager());
+        this.root.setOnMousePressed(event -> {
             if(event.getTarget().equals(sortingOverlayContainer))
-                Event.fireEvent(this.container, new MouseEvent(MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0, event.getButton(), event.getClickCount(), true, true, true, true, true, true, true, true, true, true, null));
+                Event.fireEvent(this.container, new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, event.getButton(), event.getClickCount(), true, true, true, true, true, true, true, true, true, true, null));
         });
         this.root.getChildren().add(gridOverlay);
         this.sortingOverlayContainer.toFront();
@@ -97,12 +98,14 @@ public class MediaPlayerController {
             this.preview.setImage(new Image(new File(m.getPath()).toURI().toString()));
             MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
         }
+        else
+            this.preview.setImage(null);
     }
 
     /** Init listeners for the MediaPlayer */
     private void initControlsMediaPlayer() {
         // Listener for the mouse
-        this.container.setOnMouseReleased(event -> {
+        this.container.setOnMousePressed(event -> {
             if(event.getButton() == MouseButton.PRIMARY) {  showMedia(mediaPlayer.next());  }
             if(event.getButton() == MouseButton.SECONDARY) {  showMedia(mediaPlayer.previous()); }
         });
@@ -113,5 +116,13 @@ public class MediaPlayerController {
         });
     }
 
+    private SortingManager createSortingManager() {
+        return new SortingManager(this.mediaPlayer, Configuration.getInstance().getAcceptedDirName(), Configuration.getInstance().getRejectDirName());
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.showMedia(this.mediaPlayer.current());
+    }
 }
 

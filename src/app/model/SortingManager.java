@@ -12,47 +12,54 @@ public class SortingManager {
 
     public final static int ACCEPT = 0;
     public final static int REJECT = 1;
-    private static SortingManager manager;
-
-    private String rootDir;
+    private String workingDir;
     private MediaPlayer m;
     private Path acceptedDir;
     private Path rejectedDir;
+    private boolean dirsCreated;
 
-
-    private SortingManager(String dirPath, MediaPlayer m) {
-        this.rootDir = dirPath;
+    public SortingManager(MediaPlayer m, String acceptedDir, String rejectedDir) {
         this.m = m;
-        this.initDirs();
-    }
-
-    private void initDirs() {
-        this.acceptedDir = Paths.get(this.rootDir, "accepted");
-        this.rejectedDir = Paths.get(this.rootDir, "rejected");
-        try {
-            Files.createDirectories(this.acceptedDir);
-            Files.createDirectories(this.rejectedDir);
-        } catch (IOException e) {  e.printStackTrace();  }
+        this.dirsCreated = false;
+        this.workingDir = this.m.getWorkingDirectory();
+        this.acceptedDir = Paths.get(this.workingDir, acceptedDir);
+        this.rejectedDir = Paths.get(this.workingDir, rejectedDir);
     }
 
     public void acceptMedia() {
-        try {
-            Files.move(Paths.get(this.m.current().getPath()), this.acceptedDir.resolve(Paths.get(this.m.current().getPath()).getFileName()));
-            this.m.removeCurrent();
-        } catch (IOException e) {  e.printStackTrace();  }
+        if(!this.m.isEmpty()) {
+            if(!dirsCreated)
+                this.createDirectories();
+            Path newPath = this.acceptedDir.resolve(Paths.get(this.m.current().getPath()).getFileName());
+            try {
+                Files.move(Paths.get(this.m.current().getPath()), newPath);
+                this.m.removeCurrent();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void rejectMedia() {
-        try {
-            Files.move(Paths.get(this.m.current().getPath()), this.rejectedDir.resolve(Paths.get(this.m.current().getPath()).getFileName()));
-        } catch (IOException e) {  e.printStackTrace();  }
+        if(!this.m.isEmpty()) {
+            if(!dirsCreated)
+                this.createDirectories();
+            Path newPath = this.rejectedDir.resolve(Paths.get(this.m.current().getPath()).getFileName());
+            try {
+                Files.move(Paths.get(this.m.current().getPath()), newPath);
+                this.m.removeCurrent();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-
-    public static SortingManager getInstance(String dest, MediaPlayer m) {
-        if(SortingManager.manager == null || dest != null)
-            SortingManager.manager = new SortingManager(dest, m);
-
-        return SortingManager.manager;
+    private void createDirectories() {
+        try {
+                Files.createDirectories(this.acceptedDir);
+                Files.createDirectories(this.rejectedDir);
+                this.dirsCreated = true;
+        }
+        catch (IOException e) {  e.printStackTrace();  }
     }
 }

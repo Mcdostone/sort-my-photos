@@ -34,6 +34,8 @@ public class Configuration extends Observable {
     private String shortcutReject = "A";
 
     private static Configuration config;
+    private String acceptedDirName = "accepted";
+    private String rejectDirName = "rejected";
 
 
     private Configuration() {}
@@ -158,5 +160,13 @@ public class Configuration extends Observable {
         s = s.toUpperCase();
         if(s.length() != 0 && !s.equals(this.getShortcutAccept()))
             this.shortcutReject = s;
+    }
+
+    public String getRejectDirName() {
+        return this.rejectDirName;
+    }
+
+    public String getAcceptedDirName() {
+        return this.acceptedDirName;
     }
 }

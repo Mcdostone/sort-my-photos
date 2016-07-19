@@ -34,6 +34,7 @@ public class SettingsController implements Observer {
     @FXML private TextField shortcutAccept;
     @FXML private TextField shortcutReject;
     @FXML private Button reset;
+    private int limit = 1;
 
     public SettingsController() {  Configuration.getInstance().addObserver(this);  }
 
@@ -53,21 +54,13 @@ public class SettingsController implements Observer {
             Configuration.getInstance().setColorGrid(colorPicker.getValue());
             MyLogger.getInstance().log(Level.CONFIG, "Color of grid: " + colorPicker.getValue());
         });
-        this.shortcutAccept.textProperty().addListener(event -> {
-            Configuration.getInstance().setShortcutAccept(shortcutAccept.getText());
-            MyLogger.getInstance().log(Level.CONFIG, "Shortcut accept: " + shortcutAccept.getText().toUpperCase());
-        });
+        this.shortcutAccept.textProperty().addListener(event ->
+            Configuration.getInstance().setShortcutAccept(shortcutAccept.getText())
+        );
+        this.shortcutReject.textProperty().addListener(event ->
+            Configuration.getInstance().setShortcutReject(shortcutReject.getText())
+        );
 
-        this.shortcutReject.textProperty().addListener(event -> {
-            Configuration.getInstance().setShortcutReject(shortcutReject.getText().toUpperCase());
-            MyLogger.getInstance().log(Level.CONFIG, "Shortcut reject: " + shortcutReject.getText().toUpperCase());
-
-        });
-
-        this.shortcutReject.textProperty().addListener(event -> {
-            Configuration.getInstance().setShortcutReject(this.shortcutReject.getText().toUpperCase());
-            MyLogger.getInstance().log(Level.CONFIG, "Shortcut reject: " + this.shortcutReject.getText().toUpperCase());
-        });
         this.reset.setOnAction(t -> {
             Configuration.getInstance().reset();
             MyLogger.getInstance().log(Level.CONFIG, "Reset config");
@@ -106,4 +99,5 @@ public class SettingsController implements Observer {
                 t.setText(t.getText().substring(0, limit));
         });
     }
+
 }

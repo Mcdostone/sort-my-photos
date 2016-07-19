@@ -4,10 +4,13 @@ import FX.Window;
 import FX.view.GridOverlay;
 import app.conf.Configuration;
 import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -58,6 +61,7 @@ public class ToolbarController {
             this.sortingOverlay.setVisible(!this.sortingOverlay.isVisible());
             ToolbarController.applyActiveStyle(this.sortingButton, this.sortingOverlay.isVisible());
         });
+
         this.settingsButton.setOnAction(event -> Window.getWM().openSettingsWindow());
         this.logsButton.setOnAction(event -> Window.getWM().openLogsWindows());
     }

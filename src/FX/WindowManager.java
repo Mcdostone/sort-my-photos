@@ -3,6 +3,7 @@ package FX;
 import FX.controller.MediaPlayerController;
 import app.conf.Configuration;
 import app.model.MyLogger;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +35,12 @@ public class WindowManager {
         this.stage = stage;
         this.logsStage = new Stage();
         this.logsStage.setScene((new Scene(this.loadFXML("logs.fxml"))));
+        this.stage.setOnCloseRequest(event -> {
+            logsStage.close();
+            if(settingsStage != null)
+                settingsStage.close();
+            Platform.exit();
+        });
     }
 
     /**

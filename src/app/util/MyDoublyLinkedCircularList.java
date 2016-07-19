@@ -117,10 +117,13 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     @Override
     public E removeCurrent() {
         Node<E> removedNode = this.current;
-        E returnedValue = removedNode.value();
         this.current = this.current.next();
         this.removeNode(removedNode);
-        return returnedValue;
+
+        if(this.current == null)
+            return null;
+        else
+            return this.current.value();
     }
 
     @Override

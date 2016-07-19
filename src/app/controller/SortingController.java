@@ -29,10 +29,10 @@ public class SortingController extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         switch (this.action) {
             case SortingController.ACCEPT:
-                SortingManager.getInstance(null, null).acceptMedia();
+                //SortingManager.getInstance(null, null).acceptMedia();
                 break;
             case SortingController.REJECT:
-                SortingManager.getInstance(null, null).rejectMedia();
+            //    SortingManager.getInstance(null, null).rejectMedia();
         }
     }
 

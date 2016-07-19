@@ -26,13 +26,11 @@ public class MediaPlayerFactory {
 
     public static MediaPlayer createMediaPlayer(List<File> paths) {
         MediaPlayerFactory.initMmeAnalyzer();
-        MediaPlayer m = new MediaPlayer();
+        MediaPlayer m = new MediaPlayer(paths.get(0).getAbsolutePath());
         String rootDir = null;
         for (File file : paths) {
             try {
-                if (file.isDirectory())
-                {
-                    rootDir = file.getAbsolutePath();
+                if (file.isDirectory()) {
                     Files.walk(Paths.get(file.getAbsolutePath())).forEach(filePath -> {
                         m.addMedia(MediaPlayerFactory.createMedia(filePath.toString()));
                     });
@@ -41,8 +39,6 @@ public class MediaPlayerFactory {
             } catch (Exception e) {
                 LogsWindow.getInstance().update(e.getMessage());
             }
-
-            SortingManager.getInstance(rootDir, m);
         }
 
         return m;

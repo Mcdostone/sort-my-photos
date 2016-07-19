@@ -1,6 +1,7 @@
 package FX.controller;
 
 import app.conf.Configuration;
+import app.model.SortingManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -13,10 +14,7 @@ public class SortingOverlayController {
 
     @FXML private Button acceptButton;
     @FXML private Button rejectButton;
-
-    public SortingOverlayController() {
-
-    }
+    private SortingManager sortingManager;
 
     @FXML
     public void initialize() {
@@ -27,6 +25,7 @@ public class SortingOverlayController {
         this.acceptButton.setOnMouseReleased(event -> {
             acceptButton.setText(null);
             acceptButton.setId("accept");
+            this.sortingManager.acceptMedia();
         });
 
         this.rejectButton.setOnMousePressed(event -> {
@@ -36,7 +35,11 @@ public class SortingOverlayController {
         this.rejectButton.setOnMouseReleased(event -> {
             rejectButton.setText(null);
             rejectButton.setId("reject");
+            this.sortingManager.rejectMedia();
         });
     }
 
+    public void registerSortingManager(SortingManager sortingManager) {
+        this.sortingManager = sortingManager;
+    }
 }

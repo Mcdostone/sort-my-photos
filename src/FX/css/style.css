@@ -9,6 +9,7 @@
  * SECONDARY_COLOR: white
  * SECONDARY_COLOR_PASSIVE: rgba(255, 255, 255, 100)
  * TERTIARY_COLOR: rgb(28, 28, 28)
+ * LIGHTER_PRIMARY_COLOR: rgb(160, 160, 160)
  * BACKGROUND TOOLBAR: rgba(0,0,0, 120)
  * LENGTH_BORDER: 10
  * SIZE_BORDER: 2
@@ -27,10 +28,27 @@
 	-fx-font-weight: 500;
 	-fx-pref-height: 50px;
 	-fx-text-fill: white;
+	-fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-insets: 0 0 0 0, 0, 0, 0;
+    -fx-background-radius: 0 0 0 0, 0, 0, 0;
 }
 
 .checkbox {
 	-fx-font-size: 14px;
+}
+
+.check-box:focused {
+     -fx-background-insets: 0, 0, 0, 0;
+     -fx-background-radius: 0, 0, 0, 0;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+}
+
+.check-box:selected .mark {
+      -fx-background-color: rgb(34, 34, 34);
 }
 
 .title {
@@ -50,6 +68,8 @@
 	-fx-border-color: white;
 	-fx-border-width: 2;
 	-fx-cursor: hand;
+	-fx-background-insets: 0 0 0 0, 0, 0, 0;
+    -fx-background-radius: 0 0 0 0, 0, 0, 0;
 }
 
 .button:hover {
@@ -201,15 +221,13 @@
     -fx-text-fill: rgb(34, 34, 34);
     -fx-font-size: 32px;
     -fx-opacity: 0.2;
+    -fx-font-weight: 100;
     -fx-background-color: transparent;
 }
 
 .button-sort:hover {
     -fx-opacity: 1;
-}
-
-.warning {
-    -fx-text-fill: red;
+    -fx-text-fill: rgba(0, 0 ,0, 0.9);
 }
 
 #accept {
