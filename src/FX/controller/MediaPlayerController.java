@@ -57,22 +57,20 @@ public class MediaPlayerController implements Observer {
     }
 
     @FXML public void initialize() {
-        this.sortingOverlayContainer.setVisible(false);
         this.sortingOverlayController.registerSortingManager(this.createSortingManager());
         this.toolbarController.registerInfosOverlay(this.infosOverlayContainer);
 
-        //AnchorPane.setBottomAnchor(infosOverlayContainer, toolbarContainer.getHeight());
         this.root.setOnMousePressed(event -> {
             if(event.getTarget().equals(sortingOverlayContainer))
                 Event.fireEvent(this.container, new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, event.getButton(), event.getClickCount(), true, true, true, true, true, true, true, true, true, true, null));
         });
         this.root.getChildren().add(gridOverlay);
         this.sortingOverlayContainer.toFront();
+        this.infosOverlayContainer.toFront();
         this.toolbarContainer.toFront();
 
-/*        this.root.boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
-            AnchorPane.setBottomAnchor(infosOverlayContainer, toolbarContainer.getHeight());
-        });*/
+        this.root.boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
+        });
 
         this.toolbarController.registerGridOverlay(this.gridOverlay);
         this.toolbarController.registerSortingOverlay(this.sortingOverlayContainer);

@@ -8,9 +8,11 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.beans.value.WritableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -91,12 +93,6 @@ public class ToolbarController {
             timeline.getKeyFrames().add(keyFrame);
             timeline.setOnFinished(event -> toolbar.setVisible(false));
             this.currentAnimation = timeline;
-
-
-            System.out.println(this.infosOverlay.scaleYProperty());
-            Bounds b = this.infosOverlay.getBoundsInLocal();
-            DoubleProperty height = new SimpleDoubleProperty(toolbar.getHeight());
-            System.out.println(toolbar.getPrefHeight());
 
             Timeline empty = new Timeline();
 
