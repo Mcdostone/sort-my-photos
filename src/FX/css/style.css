@@ -115,7 +115,11 @@
 .transparent-pane, .toolbar-button {
     -fx-background-color: rgba(0, 0, 0, 0.7);
 }
-.toolbar-button:hover, .active, .transparent-pane:hover {
+.transparent-pane {
+    -fx-background-color: rgba(0, 0 ,0, 0.9);
+}
+
+.toolbar-button:hover, .active {
 	-fx-background-color: rgba(0, 0 ,0, 0.9);
 }
 
@@ -139,6 +143,7 @@
 	-fx-border-radius: 0;
     -fx-background-radius: 0 0;
 	-fx-pref-height: 75px;
+	-fx-background-color: rgba(0, 0, 0, 0.7);
 
 	-fx-border-width: 1px 1px 0px 0px;
 	-fx-border-top-style: solid;

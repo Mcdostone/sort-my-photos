@@ -13,6 +13,7 @@
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
@@ -20,15 +21,16 @@
   </rowConstraints>
    <children>
       <Button id="settings" fx:id="settingsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" />
-      <Button id="locked" fx:id="lockButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="1" />
-      <Button id="sorting" fx:id="sortingButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="2" />
-      <Button id="grid" fx:id="gridButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="3" />
-      <Button id="fullscreen" fx:id="fullscreenButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="4" />
-      <Button id="logs" fx:id="logsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="0.0" GridPane.columnIndex="5">
+      <Button id="locked" fx:id="lockButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="2" />
+      <Button id="sorting" fx:id="sortingButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="3" />
+      <Button id="grid" fx:id="gridButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="4" />
+      <Button id="fullscreen" fx:id="fullscreenButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="5" />
+      <Button id="logs" fx:id="logsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="0.0" GridPane.columnIndex="6">
          <styleClass>
             <String fx:value="toolbar-button" />
             <String fx:value="toolbar-last-button" />
          </styleClass>
       </Button>
+      <Button id="infos" fx:id="infosButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="1" />
    </children>
 </GridPane>

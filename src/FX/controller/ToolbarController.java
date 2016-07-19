@@ -4,9 +4,12 @@ import FX.Window;
 import FX.view.GridOverlay;
 import app.conf.Configuration;
 import javafx.animation.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -27,10 +30,12 @@ public class ToolbarController {
     @FXML private Button gridButton;
     @FXML private Button fullscreenButton;
     @FXML private Button logsButton;
+    @FXML private Button infosButton;
     private GridOverlay gridOverlay;
     private boolean toolbarLocked;
     private Animation currentAnimation;
     private StackPane sortingOverlay;
+    private StackPane infosOverlay;
 
     public ToolbarController() {  this.toolbarLocked = Configuration.getInstance().lockToolbar();  }
 
@@ -39,7 +44,6 @@ public class ToolbarController {
         ToolbarController.applyActiveStyle(this.lockButton, this.toolbarLocked);
         if(!this.toolbarLocked) {
             lockButton.setId("unlocked");
-            this.hideToolbarAtStartup();
         }
 
         this.gridButton.setOnAction(event -> {
@@ -62,6 +66,11 @@ public class ToolbarController {
             ToolbarController.applyActiveStyle(this.sortingButton, this.sortingOverlay.isVisible());
         });
 
+        this.infosButton.setOnAction(event -> {
+            this.infosOverlay.setVisible(!this.infosOverlay.isVisible());
+            ToolbarController.applyActiveStyle(infosButton, infosOverlay.isVisible());
+        });
+
         this.settingsButton.setOnAction(event -> Window.getWM().openSettingsWindow());
         this.logsButton.setOnAction(event -> Window.getWM().openLogsWindows());
     }
@@ -70,9 +79,6 @@ public class ToolbarController {
         this.gridOverlay = grid;
         if(this.gridOverlay.isVisible())
             this.gridButton.getStyleClass().add("active");
-    }
-
-    public void hideToolbarAtStartup(){
     }
 
     public void hideToolbar() {
@@ -85,6 +91,12 @@ public class ToolbarController {
             timeline.getKeyFrames().add(keyFrame);
             timeline.setOnFinished(event -> toolbar.setVisible(false));
             this.currentAnimation = timeline;
+
+
+            System.out.println(this.infosOverlay.scaleYProperty());
+            Bounds b = this.infosOverlay.getBoundsInLocal();
+            DoubleProperty height = new SimpleDoubleProperty(toolbar.getHeight());
+            System.out.println(toolbar.getPrefHeight());
 
             Timeline empty = new Timeline();
 
@@ -119,5 +131,9 @@ public class ToolbarController {
 
     public void registerSortingOverlay(StackPane sortingOverlayContainer) {
         this.sortingOverlay = sortingOverlayContainer;
+    }
+
+    public void registerInfosOverlay(StackPane infosOverlayContainer) {
+        this.infosOverlay = infosOverlayContainer;
     }
 }

@@ -3,8 +3,11 @@ package FX.controller;
 import FX.view.GridOverlay;
 import app.conf.Configuration;
 import app.model.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -36,6 +39,7 @@ public class MediaPlayerController implements Observer {
     @FXML private StackPane toolbarContainer;
     @FXML private ToolbarController toolbarController;
     @FXML private StackPane sortingOverlayContainer;
+    @FXML private StackPane infosOverlayContainer;
     @FXML private SortingOverlayController sortingOverlayController;
     /** Grid Overlay for better sorting */
     private GridOverlay gridOverlay;
@@ -55,6 +59,9 @@ public class MediaPlayerController implements Observer {
     @FXML public void initialize() {
         this.sortingOverlayContainer.setVisible(false);
         this.sortingOverlayController.registerSortingManager(this.createSortingManager());
+        this.toolbarController.registerInfosOverlay(this.infosOverlayContainer);
+
+        //AnchorPane.setBottomAnchor(infosOverlayContainer, toolbarContainer.getHeight());
         this.root.setOnMousePressed(event -> {
             if(event.getTarget().equals(sortingOverlayContainer))
                 Event.fireEvent(this.container, new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, event.getButton(), event.getClickCount(), true, true, true, true, true, true, true, true, true, true, null));
@@ -62,12 +69,18 @@ public class MediaPlayerController implements Observer {
         this.root.getChildren().add(gridOverlay);
         this.sortingOverlayContainer.toFront();
         this.toolbarContainer.toFront();
+
+/*        this.root.boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
+            AnchorPane.setBottomAnchor(infosOverlayContainer, toolbarContainer.getHeight());
+        });*/
+
         this.toolbarController.registerGridOverlay(this.gridOverlay);
         this.toolbarController.registerSortingOverlay(this.sortingOverlayContainer);
         this.toolbarContainer.setOnMouseEntered(event -> {  toolbarController.showToolbar();  });
         this.toolbarContainer.setOnMouseExited(event -> {  toolbarController.hideToolbar();  });
 
         // Listener which make responsive the ImageView component
+
         this.preview.getParent().layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
             preview.setFitWidth(newValue.getWidth());
             preview.setFitHeight(newValue.getHeight());
