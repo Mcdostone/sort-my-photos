@@ -9,4 +9,8 @@ public class Video extends Media {
 
     public Video(String path) {  super('V', path); }
 
+    @Override
+    protected void setProperties() {
+
+    }
 }

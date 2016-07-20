@@ -1,5 +1,9 @@
 package app.model;
 
+import javax.activation.MimetypesFileTypeMap;
+import java.io.File;
+import java.util.HashMap;
+
 /**
  * A media is an abstract class, representing any kind of media (image, video, sound, animated image ...).
  * A Media is defined by its path on the hard drive and its type.
@@ -10,7 +14,8 @@ public abstract class Media {
 
     private String path;
     private char type;
-
+    private String mimetype;
+    private MediaProperties properties;
 
     /**
      * Constructor
@@ -20,13 +25,22 @@ public abstract class Media {
     public Media(char type, String path) {
         this.type = type;
         this.path = path;
+        this.mimetype = MimetypesFileTypeMap.getDefaultFileTypeMap().getContentType(new File(path));
+        this.properties = new MediaProperties();
+        this.setProperties();
     }
 
     public String getPath() {  return this.path;  }
 
     public char getType() {  return this.type;  }
 
+    public String getMimetype() {  return this.mimetype;  }
+
     public String toString() {  return "[" + this.getType()  + "] " + this.getPath();  }
+
+    public MediaProperties getProperties() {  return this.properties;  }
+
+    protected abstract void setProperties();
 
     /**
      * @param o Object to compare

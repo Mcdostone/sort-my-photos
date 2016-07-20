@@ -123,8 +123,8 @@ public class ToolbarController {
         infos.setVisible(true);
         this.infosVisible = true;
         Timeline timeline = new Timeline();
-        KeyValue hidden = new KeyValue(infos.translateXProperty(), 0, Interpolator.EASE_BOTH);
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(400), hidden);
+        KeyValue hidden = new KeyValue(infos.translateXProperty(), 0, Interpolator.EASE_OUT);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(200), hidden);
         timeline.getKeyFrames().add(keyFrame);
         this.infosAnimation = timeline;
 

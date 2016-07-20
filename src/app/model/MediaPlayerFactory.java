@@ -45,17 +45,18 @@ public class MediaPlayerFactory {
     }
 
     private static Media createMedia(String filepath) {
-        String mimetype = mimeAnalyzer.getContentType(filepath);
+        String mimetype = mimeAnalyzer.getContentType(new File(filepath));
+
         switch(mimetype.split("/")[0]) {
             case "image":
                 return new Image(filepath);
             case "video":
                 return new Video(filepath);
             case "audio":
-                return new Audio(filepath);
+                return  new Audio(filepath);
+            default:
+                return null;
         }
-
-        return null;
     }
 
 }

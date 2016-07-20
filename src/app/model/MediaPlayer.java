@@ -26,6 +26,8 @@ public class MediaPlayer extends Observable {
     public void addMedia(Media m) {
         if(m != null) {
             this.playlist.add(m);
+            if(this.current == null)
+                this.current = this.playlist.firstValue();
             this.setChanged();
             this.notifyObservers();
         }
@@ -48,11 +50,6 @@ public class MediaPlayer extends Observable {
         this.current = (this.isEmpty()) ? null: this.playlist.previous();
         this.setChanged();
         this.notifyObservers();
-        return this.current;
-    }
-
-    public Media firstMedia() {
-        this.current = this.playlist.firstValue();
         return this.current;
     }
 

@@ -9,4 +9,8 @@ public class Audio extends Media {
 
     public Audio(String path) {  super('A', path);  }
 
+    @Override
+    protected void setProperties() {
+
+    }
 }

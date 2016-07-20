@@ -36,7 +36,7 @@ public class MediaPlayerPanel extends JLayeredPane implements Observer, Componen
         this.add(this.overlay, 1);
         this.add(this.bar, 2);
 
-        this.p.setMedia(this.m.firstMedia());
+        this.p.setMedia(this.m.current());
 
         this.doLayout();
     }

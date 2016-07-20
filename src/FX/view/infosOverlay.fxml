@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" styleClass="transparent-pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="infosBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" style="-fx-background-color: transparent;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FX.controller.InfosOverlayController">
    <top>
-      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="title" text="Informations" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="title" text="Informations" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin></Label>
    </top>
    <center>
       <GridPane BorderPane.alignment="CENTER">
@@ -18,18 +22,23 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="453.0" minWidth="10.0" percentWidth="50.0" prefWidth="453.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label styleClass="label-settings" text="File:" />
-            <Label text="Label" GridPane.columnIndex="1">
+            <Label fx:id="filename" text="Label" GridPane.columnIndex="1">
                <styleClass>
                   <String fx:value="label-infos" />
                   <String fx:value="link" />
                </styleClass>
             </Label>
+            <Label styleClass="label-settings" text="Size:" GridPane.rowIndex="2" />
+            <Label fx:id="fileSize" styleClass="label-infos" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label styleClass="label-settings" text="Type:" GridPane.rowIndex="1" />
+            <Label fx:id="typeFile" styleClass="label-infos" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>

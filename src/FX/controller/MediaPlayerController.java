@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
+import javax.sound.midi.MidiDevice;
 import java.io.File;
 import java.util.List;
 import java.util.Observable;
@@ -35,6 +36,7 @@ public class MediaPlayerController implements Observer {
 
     @FXML private ToolbarController toolbarController;
     @FXML private SortingOverlayController sortingOverlayController;
+    @FXML private InfosOverlayController infosOverlayController;
 
     @FXML private StackPane toolbarContainer;
     @FXML private StackPane infosContainer;
@@ -57,21 +59,24 @@ public class MediaPlayerController implements Observer {
     @FXML public void initialize() {
         this.makeNodesResponsive();
         this.initControlsMediaPlayer();
-        this.sortingOverlayController.registerSortingManager(this.createSortingManager());
 
+        this.sortingOverlayController.registerSortingManager(this.createSortingManager());
         this.grid.setOverPane(this.preview);
         this.root.getChildren().add(this.grid);
         this.grid.toFront();
+
         this.infosContainer.toFront();
         this.toolbarContainer.toFront();
-
-        this.preview.setImage(new Image(new File(this.mediaPlayer.firstMedia().getPath()).toURI().toString()));
 
         this.toolbarController.register("grid", this.grid);
         this.toolbarController.register("infos", this.infosContainer);
         this.toolbarController.register("sorting", this.sortingOverlayContainer);
         this.toolbarContainer.setOnMouseEntered(event ->  toolbarController.showToolbar()  );
         this.toolbarContainer.setOnMouseExited(event ->  toolbarController.hideToolbar()  );
+
+        this.mediaPlayer.addObserver(this.infosOverlayController);
+        this.showMedia(this.mediaPlayer.current());
+        this.infosOverlayController.update(this.mediaPlayer, null);
     }
 
     private void makeNodesResponsive() {
@@ -95,13 +100,13 @@ public class MediaPlayerController implements Observer {
     private void initControlsMediaPlayer() {
         // Listener for the mouse
         this.container.setOnMousePressed(event -> {
-            if(event.getButton() == MouseButton.PRIMARY) {  showMedia(mediaPlayer.next());  }
-            if(event.getButton() == MouseButton.SECONDARY) {  showMedia(mediaPlayer.previous()); }
+            if(event.getButton() == MouseButton.PRIMARY)  mediaPlayer.next();
+            if(event.getButton() == MouseButton.SECONDARY)  mediaPlayer.previous();
         });
         // Listener for the keyboard
         this.root.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.LEFT)  showMedia(mediaPlayer.previous());
-            if(event.getCode() == KeyCode.RIGHT)  showMedia(mediaPlayer.next());
+            if(event.getCode() == KeyCode.LEFT)  mediaPlayer.previous();
+            if(event.getCode() == KeyCode.RIGHT)  mediaPlayer.next();
         });
         this.root.setOnMousePressed(event -> {
             if(event.getTarget().equals(this.sortingOverlayContainer.getChildren().get(0)))
