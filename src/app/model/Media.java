@@ -27,7 +27,7 @@ public abstract class Media {
         this.path = path;
         this.mimetype = MimetypesFileTypeMap.getDefaultFileTypeMap().getContentType(new File(path));
         this.properties = new MediaProperties();
-        this.setProperties();
+        this.loadMediaProperties();
     }
 
     public String getPath() {  return this.path;  }
@@ -40,7 +40,7 @@ public abstract class Media {
 
     public MediaProperties getProperties() {  return this.properties;  }
 
-    protected abstract void setProperties();
+    public abstract void loadMediaProperties();
 
     /**
      * @param o Object to compare

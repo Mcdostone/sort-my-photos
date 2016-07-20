@@ -33,6 +33,8 @@ public class SettingsController implements Observer {
     @FXML private ColorPicker colorPicker;
     @FXML private TextField shortcutAccept;
     @FXML private TextField shortcutReject;
+    @FXML private TextField acceptedDirectory;
+    @FXML private TextField rejectedDirectory;
     @FXML private Button reset;
     private int limit = 1;
 
@@ -59,6 +61,12 @@ public class SettingsController implements Observer {
         );
         this.shortcutReject.textProperty().addListener(event ->
             Configuration.getInstance().setShortcutReject(shortcutReject.getText())
+        );
+        this.acceptedDirectory.textProperty().addListener(event ->
+                Configuration.getInstance().setAcceptedDirectory(acceptedDirectory.getText())
+        );
+        this.rejectedDirectory.textProperty().addListener(event ->
+                Configuration.getInstance().setRejectedDirectory(rejectedDirectory.getText())
         );
 
         this.reset.setOnAction(t -> {
@@ -91,6 +99,8 @@ public class SettingsController implements Observer {
         this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
         this.shortcutAccept.setText(Configuration.getInstance().getShortcutAccept());
         this.shortcutReject.setText(Configuration.getInstance().getShortcutReject());
+        this.acceptedDirectory.setText(Configuration.getInstance().getAcceptedDirectory());
+        this.rejectedDirectory.setText(Configuration.getInstance().getRejectDirectory());
     }
 
     private static void limitTextField(TextField t, int limit) {

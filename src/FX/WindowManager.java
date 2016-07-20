@@ -60,6 +60,9 @@ public class WindowManager {
     public void openSettingsWindow() {
         if(this.settingsStage == null)
             this.settingsStage = new Stage();
+
+        this.settingsStage.setMinWidth(470);
+        this.settingsStage.setMinHeight(470);
         this.settingsStage.setScene(new Scene(this.loadFXML("settings.fxml")));
         this.settingsStage.setOnCloseRequest(event -> {
             Configuration.getInstance().save();
@@ -96,8 +99,8 @@ public class WindowManager {
         this.stage.setScene(scene);
         this.stage.sizeToScene();
         this.stage.requestFocus();
-        this.stage.setMinHeight(300);
-        this.stage.setMinWidth(300);
+        this.stage.setMinHeight(500);
+        this.stage.setMinWidth(320);
         this.stage.show();
     }
 

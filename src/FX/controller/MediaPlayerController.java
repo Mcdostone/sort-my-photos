@@ -3,6 +3,8 @@ package FX.controller;
 import FX.view.GridOverlay;
 import app.conf.Configuration;
 import app.model.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -60,7 +62,13 @@ public class MediaPlayerController implements Observer {
         this.makeNodesResponsive();
         this.initControlsMediaPlayer();
 
-        this.sortingOverlayController.registerSortingManager(this.createSortingManager());
+        this.sortingOverlayContainer.visibleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue)
+                sortingOverlayController.registerSortingManager(createSortingManager());
+        });
+
+
+
         this.grid.setOverPane(this.preview);
         this.root.getChildren().add(this.grid);
         this.grid.toFront();
@@ -120,6 +128,7 @@ public class MediaPlayerController implements Observer {
      */
     private void showMedia(Media m) {
         if(m != null) {
+            m.loadMediaProperties();
             this.preview.setImage(new Image(new File(m.getPath()).toURI().toString()));
             MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
         }
@@ -128,7 +137,7 @@ public class MediaPlayerController implements Observer {
     }
 
     private SortingManager createSortingManager() {
-        return new SortingManager(this.mediaPlayer, Configuration.getInstance().getAcceptedDirName(), Configuration.getInstance().getRejectDirName());
+        return new SortingManager(this.mediaPlayer, Configuration.getInstance().getAcceptedDirectory(), Configuration.getInstance().getRejectDirectory());
     }
 
     @Override

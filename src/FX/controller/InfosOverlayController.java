@@ -43,12 +43,21 @@ public class InfosOverlayController implements Observer {
     public void update(Observable o, Object arg) {
         MediaPlayer mediaPlayer = (MediaPlayer) o;
         this.current = mediaPlayer.current();
+        if(this.current != null) {
+            this.filename.setText(Paths.get(this.current.getPath()).getFileName().toString());
+            this.fileSize.setText(InfosOverlayController.humanReadableByteCount(new File(this.current.getPath()).length(), false));
+            this.typeFile.setText(this.current.getMimetype());
 
-        this.filename.setText(Paths.get(this.current.getPath()).getFileName().toString());
-        this.fileSize.setText(InfosOverlayController.humanReadableByteCount(new File(this.current.getPath()).length(), false));
-        this.typeFile.setText(this.current.getMimetype());
+            this.infosBorderPane.setBottom(InfosOverlayController.createMediaPropertiesGrid(this.current));
+        }
+        else {
+            this.filename.setText(null);
+            this.fileSize.setText(null);
+            this.typeFile.setText(null);
+            this.infosBorderPane.setBottom(null);
+        }
 
-        this.infosBorderPane.setBottom(InfosOverlayController.createMediaPropertiesGrid(this.current));
+
     }
 
     private static String humanReadableByteCount(long bytes, boolean si) {
@@ -64,14 +73,14 @@ public class InfosOverlayController implements Observer {
         ColumnConstraints col = new ColumnConstraints();
         RowConstraints row = new RowConstraints();
         row.setPrefHeight(30);
-        row.setMinHeight(10);
+        row.setMinHeight(14);
         row.setPercentHeight(-1);
         col.setPercentWidth(50);
         grid.getColumnConstraints().addAll(col, col);
 
         int nbRows = 0;
 
-        for(String propertyName: m.getProperties().keySet()) {
+        for(String propertyName: m.getProperties().keyList()) {
             Label property = new Label(propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1) + ":");
             Label value = new Label(m.getProperties().get(propertyName).toString());
             property.getStyleClass().add("label-settings");

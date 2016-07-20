@@ -1,7 +1,7 @@
 package app.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  * MediaProperties is a data structure which enable to have
@@ -12,17 +12,23 @@ import java.util.Set;
 public class MediaProperties {
 
     private HashMap<String, Object> properties;
+    private ArrayList<String> orderAdding;
 
     public MediaProperties() {
         this.properties = new HashMap<>();
+        this.orderAdding = new ArrayList<>();
     }
 
-    public Set<String> keySet() {
-        return this.properties.keySet();
+    public ArrayList<String> keyList() {
+        return this.orderAdding;
     }
 
     public void put(String key, Object value) {
-        this.properties.put(key, value);
+        if(value != null) {
+            if(!this.properties.containsKey(key))
+                this.orderAdding.add(key);
+            this.properties.put(key, value);
+        }
     }
 
     public Object get(Object key) {

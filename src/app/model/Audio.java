@@ -7,10 +7,12 @@ package app.model;
  */
 public class Audio extends Media {
 
-    public Audio(String path) {  super('A', path);  }
+    public Audio(String path) {
+        super('A', path);
+    }
 
     @Override
-    protected void setProperties() {
+    public void loadMediaProperties() {
 
     }
 }

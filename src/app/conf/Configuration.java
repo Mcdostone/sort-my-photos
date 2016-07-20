@@ -34,8 +34,8 @@ public class Configuration extends Observable {
     private String shortcutReject = "A";
 
     private static Configuration config;
-    private String acceptedDirName = "accepted";
-    private String rejectDirName = "rejected";
+    private String acceptedDirectory = "accepted";
+    private String rejectedDirectory = "rejected";
 
 
     private Configuration() {}
@@ -57,6 +57,8 @@ public class Configuration extends Observable {
             prop.setProperty("lockToolbar", String.valueOf(this.lockToolbar()));
             prop.setProperty("shortcutAccept", this.getShortcutAccept());
             prop.setProperty("shortcutReject", this.getShortcutReject());
+            prop.setProperty("acceptedDirectory", this.getAcceptedDirectory());
+            prop.setProperty("rejectedDirectory", this.getRejectDirectory());
             prop.store(output, null);
         } catch (IOException io) {
             io.printStackTrace();
@@ -87,6 +89,10 @@ public class Configuration extends Observable {
                 conf.setShortcutReject(prop.getProperty("shortcutReject"));
                 if(prop.containsKey("defaultPath"))
                     conf.setDefaultPath(prop.getProperty("defaultPath"));
+                if(prop.containsKey("acceptedDirectory"))
+                    conf.setAcceptedDirectory(prop.getProperty("acceptedDirectory"));
+                if(prop.containsKey("rejectedDirectory"))
+                    conf.setRejectedDirectory(prop.getProperty("rejectedDirectory"));
             }
         } catch (FileNotFoundException e) {
             System.out.println("No config file!\n" + e.getMessage());
@@ -106,6 +112,9 @@ public class Configuration extends Observable {
         this.setLockToolbar(tmp.lockToolbar());
         this.setShortcutAccept(tmp.getShortcutAccept());
         this.setShortcutReject(tmp.getShortcutReject());
+        this.setAcceptedDirectory(tmp.getAcceptedDirectory());
+        this.setRejectedDirectory(tmp.getRejectDirectory());
+
 
         this.setChanged();
         this.notifyObservers();
@@ -162,11 +171,19 @@ public class Configuration extends Observable {
             this.shortcutReject = s;
     }
 
-    public String getRejectDirName() {
-        return this.rejectDirName;
+    public String getRejectDirectory() {
+        return this.rejectedDirectory;
     }
 
-    public String getAcceptedDirName() {
-        return this.acceptedDirName;
+    public String getAcceptedDirectory() {
+        return this.acceptedDirectory;
+    }
+
+    public void setAcceptedDirectory(String acceptedDirectory) {
+        this.acceptedDirectory = acceptedDirectory;
+    }
+
+    public void setRejectedDirectory(String rejectedDirectory) {
+        this.rejectedDirectory = rejectedDirectory;
     }
 }
