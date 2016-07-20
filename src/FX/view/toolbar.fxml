@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="toolbar" maxHeight="1.7976931348623157E308" styleClass="toolbar" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FX.controller.ToolbarController">
+<GridPane fx:id="toolbarGrid" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="toolbar" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FX.controller.ToolbarController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="100.0" />
+    <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="40.0" percentWidth="100.0" />
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="40.0" percentWidth="100.0" />
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="40.0" percentWidth="100.0" />
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="40.0" percentWidth="100.0" />
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="40.0" percentWidth="100.0" />
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="40.0" percentWidth="100.0" />
+    <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="40.0" percentWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" />
   </rowConstraints>
    <children>
       <Button id="settings" fx:id="settingsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" />
@@ -25,12 +24,7 @@
       <Button id="sorting" fx:id="sortingButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="3" />
       <Button id="grid" fx:id="gridButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="4" />
       <Button id="fullscreen" fx:id="fullscreenButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="5" />
-      <Button id="logs" fx:id="logsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="0.0" GridPane.columnIndex="6">
-         <styleClass>
-            <String fx:value="toolbar-button" />
-            <String fx:value="toolbar-last-button" />
-         </styleClass>
-      </Button>
+      <Button id="logs" fx:id="logsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="0.0" styleClass="toolbar-button" GridPane.columnIndex="6" />
       <Button id="infos" fx:id="infosButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolbar-button" GridPane.columnIndex="1" />
    </children>
 </GridPane>

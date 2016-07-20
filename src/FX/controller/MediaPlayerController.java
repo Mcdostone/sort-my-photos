@@ -3,11 +3,8 @@ package FX.controller;
 import FX.view.GridOverlay;
 import app.conf.Configuration;
 import app.model.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -15,7 +12,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
@@ -33,16 +29,19 @@ public class MediaPlayerController implements Observer {
 
     /** The unique MediaPlayer */
     private MediaPlayer mediaPlayer;
-    @FXML private ImageView preview;
-    @FXML private HBox container;
+
     @FXML private AnchorPane root;
-    @FXML private StackPane toolbarContainer;
+    @FXML private BorderPane container;
+
     @FXML private ToolbarController toolbarController;
-    @FXML private StackPane sortingOverlayContainer;
-    @FXML private StackPane infosOverlayContainer;
     @FXML private SortingOverlayController sortingOverlayController;
-    /** Grid Overlay for better sorting */
-    private GridOverlay gridOverlay;
+
+    @FXML private StackPane toolbarContainer;
+    @FXML private StackPane infosContainer;
+    @FXML private StackPane sortingOverlayContainer;
+
+    private GridOverlay grid;
+    @FXML private ImageView preview;
 
     /**
      * Constructor which fills in the mediaPlayer with paths given by the user.
@@ -50,65 +49,46 @@ public class MediaPlayerController implements Observer {
      */
     public MediaPlayerController(List<File> paths) {
         this.mediaPlayer = MediaPlayerFactory.createMediaPlayer(paths);
-        this.gridOverlay = new GridOverlay(Configuration.getInstance().enableGridAtStartup());
-        this.gridOverlay.toFront();
         this.mediaPlayer.addObserver(this);
-        Configuration.getInstance().addObserver(this.gridOverlay);
+        this.grid = new GridOverlay(Configuration.getInstance().showGridAtStartup());
+        Configuration.getInstance().addObserver(this.grid);
     }
 
     @FXML public void initialize() {
+        this.makeNodesResponsive();
+        this.initControlsMediaPlayer();
         this.sortingOverlayController.registerSortingManager(this.createSortingManager());
-        this.toolbarController.registerInfosOverlay(this.infosOverlayContainer);
 
-        this.root.setOnMousePressed(event -> {
-            if(event.getTarget().equals(sortingOverlayContainer))
-                Event.fireEvent(this.container, new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, event.getButton(), event.getClickCount(), true, true, true, true, true, true, true, true, true, true, null));
-        });
-        this.root.getChildren().add(gridOverlay);
-        this.sortingOverlayContainer.toFront();
-        this.infosOverlayContainer.toFront();
+        this.grid.setOverPane(this.preview);
+        this.root.getChildren().add(this.grid);
+        this.grid.toFront();
+        this.infosContainer.toFront();
         this.toolbarContainer.toFront();
 
-        this.root.boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
-        });
+        this.preview.setImage(new Image(new File(this.mediaPlayer.firstMedia().getPath()).toURI().toString()));
 
-        this.toolbarController.registerGridOverlay(this.gridOverlay);
-        this.toolbarController.registerSortingOverlay(this.sortingOverlayContainer);
-        this.toolbarContainer.setOnMouseEntered(event -> {  toolbarController.showToolbar();  });
-        this.toolbarContainer.setOnMouseExited(event -> {  toolbarController.hideToolbar();  });
-
-        // Listener which make responsive the ImageView component
-
-        this.preview.getParent().layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
-            preview.setFitWidth(newValue.getWidth());
-            preview.setFitHeight(newValue.getHeight());
-            toolbarContainer.setPrefHeight((newValue.getHeight()/10) > 60 ? newValue.getHeight()/10 : 60);
-        });
-
-        // Listener which adapt the Grid overlay to the preview component
-        this.preview.boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
-            gridOverlay.setPrefSize(newValue.getWidth(), newValue.getHeight());
-            gridOverlay.setLayoutX(newValue.getMinX());
-            gridOverlay.setLayoutY(newValue.getMinY());
-        });
-        // Init all listeners (toolbar, mouse shortcut ...)
-        this.initControlsMediaPlayer();
-
-        if(!this.mediaPlayer.isEmpty())
-            this.showMedia(this.mediaPlayer.firstMedia());
+        this.toolbarController.register("grid", this.grid);
+        this.toolbarController.register("infos", this.infosContainer);
+        this.toolbarController.register("sorting", this.sortingOverlayContainer);
+        this.toolbarContainer.setOnMouseEntered(event ->  toolbarController.showToolbar()  );
+        this.toolbarContainer.setOnMouseExited(event ->  toolbarController.hideToolbar()  );
     }
 
-    /**
-     * Update the current Media which is displayed in the preview
-     * @param m Media to display
-     */
-    private void showMedia(Media m) {
-        if(m != null) {
-            this.preview.setImage(new Image(new File(m.getPath()).toURI().toString()));
-            MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
-        }
-        else
-            this.preview.setImage(null);
+    private void makeNodesResponsive() {
+        this.root.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
+            preview.setFitWidth(newValue.getWidth());
+            preview.setFitHeight(newValue.getHeight());
+            double topToolbar = newValue.getHeight() - 80;
+
+            AnchorPane.setTopAnchor(this.toolbarContainer, topToolbar);
+            AnchorPane.setLeftAnchor(this.infosContainer, newValue.getWidth() - this.infosContainer.getPrefWidth());
+            AnchorPane.setBottomAnchor(infosContainer, newValue.getHeight() - topToolbar);
+        });
+
+
+        this.toolbarContainer.getChildren().get(0).translateYProperty().addListener((observable, oldValue, newValue) ->
+            AnchorPane.setBottomAnchor(infosContainer, this.toolbarContainer.getHeight() - newValue.doubleValue())
+      );
     }
 
     /** Init listeners for the MediaPlayer */
@@ -122,11 +102,24 @@ public class MediaPlayerController implements Observer {
         this.root.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.LEFT)  showMedia(mediaPlayer.previous());
             if(event.getCode() == KeyCode.RIGHT)  showMedia(mediaPlayer.next());
-            if(event.getCode().getName().equals(Configuration.getInstance().getShortcutAccept()) && sortingOverlayContainer.isVisible())
-                this.sortingOverlayController.accept();
-            if(event.getCode().getName().equals(Configuration.getInstance().getShortcutReject()) && sortingOverlayContainer.isVisible())
-                this.sortingOverlayController.reject();
         });
+        this.root.setOnMousePressed(event -> {
+            if(event.getTarget().equals(this.sortingOverlayContainer.getChildren().get(0)))
+                Event.fireEvent(this.container, new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, event.getButton(), event.getClickCount(), true, true, true, true, true, true, true, true, true, true, null));
+        });
+    }
+
+    /**
+     * Update the current Media which is displayed in the preview
+     * @param m Media to display
+     */
+    private void showMedia(Media m) {
+        if(m != null) {
+            this.preview.setImage(new Image(new File(m.getPath()).toURI().toString()));
+            MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
+        }
+        else
+            this.preview.setImage(null);
     }
 
     private SortingManager createSortingManager() {

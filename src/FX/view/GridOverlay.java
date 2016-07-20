@@ -1,6 +1,7 @@
 package FX.view;
 
 import app.conf.Configuration;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
@@ -17,6 +18,7 @@ public class GridOverlay extends StackPane implements Observer {
 
     /** Grid will be drawn on this canvas */
     private Canvas canvas;
+    private Node over;
 
     /** Default constructor */
     public GridOverlay(boolean visible) {
@@ -25,6 +27,15 @@ public class GridOverlay extends StackPane implements Observer {
         this.getChildren().add(this.canvas);
         this.setMouseTransparent(true);
         this.setVisible(visible);
+    }
+
+    public void setOverPane(Node p) {
+        this.over = p;
+        this.over.boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
+            this.setPrefSize(newValue.getWidth(), newValue.getHeight());
+            this.setLayoutX(newValue.getMinX());
+            this.setLayoutY(newValue.getMinY());
+        });
     }
 
     @Override

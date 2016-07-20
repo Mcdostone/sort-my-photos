@@ -105,18 +105,12 @@
 	-fx-opacity: 1;
 }
 
-.toolbar {
-	-fx-pref-width: 100%;
-	-fx-pref-height: 75px;
-	-fx-bottom: 0;
-
-}
-
 .transparent-pane, .toolbar-button {
     -fx-background-color: rgba(0, 0, 0, 0.7);
 }
 .transparent-pane {
     -fx-background-color: rgba(0, 0 ,0, 0.9);
+    -fx-margin: 0 0 0 0;
 }
 
 .toolbar-button:hover, .active {
@@ -142,11 +136,11 @@
 	-fx-border-color: black;
 	-fx-border-radius: 0;
     -fx-background-radius: 0 0;
-	-fx-pref-height: 75px;
+	-fx-pref-height: 80px;
 	-fx-background-color: rgba(0, 0, 0, 0.7);
 
-	-fx-border-width: 1px 1px 0px 0px;
-	-fx-border-top-style: solid;
+	-fx-border-width: 0px 0px 0px 0px;
+	/*-fx-border-top-style: solid;*/
 	-fx-cursor: hand;
 
 	-fx-background-position: center center;
@@ -157,10 +151,6 @@
 
 .toolbar-button:hover, .active {
 	-fx-background-color: rgba(0, 0 ,0, 0.9);
-}
-
-.toolbar-last-button {
-	-fx-border-width: 1px 0px 0px 0px; 
 }
 
 #settings {	

@@ -2,17 +2,12 @@ package FX;
 
 import FX.controller.MediaPlayerController;
 import app.conf.Configuration;
-import app.model.MyLogger;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +24,6 @@ public class WindowManager {
     private Stage stage;
     private Stage settingsStage;
     private Stage logsStage;
-
 
     public WindowManager(Stage stage) {
         this.stage = stage;
@@ -108,11 +102,11 @@ public class WindowManager {
     }
 
     public void toggleFullscreen() {
-        this.stage.setFullScreen(!this.isFullscreen());
+        this.stage.setFullScreen(!this.stage.isFullScreen());
     }
 
-    public boolean isFullscreen() {
-        return this.stage.isFullScreen();
+    public ReadOnlyBooleanProperty getFullsreenProperty() {
+        return this.stage.fullScreenProperty();
     }
 
     /**

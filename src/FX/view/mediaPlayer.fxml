@@ -1,50 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <styleClass>
-      <String fx:value="media-player" />
       <String fx:value="pane" />
+      <String fx:value="media-player" />
    </styleClass>
    <children>
-      <StackPane fx:id="sortingOverlayContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" styleClass="sortingOverlay" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="container" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <ImageView fx:id="preview" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <StackPane fx:id="toolbarContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="720.0">
          <children>
-            <fx:include fx:id="sortingOverlay" source="sortingOverlay.fxml" />
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+              <columnConstraints>
+                <ColumnConstraints percentWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints percentHeight="100.0" />
+              </rowConstraints>
+               <children>
+                  <fx:include fx:id="toolbar" source="toolbar.fxml" />
+               </children>
+            </GridPane>
          </children>
       </StackPane>
-      <StackPane fx:id="infosOverlayContainer" prefHeight="150.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane fx:id="infosContainer" pickOnBounds="false" prefWidth="300.0" visible="false" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane>
+               <center>
+                  <fx:include source="infosOverlay.fxml" />
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+      <StackPane fx:id="sortingOverlayContainer" prefHeight="150.0" prefWidth="200.0" styleClass="sortingOverlay" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <right>
-                  <fx:include source="infosOverlay.fxml" />
-               </right>
+               <center>
+                  <fx:include fx:id="sortingOverlay" source="sortingOverlay.fxml" />
+               </center>
             </BorderPane>
          </children>
       </StackPane>
-      <StackPane fx:id="toolbarContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="75.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
-               <bottom>
-                  <fx:include fx:id="toolbar" source="toolbar.fxml" />
-               </bottom>
-            </BorderPane>
-         </children>
-      </StackPane>
-      <HBox fx:id="container" alignment="CENTER" layoutX="207.0" layoutY="255.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ImageView fx:id="preview" fitHeight="150.0" fitWidth="533.0" pickOnBounds="true" preserveRatio="true" styleClass="preview-pane">
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-            </ImageView>
-         </children>
-      </HBox>
    </children>
 </AnchorPane>

@@ -47,7 +47,7 @@ public class SettingsController implements Observer {
             MyLogger.getInstance().log(Level.CONFIG, "Lock toolbar: " + lockToolbar.isSelected());
         });
         this.enableGrid.setOnAction(t -> {
-            Configuration.getInstance().setEnableGrid(enableGrid.isSelected());
+            Configuration.getInstance().setShowGrid(enableGrid.isSelected());
             MyLogger.getInstance().log(Level.CONFIG, "Enable grid: " + enableGrid.isSelected());
         });
         this.colorPicker.setOnAction(t -> {
@@ -87,7 +87,7 @@ public class SettingsController implements Observer {
     public void update(Observable o, Object arg) {
         this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
         this.lockToolbar.setSelected(Configuration.getInstance().lockToolbar());
-        this.enableGrid.setSelected(Configuration.getInstance().enableGridAtStartup());
+        this.enableGrid.setSelected(Configuration.getInstance().showGridAtStartup());
         this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
         this.shortcutAccept.setText(Configuration.getInstance().getShortcutAccept());
         this.shortcutReject.setText(Configuration.getInstance().getShortcutReject());

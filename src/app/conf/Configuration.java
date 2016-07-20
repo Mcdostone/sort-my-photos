@@ -51,7 +51,7 @@ public class Configuration extends Observable {
         OutputStream output;
         try {
             output = new FileOutputStream(CONFIG_FILE);
-            prop.setProperty("enableGrid", String.valueOf(this.enableGridAtStartup()));
+            prop.setProperty("showGrid", String.valueOf(this.showGridAtStartup()));
             prop.setProperty("colorGrid", this.getColorGrid().toString());
             prop.setProperty("defaultPath", this.getDefaultPath());
             prop.setProperty("lockToolbar", String.valueOf(this.lockToolbar()));
@@ -75,8 +75,8 @@ public class Configuration extends Observable {
             input = new FileInputStream(Configuration.CONFIG_FILE);
             if(input != null) {
                 prop.load(input);
-                if(prop.containsKey("enableGrid"))
-                    conf.setEnableGrid(Boolean.parseBoolean(prop.getProperty("enableGrid")));
+                if(prop.containsKey("showGrid"))
+                    conf.setShowGrid(Boolean.parseBoolean(prop.getProperty("showGrid")));
                 if(prop.containsKey("colorGrid"))
                     conf.setColorGrid(Color.web(prop.getProperty("colorGrid")));
                 if(prop.containsKey("lockToolbar"))
@@ -102,7 +102,7 @@ public class Configuration extends Observable {
 
         this.setDefaultPath(tmp.getDefaultPath());
         this.setColorGrid(tmp.getColorGrid());
-        this.setEnableGrid(tmp.enableGridAtStartup());
+        this.setShowGrid(tmp.showGridAtStartup());
         this.setLockToolbar(tmp.lockToolbar());
         this.setShortcutAccept(tmp.getShortcutAccept());
         this.setShortcutReject(tmp.getShortcutReject());
@@ -111,11 +111,11 @@ public class Configuration extends Observable {
         this.notifyObservers();
     }
 
-    public void setEnableGrid(boolean enable) {
+    public void setShowGrid(boolean enable) {
         this.enableGridAtStartup = enable;
     }
 
-    public boolean enableGridAtStartup() {  return this.enableGridAtStartup;  }
+    public boolean showGridAtStartup() {  return this.enableGridAtStartup;  }
 
     public Color getColorGrid() {
         return this.colorGrid;
