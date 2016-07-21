@@ -3,10 +3,9 @@ package FX.controller;
 import FX.view.GridOverlay;
 import app.conf.Configuration;
 import app.model.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -16,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
-import javax.sound.midi.MidiDevice;
 import java.io.File;
 import java.util.List;
 import java.util.Observable;
@@ -43,9 +41,11 @@ public class MediaPlayerController implements Observer {
     @FXML private StackPane toolbarContainer;
     @FXML private StackPane infosContainer;
     @FXML private StackPane sortingOverlayContainer;
+    @FXML private StackPane blurContainer;
 
     private GridOverlay grid;
     @FXML private ImageView preview;
+    @FXML private ImageView bluredPreview;
 
     /**
      * Constructor which fills in the mediaPlayer with paths given by the user.
@@ -67,14 +67,14 @@ public class MediaPlayerController implements Observer {
                 sortingOverlayController.registerSortingManager(createSortingManager());
         });
 
-
-
         this.grid.setOverPane(this.preview);
         this.root.getChildren().add(this.grid);
         this.grid.toFront();
 
         this.infosContainer.toFront();
         this.toolbarContainer.toFront();
+        this.blurContainer.toBack();
+        this.blurContainer.setEffect(new BoxBlur(60, 60, 3));
 
         this.toolbarController.register("grid", this.grid);
         this.toolbarController.register("infos", this.infosContainer);
@@ -91,13 +91,14 @@ public class MediaPlayerController implements Observer {
         this.root.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
             preview.setFitWidth(newValue.getWidth());
             preview.setFitHeight(newValue.getHeight());
+            bluredPreview.setFitWidth(newValue.getWidth());
+            bluredPreview.setFitHeight(newValue.getHeight());
             double topToolbar = newValue.getHeight() - 80;
 
             AnchorPane.setTopAnchor(this.toolbarContainer, topToolbar);
             AnchorPane.setLeftAnchor(this.infosContainer, newValue.getWidth() - this.infosContainer.getPrefWidth());
             AnchorPane.setBottomAnchor(infosContainer, newValue.getHeight() - topToolbar);
         });
-
 
         this.toolbarContainer.getChildren().get(0).translateYProperty().addListener((observable, oldValue, newValue) ->
             AnchorPane.setBottomAnchor(infosContainer, this.toolbarContainer.getHeight() - newValue.doubleValue())
@@ -128,8 +129,10 @@ public class MediaPlayerController implements Observer {
      */
     private void showMedia(Media m) {
         if(m != null) {
+            Image i = new Image(new File(m.getPath()).toURI().toString());
             m.loadMediaProperties();
-            this.preview.setImage(new Image(new File(m.getPath()).toURI().toString()));
+            this.bluredPreview.setImage(i);
+            this.preview.setImage(i);
             MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
         }
         else

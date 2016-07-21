@@ -54,6 +54,16 @@ public class SortingManager {
         }
     }
 
+    public void setAcceptedDirectory(String newDir) {
+        this.acceptedDir = Paths.get(this.workingDir, newDir);
+        this.dirsCreated = false;
+    }
+
+    public void setRejectedDirectory(String newDir) {
+        this.rejectedDir = Paths.get(this.workingDir, newDir);
+        this.dirsCreated = false;
+    }
+
     private void createDirectories() {
         try {
                 Files.createDirectories(this.acceptedDir);

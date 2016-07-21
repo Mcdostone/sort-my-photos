@@ -5,16 +5,23 @@ import app.model.SortingManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Controller for the sorting overlay.
  *
  * @author Mcdostone
  */
-public class SortingOverlayController {
+public class SortingOverlayController implements Observer {
 
     @FXML private Button acceptButton;
     @FXML private Button rejectButton;
     private SortingManager sortingManager;
+
+    public SortingOverlayController() {
+        Configuration.getInstance().addObserver(this);
+    }
 
     @FXML
     public void initialize() {
@@ -44,6 +51,15 @@ public class SortingOverlayController {
     public void reject() {  this.sortingManager.rejectMedia();  }
 
     public void registerSortingManager(SortingManager sortingManager) {
-        this.sortingManager = sortingManager;
+        if(this.sortingManager == null)
+            this.sortingManager = sortingManager;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(this.sortingManager != null) {
+            this.sortingManager.setAcceptedDirectory(Configuration.getInstance().getAcceptedDirectory());
+            this.sortingManager.setRejectedDirectory(Configuration.getInstance().getRejectDirectory());
+        }
     }
 }

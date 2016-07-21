@@ -77,10 +77,19 @@
 	-fx-text-fill: rgb(34, 34, 34);
 }
 
-.start-pane, .media-player {
+.starter-pane, .media-player {
 	-fx-pref-width: 800px;
 	-fx-pref-height: 800px;
 }
+
+.starter-pane {
+    -fx-background-color: rgb(14, 14, 14);
+}
+
+.media-player {
+    -fx-background-color: black;
+}
+
 
 .container {
 	-fx-pref-width: 100%;
@@ -92,7 +101,8 @@
 	-fx-pref-height: 80%;
 	-fx-opacity: 0.5;
 	-fx-border-color: white;
-	-fx-border-width: 2px; 
+	-fx-border-width: 2px;
+	 -fx-background-color: transparent;
 	-fx-border-style: segments(20) line-cap butt;
 }
 
@@ -129,6 +139,10 @@
 .link:hover {
     -fx-underline: true;
     -fx-cursor: hand;
+}
+
+.blured-preview {
+    -fx-opacity: 0.4;
 }
 
 

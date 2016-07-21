@@ -93,14 +93,16 @@ public class SettingsController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
-        this.lockToolbar.setSelected(Configuration.getInstance().lockToolbar());
-        this.enableGrid.setSelected(Configuration.getInstance().showGridAtStartup());
-        this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
-        this.shortcutAccept.setText(Configuration.getInstance().getShortcutAccept());
-        this.shortcutReject.setText(Configuration.getInstance().getShortcutReject());
-        this.acceptedDirectory.setText(Configuration.getInstance().getAcceptedDirectory());
-        this.rejectedDirectory.setText(Configuration.getInstance().getRejectDirectory());
+        if(arg == null) {
+            this.defaultPath.setText(Configuration.getInstance().getDefaultPath());
+            this.lockToolbar.setSelected(Configuration.getInstance().lockToolbar());
+            this.enableGrid.setSelected(Configuration.getInstance().showGridAtStartup());
+            this.colorPicker.setValue(Configuration.getInstance().getColorGrid());
+            this.shortcutAccept.setText(Configuration.getInstance().getShortcutAccept());
+            this.shortcutReject.setText(Configuration.getInstance().getShortcutReject());
+            this.acceptedDirectory.setText(Configuration.getInstance().getAcceptedDirectory());
+            this.rejectedDirectory.setText(Configuration.getInstance().getRejectDirectory());
+        }
     }
 
     private static void limitTextField(TextField t, int limit) {

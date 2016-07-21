@@ -65,8 +65,6 @@ public class Configuration extends Observable {
         }
     }
 
-
-
     public static Configuration load() {
         MyLogger.getInstance().log(Level.CONFIG, "Load: '" + Configuration.CONFIG_FILE + "'");
         Properties prop = new Properties();
@@ -161,7 +159,7 @@ public class Configuration extends Observable {
 
     public void setShortcutAccept(String s) {
         s = s.toUpperCase();
-        if(s.length() != 0 && !s.equals(this.getShortcutReject()))
+        if(s.length() != 0 && !s.equals(this.getShortcutReject())) {}
             this.shortcutAccept = s;
     }
 
@@ -181,9 +179,15 @@ public class Configuration extends Observable {
 
     public void setAcceptedDirectory(String acceptedDirectory) {
         this.acceptedDirectory = acceptedDirectory;
+        this.clearChanged();
+        this.setChanged();
+        this.notifyObservers("sortingManager");
     }
 
     public void setRejectedDirectory(String rejectedDirectory) {
         this.rejectedDirectory = rejectedDirectory;
+        this.clearChanged();
+        this.setChanged();
+        this.notifyObservers("sortingManager");
     }
 }
