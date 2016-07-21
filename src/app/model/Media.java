@@ -42,6 +42,8 @@ public abstract class Media {
 
     public abstract void loadMediaProperties();
 
+    public void setPath(String newPath) { this.path = newPath;  }
+
     /**
      * @param o Object to compare
      * @return {@code true} only if the two medias have the same filepath.

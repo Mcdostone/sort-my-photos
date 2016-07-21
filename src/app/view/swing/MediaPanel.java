@@ -47,14 +47,14 @@ public class MediaPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-        BufferedImage image = MediaLoader.getInstance().getImage(this.current);
-        System.out.println(this.current + "\n" + image + "\n");
+        //BufferedImage image = MediaLoader.getInstance().getImage(this.current);
+        //System.out.println(this.current + "\n" + image + "\n");
 
-        if(image != null) {
+        /*if(image != null) {
             Dimension scale = MediaPanel.getScaledDimension(new Dimension(image.getWidth(), image.getHeight()), this.getSize());
             Dimension pos = MediaPanel.getPosition(scale, this.getSize());
             g.drawImage(image, (int) pos.getWidth(), (int) pos.getHeight(), (int) scale.getWidth(), (int) scale.getHeight(), null);
-        }
+        }*/
     }
 
     /** Thank you StackOverFlow */

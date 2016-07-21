@@ -54,11 +54,11 @@ public class Window extends JFrame {
     /** Enables to display the 'media player' view in the app */
     public void launchMediaPlayer(List<File> paths) {
         MediaPlayer m = MediaPlayerFactory.createMediaPlayer(paths);
-        MediaLoader loader = MediaLoader.getInstance();
-        int capa = loader.capacity();
+        //MediaLoader loader = MediaLoader.getInstance();
+        /*int capa = loader.capacity();
         capa = capa / 2;
         for(int i = -capa; i <= capa; i++)
-            loader.add(m.get(i));
+            loader.add(m.get(i));*/
 
 
         this.mediaPlayerPanel = new MediaPlayerPanel(m);

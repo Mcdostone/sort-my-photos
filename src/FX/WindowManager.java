@@ -54,6 +54,8 @@ public class WindowManager {
     public void startHomePage() {
         Parent root = this.loadFXML("homepage.fxml");
         this.stage.setTitle("Sort my fucking photos !");
+        this.stage.setMinHeight(450);
+        this.stage.setMinWidth(450);
         this.setScene(new Scene(root));
     }
 
@@ -80,6 +82,8 @@ public class WindowManager {
     public void startMediaPlayer(List<File> paths) {
         FXMLLoader loader = this.getLoader("mediaPlayer.fxml");
         MediaPlayerController controller = new MediaPlayerController(paths);
+        this.stage.setMinHeight(500);
+        this.stage.setMinWidth(320);
         loader.setController(controller);
         Parent root = null;
         try {
@@ -99,8 +103,6 @@ public class WindowManager {
         this.stage.setScene(scene);
         this.stage.sizeToScene();
         this.stage.requestFocus();
-        this.stage.setMinHeight(500);
-        this.stage.setMinWidth(320);
         this.stage.show();
     }
 

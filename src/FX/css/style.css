@@ -38,6 +38,11 @@
 	-fx-font-size: 14px;
 }
 
+.check-box {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
 .check-box:focused {
      -fx-background-insets: 0, 0, 0, 0;
      -fx-background-radius: 0, 0, 0, 0;
@@ -272,4 +277,9 @@
 
 #reject {
     -fx-background-image: url("../assets/icons/reject.png");
+}
+
+.text-field {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
 }
