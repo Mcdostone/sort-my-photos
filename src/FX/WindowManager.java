@@ -85,13 +85,14 @@ public class WindowManager {
         this.stage.setMinHeight(500);
         this.stage.setMinWidth(320);
         loader.setController(controller);
+
         Parent root = null;
         try {
             root = loader.load();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         this.setScene(new Scene(root));
     }
 

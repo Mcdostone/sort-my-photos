@@ -147,6 +147,7 @@ public class ToolbarController {
             SequentialTransition sequence = new SequentialTransition(empty, timeline);
             this.currentAnimation = sequence;
 
+            this.toolbarGrid.getParent().getParent().getParent().requestFocus();
             sequence.play();
         }
     }

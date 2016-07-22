@@ -2,9 +2,10 @@ package FX.controller;
 
 import FX.view.GridOverlay;
 import app.conf.Configuration;
-import app.model.*;
 import app.model.Media;
 import app.model.MediaPlayer;
+import app.model.MediaPlayerFactory;
+import app.model.SortingManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.effect.BoxBlur;
@@ -16,14 +17,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.*;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
 
 /**
  * Controller of the MediaPlayer scene.
@@ -89,6 +87,8 @@ public class MediaPlayerController implements Observer {
         this.mediaPlayer.addObserver(this.infosOverlayController);
         this.showMedia(this.mediaPlayer.current());
         this.infosOverlayController.update(this.mediaPlayer, null);
+        this.root.requestFocus();
+        this.root.requestLayout();
     }
 
     private void makeNodesResponsive() {
@@ -116,7 +116,6 @@ public class MediaPlayerController implements Observer {
             if(event.getButton() == MouseButton.PRIMARY)  mediaPlayer.next();
             if(event.getButton() == MouseButton.SECONDARY)  mediaPlayer.previous();
         });
-        // Listener for the keyboard
         this.root.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.LEFT)  mediaPlayer.previous();
             if(event.getCode() == KeyCode.RIGHT)  mediaPlayer.next();
@@ -137,7 +136,8 @@ public class MediaPlayerController implements Observer {
             m.loadMediaProperties();
             this.bluredPreview.setImage(i);
             this.preview.setImage(i);
-            MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
+            System.out.println(m);
+            //MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
         }
         else
             this.preview.setImage(null);
