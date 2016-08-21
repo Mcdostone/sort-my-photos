@@ -43,23 +43,13 @@ public class MediaPlayer extends Observable {
 
     public Media next() {
         this.current = (this.isEmpty()) ? null: this.playlist.next();
-        /*Media toLoad = this.playlist.NthMediaAfterCurrent((this.loader.capacity()/2) + 1);
-        Media toRemove = this.playlist.NthMediaBeforeCurrent(this.loader.capacity()/2);
-        this.loader.nextMedia(toRemove, toLoad);*/
         this.setChanged();
         this.notifyObservers();
         return this.current;
     }
 
-    /*public Image getImage(Media m) {
-        return this.loader.getImage(m);
-    }*/
-
     public Media previous() {
-        this.current = (this.isEmpty()) ? null: this.playlist.previous();
-        /*Media toLoad = this.playlist.NthMediaAfterCurrent((this.loader.capacity()/2) + 1);
-        Media toRemove = this.playlist.NthMediaAfterCurrent(this.loader.capacity()/2);
-        this.loader.previousMedia(toRemove, toLoad);*/
+        this.current = this.playlist.previous();
         this.setChanged();
         this.notifyObservers();
         return this.current;

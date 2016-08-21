@@ -132,12 +132,11 @@ public class MediaPlayerController implements Observer {
      */
     private void showMedia(Media m) {
         if(m != null) {
-            Image i = new Image(new File(m.getPath()).toURI().toString());
+            new File(m.getPath()).toURI().toString();
+            Image i = new Image(new File(m.getPath()).toURI().toString(), 1920, 1080, true, true);
             m.loadMediaProperties();
             this.bluredPreview.setImage(i);
             this.preview.setImage(i);
-            System.out.println(m);
-            //MyLogger.getInstance().log(Level.INFO, "Show: " + m.getPath());
         }
         else
             this.preview.setImage(null);

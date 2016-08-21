@@ -1,7 +1,6 @@
 package app.view.swing;
 
 import app.conf.Configuration;
-import app.model.MediaLoader;
 import app.model.MediaPlayer;
 import app.model.MediaPlayerFactory;
 

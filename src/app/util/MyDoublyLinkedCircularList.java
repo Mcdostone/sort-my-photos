@@ -155,32 +155,6 @@ public class MyDoublyLinkedCircularList<E> implements DoublyLinkedCircularList<E
     }
 
     @Override
-    public E NthMediaAfterCurrent(int n) {
-        if(!this.isEmpty()) {
-            Node<E> tmp = this.current;
-            for(int i = 0; i < n; i++) {
-                tmp = tmp.next();
-            }
-
-            return tmp.value();
-        }
-        return null;
-    }
-
-    @Override
-    public E NthMediaBeforeCurrent(int n) {
-        if(!this.isEmpty()) {
-            Node<E> tmp = this.current;
-            for(int i = 0; i < n; i++) {
-                tmp = tmp.previous();
-            }
-
-            return tmp.value();
-        }
-        return null;
-    }
-
-    @Override
     public Iterator<E> iterator() {
         ArrayList<E> list = new ArrayList<>();
         Node<E> tmp = this.first;

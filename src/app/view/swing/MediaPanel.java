@@ -2,18 +2,10 @@ package app.view.swing;
 
 import app.controller.MediaPlayerController;
 import app.model.Media;
-import app.model.MediaLoader;
 import app.model.MediaPlayer;
 
-import javax.imageio.ImageIO;
-import java.io.File;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * JPanel which displays a given media

@@ -35,7 +35,4 @@ public interface DoublyLinkedCircularList<E> extends Iterable<E> {
 
     E firstValue();
 
-    E NthMediaAfterCurrent(int n);
-
-    E NthMediaBeforeCurrent(int n);
 }
